@@ -12,7 +12,6 @@ import PlacementOverview from "@/component/PlacementOverview";
 import { ProgramSection } from "@/component/ProgramSection";
 import { RecruiterTestimonial } from "@/component/RecruiterTestimonial";
 import { StudentTestimonial } from "@/component/StudentTestimonial";
-import TabbedSlider from "@/component/TabbedSlider";
 
 export default function HomePage({ data }) {
 
@@ -26,7 +25,6 @@ export default function HomePage({ data }) {
       <StudentTestimonial />
       <PlacementOverview />
       <RecruiterTestimonial />
-      {/* <TabbedSlider /> */}
       {/* {data && <HomeTopCard data={data} />}
       {data && <ExploreCourses data={data} />}
       {data && <SlickSlider data={data} />}
