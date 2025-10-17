@@ -64,6 +64,7 @@ const TableList = ({ type, title, subTitle }) => {
         if (searchTerm) {
             filtered = filtered.filter(
                 (item) =>
+                    item.page_id?.toString()?.toLowerCase().includes(searchTerm.toLowerCase())||
                     item.name?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
                     item.shortdesc?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
                     item.type?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
