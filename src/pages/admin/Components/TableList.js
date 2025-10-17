@@ -61,13 +61,13 @@ const TableList = ({ type, title, subTitle }) => {
     useEffect(() => {
         let filtered = newsAndEvents
 
-        // Filter by search term
         if (searchTerm) {
             filtered = filtered.filter(
                 (item) =>
                     item.name?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
                     item.shortdesc?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
-                    item.type?.toLowerCase().includes(searchTerm?.toLowerCase()),
+                    item.type?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+                    item.path?.toLowerCase().includes(searchTerm.toLowerCase())
             )
         }
 
