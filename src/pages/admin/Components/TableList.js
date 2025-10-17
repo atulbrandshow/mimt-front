@@ -325,6 +325,7 @@ const TableList = ({ type, title, subTitle }) => {
                                                     <div className="flex items-center">
                                                         <div className="ml-4">
                                                             <div className="text-sm font-novaSemi text-gray-900 line-clamp-2">{event.name}</div>
+                                                            <span className="text-sm font-novaSemi text-gray-800">{event.path}</span>
                                                         </div>
                                                     </div>
                                                 </td>
