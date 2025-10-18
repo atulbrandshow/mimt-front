@@ -326,7 +326,7 @@ const TableList = ({ type, title, subTitle }) => {
                                                     <div className="flex items-center">
                                                         <div className="ml-4">
                                                             <div className="text-sm font-novaSemi text-gray-900 line-clamp-2">{event.name}</div>
-                                                            <span className="text-sm font-novaSemi text-gray-800">{event.path}</span>
+                                                            <span className="text-xs font-novaReg text-gray-500">Path: {event.path}</span>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -394,7 +394,7 @@ const TableList = ({ type, title, subTitle }) => {
                                                 <td className="px-6 py-4 whitespace-nowrap text-center">
                                                     <div className="flex items-center justify-center space-x-2">
                                                         {
-                                                            (type === "Program" || type === "School" || type === "Department" || event.ComponentType === "HomePage") && hasPermission(type, 'create') &&
+                                                            hasPermission(type, 'create') &&
                                                             <button
                                                                 onClick={() => router.push(
                                                                     `/admin/page-content-manager` +
