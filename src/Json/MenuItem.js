@@ -14,118 +14,24 @@ export const About = {
             },
             {
                 name: 'Vision & Mission',
-                url: "#"
+                url: "/mission-vision.html"
             },
             {
                 name: 'Governing Body',
-                url: "#"
+                url: "/governing-body.html"
             },
             {
                 name: 'Message By Chairman',
-                url: "#"
+                url: "/chairman-message.html"
             },
             {
                 name: 'Message By Vice Chairman',
-                url: "#"
+                url: "/vice-chairman-message.html"
             },
         ]
     }
 }
 
-export const Academics = {
-    name: 'Academics',
-    links: '/',
-    sublinks: {
-        "Schools": [
-            {
-                name: "School of Computer Science Engineering & Technology",
-                url: "#"
-            },
-            {
-                name: "School of Engineering & Technology",
-                url: "#"
-            },
-            {
-                name: "School of Business Studies",
-                url: "#"
-            },
-        ],
-        "Academics": [
-            {
-                name: 'Exam Results',
-                url: "#"
-            },
-            {
-                name: 'Examination Schedule',
-                url: "#"
-            },
-            {
-                name: 'Examination Annual Report',
-                url: "#"
-            },
-            // {
-            //     name: 'Academics Overview',
-            //     url: "#"
-            // },
-            {
-                name: 'Academic Calendar',
-                url: "#"
-            },
-            {
-                name: 'System of Evaluation',
-                url: "#"
-            },
-            // {
-            //     name: 'Degree Verification',
-            //     url: "#"
-            // },
-            {
-                name: 'National Academic Depository(NAD)',
-                url: "#"
-            },
-            {
-                name: 'Academic Bank of Credits (ABC)',
-                url: "#"
-            },
-            {
-                name: 'Programme Curriculum',
-                url: "#"
-            },
-            {
-                name: 'Curricula Feedback',
-                url: "#"
-            },
-            {
-                name: 'University Brochure',
-                url: "#"
-            },
-            // {
-            //     name: 'Institutes',
-            //     url: "#"
-            // },
-            // {
-            //     name: 'Program (Courses)',
-            //     url: "#"
-            // },
-            {
-                name: 'List of Holidays',
-                url: "#"
-            },
-            {
-                name: 'Teaching Practices',
-                url: "#"
-            },
-            {
-                name: 'Professional Bodies',
-                url: "#"
-            },
-            {
-                name: 'Professors of Practice',
-                url: "#"
-            },
-        ]
-    }
-}
 export const Programs = {
     name: "Programs",
     links: "/",
@@ -133,39 +39,39 @@ export const Programs = {
         "Courses Offered": [
             {
                 name: 'MBA++ (Master of Business Administration++)',
-                url: "#"
+                url: "/mba-plus.html"
             },
             {
                 name: 'MBA (Master of Business Administration)',
-                url: "#"
+                url: "/mba-in-delhi-ncr.html"
             },
             {
                 name: 'B.Tech (Bachelor of Technology) Advance',
-                url: "#"
+                url: "/b.tech-advance.html"
             },
             {
                 name: 'B.Tech (Bachelor of Technology)',
-                url: "#"
+                url: "/best-btech-college-in-india.html"
             },
             {
                 name: 'BCA (Bachelor of Computer Applications)',
-                url: "#"
+                url: "/bca.html"
             },
             {
                 name: 'BBA Platina (Bachelors of Business Administration Platina)',
-                url: "#"
+                url: "/bba-platina-program-in-delhi-ncr.html"
             },
             {
                 name: 'BBA (Bachelors of Business Administration)',
-                url: "#"
+                url: "/best-management-institute.html"
             },
             {
                 name: 'B.Com (Bachelor of Commerce)',
-                url: "#"
+                url: "/bachelor-of-commerce.html"
             },
             {
                 name: 'B.A. B.Ed (Bachelor of Arts and Bachelor of Education)',
-                url: "#"
+                url: "/ba-bed.html"
             },
             {
                 name: 'D.Pharm (Diploma of Pharmacy)',
@@ -181,76 +87,22 @@ export const Admissions = {
         "Admission": [
             {
                 name: 'Advantage Mangalmay',
-                url: "#"
+                url: "/advantagemangalmay.html"
             },
             {
                 name: 'Rankings and Awards',
-                url: "#"
+                url: "/rankings-and-awards.html"
             },
             {
                 name: 'Online Applications',
-                url: "#"
+                url: "https://admissions.mangalmay.org/"
             },
             {
                 name: 'Education Loan Facility',
-                url: "#"
+                url: "/education-loans.html"
             },
         ]
     }
-}
-export const CampusLife = {
-    name: 'Campus Life',
-    links: '/',
-    sublinks: [
-        {
-            name: "Overview",
-            url: "#"
-        },
-        {
-            name: "Infrastructure",
-            url: "#"
-        },
-        {
-            name: "Academic Facilities",
-            url: "#"
-        },
-        {
-            name: "Campus Facilities",
-            url: "#"
-        },
-        {
-            name: "Transportation",
-            url: "#"
-        },
-        {
-            name: "Residential Facilities",
-            url: "#"
-        },
-        {
-            name: "Library",
-            url: "#"
-        },
-        {
-            name: "Auditorium",
-            url: "#"
-        },
-        {
-            name: "Student Welfare",
-            url: "#"
-        },
-        {
-            name: "Convocations",
-            url: "#"
-        },
-        {
-            name: "Innovations & Events",
-            url: "#"
-        },
-        {
-            name: "Extra-Curricular Societies",
-            url: "#"
-        },
-    ]
 }
 export const Placements = {
     name: 'Placements',
@@ -259,31 +111,31 @@ export const Placements = {
         "Placements": [
             {
                 name: "Career Resource Division",
-                url: "#"
+                url: "/best-campus-placement-in-delhi-ncr.html"
             },
             {
                 name: "Top Placement",
-                url: "#"
+                url: "/top-placement-college-in-delhi-ncr.html"
             },
             {
                 name: "Placement Result",
-                url: "#"
+                url: "/placement-result.html"
             },
             {
                 name: "Alumni Speak",
-                url: "#"
+                url: "/alumni-speak.html"
             },
             {
                 name: "Industry Speak",
-                url: "#"
+                url: "/industry-speak.html"
             },
             {
                 name: "Eminent Guest Speakers",
-                url: "#"
+                url: "/eminent-guest-speakers.html"
             },
             {
                 name: "Download Placement Brochure",
-                url: "#"
+                url: "https://www.mangalmay.org/download/Placement-Brochure-2024.pdf"
             },
         ]
     }
@@ -295,59 +147,59 @@ export const Facilities = {
         "Facilities": [
             {
                 name: "Library",
-                url: "#"
+                url: "/library.html"
             },
             {
                 name: "Wi-Fi Campus",
-                url: "#"
+                url: "/wifi-campus.html"
             },
             {
                 name: "Auditorium",
-                url: "#"
+                url: "/auditorium.html"
             },
             {
                 name: "Incubation Centre",
-                url: "#"
+                url: "/mciei.html"
             },
             {
                 name: "Computer Lab",
-                url: "#"
+                url: "/computer-center.html"
             },
             {
                 name:"Cafeteria",
-                url: "#"
+                url: "/cafeteria.html"
             },
             {
                 name:"Seminar Halls",
-                url: "#"
+                url: "/seminar-halls.html"
             },
             {
                 name:"Pharm lab",
-                url: "#"
+                url: "/biotech-lab.html"
             },
             {
                 name:"Hostel",
-                url: "#"
+                url: "/hostel.html"
             },
             {
                 name:"Gallery",
-                url: "#"
+                url: "/gallery.html"
             },
             {
                 name:"Transport",
-                url: "#"
+                url: "/transport.html"
             },
             {
                 name:"Communication Lab",
-                url: "#"
+                url: "/communication-lab.html"
             },
             {
                 name:"Lecture Halls",
-                url: "#"
+                url: "/lecture-halls.html"
             },
             {
                 name:"Circular",
-                url: "#"
+                url: "/circular.html"
             },
             {
                 name:"Library OPAC",
