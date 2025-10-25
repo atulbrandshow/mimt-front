@@ -83,12 +83,10 @@ export default function DynamicPage({ fallbackData, pagePath }) {
   ------------------------------------------ */
   const { meta_title, meta_description, banner, name } = data?.data || {};
   const metaTitle =
-    meta_title || "AKGEC - Ajay Kumar Garg Engineering College, Ghaziabad";
+    meta_title || "Mangalmay, Greater Noida";
   const metaDescription =
     meta_description ||
-    "Explore AKGEC, Ghaziabad – a premier engineering college affiliated to Dr. A.P.J. Abdul Kalam Technical University. Discover courses, campus, placements, and admission details.";
-  const bannerImage = banner || "https://www.akgec.ac.in/wp-content/uploads/2023/03/akgec-campus.jpg";
-  const pageUrl = `https://www.akgec.ac.in${router.asPath}`;
+    "MIMT, Greater Noida is one of the best colleges in Delhi NCR for MBA, B.Tech., BBA, BCA and other business and engineering courses. Top ranked college. Mangalmay Greater Noida";
 
   /* ------------------------------------------
      🚀 Loading & Error States

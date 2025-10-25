@@ -1,10 +1,6 @@
 import React from 'react'
 
 function DefaultPageComponent({ data }) {
-  console.log('====================================');
-  console.log("Data From Default Page : ", data);
-  console.log('====================================');
-
   if (!data) return <p>No data available</p>;
 
   // Recursive function to render objects and arrays
