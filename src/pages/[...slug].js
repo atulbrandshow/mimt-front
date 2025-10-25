@@ -87,6 +87,8 @@ export default function DynamicPage({ fallbackData, pagePath }) {
   const metaDescription =
     meta_description ||
     "MIMT, Greater Noida is one of the best colleges in Delhi NCR for MBA, B.Tech., BBA, BCA and other business and engineering courses. Top ranked college. Mangalmay Greater Noida";
+  const bannerImage = banner || "https://www.akgec.ac.in/wp-content/uploads/2023/03/akgec-campus.jpg";
+  const pageUrl = `https://www.akgec.ac.in${router.asPath}`;
 
   /* ------------------------------------------
      🚀 Loading & Error States
