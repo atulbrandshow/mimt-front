@@ -37,6 +37,7 @@ function MyApp({ Component, pageProps }) {
                 draggable
                 pauseOnHover
             />
+            {/* {isShowNavAndFooter && <StickyFooter streamId={pageProps?.data?.data?.stream} />} */}
             {isShowNavAndFooter && <Footer />}
         </AppDataProvider>
     );

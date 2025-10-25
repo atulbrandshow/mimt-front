@@ -1,137 +1,35 @@
-import { useEffect, useState, Suspense, useMemo } from "react";
-import Head from "next/head";
+// pages/[...slug].js
+import { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import ShimmerContent from "@/component/ShimmerContent";
-import HomePage from "./pagesComp/HomePage";
+import DynamicPageWrapper from "./main/DynamicPage";
+import ShimmerContent from "@component/ShimmerContent";
+import MetaTags from "@/component/MetaTags";
 import { API_NODE_URL } from "@/configs/config";
 
-/* -----------------------------
-   📦 Fetcher function for SWR
------------------------------ */
-const fetcher = async (url) => {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error("Failed to fetch data");
+const fetcher = (url) => fetch(url).then((res) => {
+  if (!res.ok) throw new Error('Failed to fetch');
   return res.json();
-};
+});
 
-/* ------------------------------------------
-   🧩 Dynamically load a page component
------------------------------------------- */
 const loadComponent = async (componentName) => {
   try {
     const mod = await import(`./main/${componentName}`);
     return mod?.default || null;
   } catch (error) {
-    console.warn(`⚠️ Component not found: ${componentName}. Using fallback.`);
+    console.warn(`Component ${componentName} not found, using fallback`);
+    
     try {
       const fallbackMod = await import(`./main/DefaultPageComponent`);
       return fallbackMod?.default || null;
     } catch (fallbackError) {
-      console.error("Error loading fallback component:", fallbackError);
+      console.error("Fallback component also failed:", fallbackError);
       return null;
     }
   }
 };
 
-/* ------------------------------------------
-   🧱 Wrapper for consistent layout
------------------------------------------- */
-const DynamicPageWrapper = ({ children }) => (
-  <main className="flex-grow bg-orange-50">
-    {children || <HomePage />}
-  </main>
-);
-
-/* ------------------------------------------
-   🧠 Main Component: DynamicPage
------------------------------------------- */
-export default function DynamicPage({ fallbackData, pagePath }) {
-  const router = useRouter();
-  const [Component, setComponent] = useState(null);
-
-  // ✅ SWR for incremental revalidation
-  const { data, error, isLoading } = useSWR(
-    `${API_NODE_URL}slug?path=${encodeURIComponent(pagePath)}`,
-    fetcher,
-    {
-      fallbackData,
-      revalidateOnFocus: false,
-      revalidateIfStale: true,
-      shouldRetryOnError: false,
-    }
-  );
-
-  /* ------------------------------------------
-     ⚙️ Load the corresponding page component
-  ------------------------------------------ */
-  useEffect(() => {
-    let isMounted = true;
-
-    const initComponent = async () => {
-      const componentName = data?.data?.ComponentType || "DefaultPageComponent";
-      const DynamicComp = await loadComponent(componentName);
-      if (isMounted) setComponent(() => DynamicComp);
-    };
-
-    if (data?.data) initComponent();
-    return () => { isMounted = false; };
-  }, [data?.data]);
-
-  /* ------------------------------------------
-     🧾 Dynamic SEO metadata (from API or fallback)
-  ------------------------------------------ */
-  const { meta_title, meta_description, banner, name } = data?.data || {};
-  const metaTitle =
-    meta_title || "Mangalmay, Greater Noida";
-  const metaDescription =
-    meta_description ||
-    "MIMT, Greater Noida is one of the best colleges in Delhi NCR for MBA, B.Tech., BBA, BCA and other business and engineering courses. Top ranked college. Mangalmay Greater Noida";
-  const bannerImage = banner || "https://www.akgec.ac.in/wp-content/uploads/2023/03/akgec-campus.jpg";
-  const pageUrl = `https://www.akgec.ac.in${router.asPath}`;
-
-  /* ------------------------------------------
-     🚀 Loading & Error States
-  ------------------------------------------ */
-  if (isLoading) return <ShimmerContent />;
-  if (error || !data?.status) return <div className="text-center py-20 text-red-600 font-semibold">404 - Page Not Found</div>;
-
-  /* ------------------------------------------
-     ✅ Render Dynamic Page
-  ------------------------------------------ */
-  return (
-    <DynamicPageWrapper>
-      <Head>
-        <title>{metaTitle}</title>
-        <meta name="description" content={metaDescription} />
-        <link rel="canonical" href={pageUrl} />
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:image" content={bannerImage} />
-        <meta property="og:url" content={pageUrl} />
-        <meta property="og:type" content="website" />
-        <meta name="robots" content="index,follow" />
-        <meta name="keywords" content={`${name || ""}, Mangalmay, Greater Noida`} />
-      </Head>
-
-      <Suspense fallback={<ShimmerContent />}>
-        {Component ? <Component data={data.data} /> : <ShimmerContent />}
-      </Suspense>
-    </DynamicPageWrapper>
-  );
-}
-
-/* ------------------------------------------
-   ⚡ Server-Side Data Fetching (SEO + SSR)
------------------------------------------- */
-export async function getServerSideProps(context) {
-  const { slug = [] } = context.params || {};
-  let path = "/" + slug.join("/");
-
-  // Clean query parameters
-  if (path.includes("?")) path = path.split("?")[0];
-
-  // Ignore static and system files
+const isValidPath = (path) => {
   const ignoredPaths = [
     "/favicon.ico",
     "/sw.js",
@@ -140,14 +38,99 @@ export async function getServerSideProps(context) {
     "/sitemap.xml",
   ];
 
-  const isIgnored =
+  return !(
     ignoredPaths.includes(path) ||
-    path.startsWith("/_next") ||
-    path.startsWith("/static") ||
-    path.startsWith("/api") ||
-    path.match(/\.(js|css|map|json|svg|png|jpg|jpeg|ico)$/);
+    path?.startsWith("/_next") ||
+    path?.startsWith("/static") ||
+    path?.startsWith("/api") ||
+    path.match(/\.(js|css|map|json|svg|png|jpg|jpeg|ico)$/)
+  );
+};
 
-  if (isIgnored) {
+export default function DynamicPage({ fallbackData, pagePath }) {
+  const router = useRouter();
+  const [Component, setComponent] = useState(null);
+
+  // SWR hook with fallbackData from SSR
+  const { data, error, isLoading } = useSWR(
+    `${API_NODE_URL}slug?path=${encodeURIComponent(pagePath)}`,
+    fetcher,
+    {
+      fallbackData,
+      revalidateOnFocus: false,
+      revalidateOnMount: !fallbackData, // Only revalidate if no fallback data
+    }
+  );
+
+  // Dynamic import of component when data changes
+  useEffect(() => {
+    let isMounted = true;
+
+    const init = async () => {
+      const componentName = data?.data?.ComponentType || "DefaultPageComponent";
+      const dynamicComponent = await loadComponent(componentName);
+      
+      if (isMounted) {
+        setComponent(() => dynamicComponent);
+      }
+    };
+
+    if (data?.status) {
+      init();
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [data]);
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <DynamicPageWrapper>
+        <ShimmerContent />
+      </DynamicPageWrapper>
+    );
+  }
+
+  // Error state
+  if (error || !data?.status) {
+    return (
+      <DynamicPageWrapper>
+        <div className="container mx-auto px-4 py-8 text-center">
+          <h1 className="text-2xl font-bold text-red-600">Page Not Found</h1>
+          <p className="mt-4 text-gray-600">The page you are looking for does not exist.</p>
+        </div>
+      </DynamicPageWrapper>
+    );
+  }
+
+  return (
+    <DynamicPageWrapper>
+      {/* Meta Tags */}
+      <MetaTags data={data?.data} />
+      
+      {/* Dynamic Content */}
+      <Suspense fallback={<ShimmerContent />}>
+        {Component ? (
+          <Component data={data.data} />
+        ) : (
+          <ShimmerContent />
+        )}
+      </Suspense>
+    </DynamicPageWrapper>
+  );
+}
+
+export async function getServerSideProps(context) {
+  const { slug = [] } = context.params || {};
+  let path = "/" + slug.join("/");
+
+  // Clean path
+  if (path.includes("?")) path = path.split("?")[0];
+
+  // Validate path
+  if (!isValidPath(path)) {
     return { notFound: true };
   }
 
@@ -156,13 +139,21 @@ export async function getServerSideProps(context) {
       `${API_NODE_URL}slug?path=${encodeURIComponent(path)}`,
       {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "User-Agent": "NextJS-Server"
+        },
+        timeout: 5000, // 5 second timeout
       }
     );
 
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const result = await response.json();
 
-    if (!result?.status || !result?.data) {
+    if (!result.status || !result.data) {
       return { notFound: true };
     }
 
@@ -173,7 +164,9 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
-    console.error("❌ Server API error:", error);
+    console.error("SSR API error:", error);
+    
+    // Return not found in case of error, or consider a fallback page
     return { notFound: true };
   }
 }

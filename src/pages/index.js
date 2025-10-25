@@ -1,19 +1,16 @@
+// pages/index.js
 import { useContext } from "react";
 import { AppDataContext } from "@/context/AppDataContext";
 import HomePage from "./pagesComp/HomePage";
-import ShimmerContent from "@/component/ShimmerContent";
-import HomeMetaTags from "@/component/HomeMetaTags";
-
+import HomeMetaTags from "../component/HomeMetaTags";
 
 export default function Home() {
-  const { homeData, loading } = useContext(AppDataContext);
+  const { homeData } = useContext(AppDataContext);
 
-  if (loading) return <ShimmerContent />;
   return (
     <>
       <HomeMetaTags data={homeData} />
-      <HomePage data={homeData} />;
+      <HomePage data={homeData} />
     </>
-  )
-
+  );
 }
