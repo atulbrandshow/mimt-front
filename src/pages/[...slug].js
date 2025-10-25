@@ -2,9 +2,9 @@ import { useEffect, useState, Suspense } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import DynamicPageWrapper from "./main/DynamicPage";
-import ShimmerContent from "@Components/ShimmerContent";
+import ShimmerContent from "@/component/ShimmerContent";
 import { API_NODE_URL } from "@/configs/config";
+import HomePage from "./pagesComp/HomePage";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -26,6 +26,14 @@ const loadComponent = async (componentName) => {
     }
   }
 };
+
+function DynamicPageWrapper({ children }) {
+  return (
+    <div>
+      <main className="flex-grow bg-orange-50">{children || <HomePage />}</main>
+    </div>
+  );
+}
 
 
 export default function DynamicPage({ fallbackData, pagePath }) {
@@ -49,7 +57,7 @@ export default function DynamicPage({ fallbackData, pagePath }) {
     const init = async () => {
       // if (!data?.data?.ComponentType) return;
 
-      const dynamicComponent = await loadComponent(data?.data?.ComponentType||"DefaultPageComponent");
+      const dynamicComponent = await loadComponent(data?.data?.ComponentType || "DefaultPageComponent");
       if (isMounted) {
         setComponent(() => dynamicComponent);
       }

@@ -1,21 +1,11 @@
-import Header from "@/Components/Header";
-import Gallery from "../pagesComp/Gallery";
+import React from 'react'
 
-const Button = {
-    name: "Apply Now",
-    Link: "",
-};
-
-const Home = () => {
+const Page = ({ data }) => {
     return (
-        <>
-            <div className="bg-gray-100">
-                <Header title={"Gallery"} Button={Button} gradient={"bg-gradient-to-r from-blue-900 to-blue-900/40"} bgKey="BG-Building-14" />
-                <Gallery />
-            </div>
-        </>
+        <div className='h-screen w-full flex justify-center items-center'>
+            <h1>{data?.name}</h1>
+        </div>
     )
 }
 
-
-export default Home;
+export default Page

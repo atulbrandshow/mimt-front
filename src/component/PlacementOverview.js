@@ -1,7 +1,7 @@
 import React from 'react'
 import TitleInfo from './TitleInfo'
-import { LogoSlider } from '@/Components'
 import PlacementSlider from './PlacementSlider';
+import LogoSlider from '@/component/LogoSlider';
 
 const statsData = [
     {

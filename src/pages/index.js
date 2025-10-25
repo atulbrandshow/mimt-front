@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AppDataContext } from "@/context/AppDataContext";
 import HomePage from "./pagesComp/HomePage";
-import ShimmerContent from "@/Components/ShimmerContent";
+import ShimmerContent from "@/component/ShimmerContent";
 import HomeMetaTags from "@/component/HomeMetaTags";
 
 

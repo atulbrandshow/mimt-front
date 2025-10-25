@@ -10,7 +10,7 @@ export const About = {
         "About Mangalmay": [
             {
                 name: 'About Us',
-                url: "#"
+                url: "/about.html"
             },
             {
                 name: 'Vision & Mission',
