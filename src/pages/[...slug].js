@@ -1,85 +1,104 @@
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, useMemo } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import ShimmerContent from "@/component/ShimmerContent";
-import { API_NODE_URL } from "@/configs/config";
 import HomePage from "./pagesComp/HomePage";
+import { API_NODE_URL } from "@/configs/config";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+/* -----------------------------
+   📦 Fetcher function for SWR
+----------------------------- */
+const fetcher = async (url) => {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Failed to fetch data");
+  return res.json();
+};
 
+/* ------------------------------------------
+   🧩 Dynamically load a page component
+------------------------------------------ */
 const loadComponent = async (componentName) => {
   try {
-    // Try loading the requested component
     const mod = await import(`./main/${componentName}`);
     return mod?.default || null;
   } catch (error) {
-    console.error(`Error loading component: ${componentName}`, error);
-
-    // Fallback to DefaultPageComponent if import fails
+    console.warn(`⚠️ Component not found: ${componentName}. Using fallback.`);
     try {
       const fallbackMod = await import(`./main/DefaultPageComponent`);
       return fallbackMod?.default || null;
     } catch (fallbackError) {
-      console.error("Error loading fallback DefaultPageComponent:", fallbackError);
+      console.error("Error loading fallback component:", fallbackError);
       return null;
     }
   }
 };
 
-function DynamicPageWrapper({ children }) {
-  return (
-    <div>
-      <main className="flex-grow bg-orange-50">{children || <HomePage />}</main>
-    </div>
-  );
-}
+/* ------------------------------------------
+   🧱 Wrapper for consistent layout
+------------------------------------------ */
+const DynamicPageWrapper = ({ children }) => (
+  <main className="flex-grow bg-orange-50">
+    {children || <HomePage />}
+  </main>
+);
 
-
+/* ------------------------------------------
+   🧠 Main Component: DynamicPage
+------------------------------------------ */
 export default function DynamicPage({ fallbackData, pagePath }) {
   const router = useRouter();
   const [Component, setComponent] = useState(null);
 
-  // 🔥 SWR hook with fallbackData from SSR
+  // ✅ SWR for incremental revalidation
   const { data, error, isLoading } = useSWR(
     `${API_NODE_URL}slug?path=${encodeURIComponent(pagePath)}`,
     fetcher,
     {
       fallbackData,
-      revalidateOnFocus: false, // don't refetch when switching tabs
+      revalidateOnFocus: false,
+      revalidateIfStale: true,
+      shouldRetryOnError: false,
     }
   );
 
-  // Dynamic import of component when data changes
+  /* ------------------------------------------
+     ⚙️ Load the corresponding page component
+  ------------------------------------------ */
   useEffect(() => {
     let isMounted = true;
 
-    const init = async () => {
-      // if (!data?.data?.ComponentType) return;
-
-      const dynamicComponent = await loadComponent(data?.data?.ComponentType || "DefaultPageComponent");
-      if (isMounted) {
-        setComponent(() => dynamicComponent);
-      }
+    const initComponent = async () => {
+      const componentName = data?.data?.ComponentType || "DefaultPageComponent";
+      const DynamicComp = await loadComponent(componentName);
+      if (isMounted) setComponent(() => DynamicComp);
     };
 
-    init();
-    return () => {
-      isMounted = false;
-    };
-  }, [data]);
+    if (data?.data) initComponent();
+    return () => { isMounted = false; };
+  }, [data?.data]);
 
-  // Meta data (static for now, you can make dynamic from API)
-  const metaTitle = "AKGEC - Ajay Kumar Garg Engineering College, Ghaziabad";
+  /* ------------------------------------------
+     🧾 Dynamic SEO metadata (from API or fallback)
+  ------------------------------------------ */
+  const { meta_title, meta_description, banner, name } = data?.data || {};
+  const metaTitle =
+    meta_title || "AKGEC - Ajay Kumar Garg Engineering College, Ghaziabad";
   const metaDescription =
+    meta_description ||
     "Explore AKGEC, Ghaziabad – a premier engineering college affiliated to Dr. A.P.J. Abdul Kalam Technical University. Discover courses, campus, placements, and admission details.";
-  const bannerImage =
-    "https://www.akgec.ac.in/wp-content/uploads/2023/03/akgec-campus.jpg";
+  const bannerImage = banner || "https://www.akgec.ac.in/wp-content/uploads/2023/03/akgec-campus.jpg";
   const pageUrl = `https://www.akgec.ac.in${router.asPath}`;
 
+  /* ------------------------------------------
+     🚀 Loading & Error States
+  ------------------------------------------ */
   if (isLoading) return <ShimmerContent />;
-  if (error || !data?.status) return <div>Page not found</div>;
+  if (error || !data?.status) return <div className="text-center py-20 text-red-600 font-semibold">404 - Page Not Found</div>;
 
+  /* ------------------------------------------
+     ✅ Render Dynamic Page
+  ------------------------------------------ */
   return (
     <DynamicPageWrapper>
       <Head>
@@ -91,25 +110,28 @@ export default function DynamicPage({ fallbackData, pagePath }) {
         <meta property="og:image" content={bannerImage} />
         <meta property="og:url" content={pageUrl} />
         <meta property="og:type" content="website" />
+        <meta name="robots" content="index,follow" />
+        <meta name="keywords" content={`${name || ""}, AKGEC, Engineering College, Ghaziabad`} />
       </Head>
 
       <Suspense fallback={<ShimmerContent />}>
-        {Component ? (
-          <Component data={data.data} />
-        ) : (
-          <ShimmerContent />
-        )}
+        {Component ? <Component data={data.data} /> : <ShimmerContent />}
       </Suspense>
     </DynamicPageWrapper>
   );
 }
 
+/* ------------------------------------------
+   ⚡ Server-Side Data Fetching (SEO + SSR)
+------------------------------------------ */
 export async function getServerSideProps(context) {
   const { slug = [] } = context.params || {};
   let path = "/" + slug.join("/");
 
+  // Clean query parameters
   if (path.includes("?")) path = path.split("?")[0];
 
+  // Ignore static and system files
   const ignoredPaths = [
     "/favicon.ico",
     "/sw.js",
@@ -118,13 +140,14 @@ export async function getServerSideProps(context) {
     "/sitemap.xml",
   ];
 
-  if (
+  const isIgnored =
     ignoredPaths.includes(path) ||
-    path?.startsWith("/_next") ||
-    path?.startsWith("/static") ||
-    path?.startsWith("/api") ||
-    path.match(/\.(js|css|map|json|svg|png|jpg|jpeg|ico)$/)
-  ) {
+    path.startsWith("/_next") ||
+    path.startsWith("/static") ||
+    path.startsWith("/api") ||
+    path.match(/\.(js|css|map|json|svg|png|jpg|jpeg|ico)$/);
+
+  if (isIgnored) {
     return { notFound: true };
   }
 
@@ -139,18 +162,18 @@ export async function getServerSideProps(context) {
 
     const result = await response.json();
 
-    if (!result.status || !result.data) {
+    if (!result?.status || !result?.data) {
       return { notFound: true };
     }
 
     return {
       props: {
-        fallbackData: result, // ✅ pass as SWR fallback
-        pagePath: path, // ✅ pass pagePath for SWR key
+        fallbackData: result,
+        pagePath: path,
       },
     };
   } catch (error) {
-    console.error("API error:", error);
+    console.error("❌ Server API error:", error);
     return { notFound: true };
   }
 }
