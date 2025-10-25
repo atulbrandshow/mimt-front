@@ -111,7 +111,7 @@ export default function DynamicPage({ fallbackData, pagePath }) {
         <meta property="og:url" content={pageUrl} />
         <meta property="og:type" content="website" />
         <meta name="robots" content="index,follow" />
-        <meta name="keywords" content={`${name || ""}, AKGEC, Engineering College, Ghaziabad`} />
+        <meta name="keywords" content={`${name || ""}, Mangalmay, Greater Noida`} />
       </Head>
 
       <Suspense fallback={<ShimmerContent />}>
