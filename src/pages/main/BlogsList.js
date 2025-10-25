@@ -4,19 +4,20 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 const BlogsList = ({ data }) => {
-  const { slug } = useParams(); // 👈 get slug from the route
+  const params = useParams();
+  const slug = params?.slug || [];
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const type = slug[1]
-    const content = slug[2]
-    if (slug || slug.length == 1) {
-      fetchFilteredBlogs(type,content);
-    }else{
-      fetchFilteredBlogs();
-
+    if (!slug || slug.length === 0) {
+      fetchFilteredBlogs(); // fallback
+      return;
     }
+
+    const type = slug[1];
+    const content = slug[2];
+    fetchFilteredBlogs(type, content);
   }, [slug]);
 
   const fetchFilteredBlogs = async (type,content) => {
