@@ -8,7 +8,7 @@ const HomeMetaTags = ({ data }) => {
 
     const title = metatitle || "MBA, B.Tech., BBA, BCA | Best College in Delhi NCR | Mangalmay, Greater Noida,";
     const description = metadesc || "MIMT, Greater Noida is one of the best colleges in Delhi NCR for MBA, B.Tech., BBA, BCA and other business and engineering courses. Top ranked college. Mangalmay Greater Noida,";
-    const image = banner_img || "https://www.gims.net.in/img/gims-logo.png";
+    const image = banner_img || "https://www.mangalmay.org/assets/images/best-college-logo.webp";
     const keywords = keywords_tag || "MBA, B.Tech., BBA, BCA, Best College in Delhi NCR, Greater Noida, Delhi NCR, Top Colleges, Business Schools, Engineering College, UP, B.Com, B.A, B.Ed., Mangalmay";
 
     return (

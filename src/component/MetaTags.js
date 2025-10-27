@@ -10,7 +10,7 @@ const MetaTags = ({ data, isHomePage = false }) => {
     title: "MBA, B.Tech., BBA, BCA | Best College in Delhi NCR | Mangalmay, Greater Noida,",
     description: "MIMT, Greater Noida is one of the best colleges in Delhi NCR for MBA, B.Tech., BBA, BCA and other business and engineering courses. Top ranked college. Mangalmay Greater Noida,",
     keywords: "MBA, B.Tech., BBA, BCA, Best College in Delhi NCR, Greater Noida, Delhi NCR, Top Colleges, Business Schools, Engineering College, UP, B.Com, B.A, B.Ed., Mangalmay, Top PGDM Colleges in UPTU, Best Management Colleges in India, UPSEE Best PGDM colleges, Top GBTU Institutes, Top Management institute",
-    image: "https://www.gims.net.in/img/gims-logo.png"
+    image: "https://www.mangalmay.org/assets/images/best-college-logo.webp"
   };
 
   // Use provided data or defaults
@@ -18,7 +18,7 @@ const MetaTags = ({ data, isHomePage = false }) => {
   const metaDescription = data?.metadesc || data?.description || defaultMeta.description;
   const metaKeywords = data?.keywords_tag || defaultMeta.keywords;
   const metaImage = data?.banner_img || defaultMeta.image;
-  const pageUrl = `https://www.gims.net.in${router.asPath}`;
+  const pageUrl = `https://www.mangalmay.org${router.asPath}`;
 
   return (
     <Head>
@@ -34,7 +34,7 @@ const MetaTags = ({ data, isHomePage = false }) => {
       <meta property="og:image" content={metaImage} />
       <meta property="og:url" content={pageUrl} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="gims" />
+      <meta property="og:site_name" content="mimt" />
       
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
