@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from "react";
-import { About, Academics, Admissions, CampusLife, ResearchInnovation, Placements, Programs, Facilities } from "../Json/MenuItem";
+import { About,Blog, Academics, Admissions, CampusLife, ResearchInnovation, Placements, Programs, Facilities } from "../Json/MenuItem";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from 'gsap';
@@ -131,6 +131,7 @@ export default function LatestNavbar() {
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Campus</Link>
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Library</Link>
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Student Services</Link>
+              <Link href="/blogs" className={`hover:underline hover:text-gray-400 transition duration-500`}>Blogs</Link>
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>News</Link>
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Events</Link>
               {/* <Link href="/articles" className={`hover:underline hover:text-gray-400 transition duration-500`}>Article</Link> */}
