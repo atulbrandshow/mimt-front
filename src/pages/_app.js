@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AppDataProvider } from '@/context/AppDataContext';
 import LatestNavbar from '@/component/LatestNavbar';
-
+import '../../public/global.css'
 function MyApp({ Component, pageProps }) {
     const [isShowNavAndFooter, setIsShowNavAndFooter] = useState(false);
     const router = useRouter();

@@ -8,8 +8,8 @@ const Page = ({ data }) => {
     if (
       value === null ||
       value === undefined ||
-      value === false || // exclude false
-      value === "" // exclude empty string
+      value === false ||
+      value === ""
     )
       return false;
 
@@ -29,7 +29,7 @@ const Page = ({ data }) => {
     if (typeof value === "string" && /<[^>]+>/.test(value)) {
       return (
         <div
-          className="prose max-w-none"
+          className="prose max-w-none custom-prose"
           dangerouslySetInnerHTML={{ __html: value }}
         />
       );
@@ -53,10 +53,10 @@ const Page = ({ data }) => {
       const entries = Object.entries(value).filter(([_, v]) => hasContent(v));
       if (entries.length === 0) return null;
       return (
-        <div className="ml-4 border-l border-gray-300 pl-4">
+        <div className="ml-4 border-l border-gray-400 pl-4">
           {entries.map(([k, v]) => (
             <div key={k} className="mb-2">
-              <strong className="text-blue-700">{k}:</strong>
+              <strong className="text-black">{k}:</strong>
               <div className="ml-2 mt-1">{renderValue(v)}</div>
             </div>
           ))}
@@ -65,7 +65,7 @@ const Page = ({ data }) => {
     }
 
     // Primitive values
-    return <span>{value.toString()}</span>;
+    return <span className="text-black">{value.toString()}</span>;
   };
 
   // ✅ Filter top-level keys
@@ -74,14 +74,14 @@ const Page = ({ data }) => {
   );
 
   if (filteredData.length === 0)
-    return <p className="text-gray-500">No meaningful data available</p>;
+    return <p className="text-black">No meaningful data available</p>;
 
   return (
-    <div className="p-4 bg-gray-50 min-h-screen mt-10">
+    <div className="p-6 bg-gray-200 min-h-screen  text-black mt-32">
       {filteredData.map(([key, value]) => (
-        <div key={key} className="mb-4">
-          <strong className="text-lg text-gray-700">{key}:</strong>
-          <div className="ml-2 mt-1">{renderValue(value)}</div>
+        <div key={key} className="mb-6">
+          <strong className="text-lg font-semibold text-black">{key}:</strong>
+          <div className="ml-3 mt-2">{renderValue(value)}</div>
         </div>
       ))}
     </div>
