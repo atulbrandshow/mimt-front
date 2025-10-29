@@ -132,7 +132,7 @@ export default function LatestNavbar() {
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Library</Link>
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Student Services</Link>
               <Link href="/blogs" className={`hover:underline hover:text-gray-400 transition duration-500`}>Blogs</Link>
-              <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>News</Link>
+              <Link href="/mangalmay-in-press.html" className={`hover:underline hover:text-gray-400 transition duration-500`}>News</Link>
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Events</Link>
               {/* <Link href="/articles" className={`hover:underline hover:text-gray-400 transition duration-500`}>Article</Link> */}
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Circulars</Link>
