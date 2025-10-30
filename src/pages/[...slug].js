@@ -67,6 +67,8 @@ export default function DynamicPage({ fallbackData, pagePath }) {
     let isMounted = true;
 
     const init = async () => {
+      console.log(data);
+      
       const componentName = data?.data?.ComponentType || "DefaultPageComponent";
       const dynamicComponent = await loadComponent(componentName);
       

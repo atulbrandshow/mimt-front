@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from "react";
-import { About, Academics, Admissions, CampusLife, ResearchInnovation, Placements, Programs, Facilities } from "../Json/MenuItem";
+import { About,Blog, Academics, Admissions, CampusLife, ResearchInnovation, Placements, Programs, Facilities } from "../Json/MenuItem";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from 'gsap';
@@ -128,11 +128,11 @@ export default function LatestNavbar() {
         <div className="hidden lg:flex justify-end items-center px-2">
           <div className={`flex gap-x-6 justify-end items-center`}>
             <div className={`flex items-center gap-5 xl:gap-10 text-sm uppercase tracking-wider whitespace-nowrap text-black font-novaReg`}>
-              <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Campus</Link>
-              <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Library</Link>
-              <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Student Services</Link>
-              <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>News</Link>
-              <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Events</Link>
+              
+              <Link href="/blogs" className={`hover:underline hover:text-gray-400 transition duration-500`}>Blogs</Link>
+              <Link href="/mangalmay-in-press.html" className={`hover:underline hover:text-gray-400 transition duration-500`}>News</Link>
+              <Link href="/upcoming-events.html" className={`hover:underline hover:text-gray-400 transition duration-500`}>Events</Link>
+              <Link href="/job-fair-list.html" className={`hover:underline hover:text-gray-400 transition duration-500`}>Job Fair</Link>
               {/* <Link href="/articles" className={`hover:underline hover:text-gray-400 transition duration-500`}>Article</Link> */}
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>Circulars</Link>
               {/* <Link href="/notice" className={`hover:underline hover:text-gray-400 transition duration-500`}>Notices</Link> */}

@@ -3,6 +3,11 @@ export const Home = {
     links: '/',
     sublinks: []
 }
+export const Blog = {
+    name: 'Blog',
+    links: '/blogs',
+    sublinks: []
+}
 export const About = {
     name: 'About',
     links: '/',

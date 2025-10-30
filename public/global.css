@@ -1,0 +1,18 @@
+/* Force all text inside .custom-prose to be black */
+.custom-prose,
+.custom-prose * {
+  color: black !important;
+  background-color: transparent !important;
+}
+
+/* Optional: make lists, links, and headings visible too */
+.custom-prose a {
+  color: black !important;
+  text-decoration: underline;
+}
+
+.custom-prose strong,
+.custom-prose b {
+  color: black !important;
+  font-weight: bold;
+}
