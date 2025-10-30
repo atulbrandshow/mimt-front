@@ -146,6 +146,7 @@ export async function getServerSideProps(context) {
         timeout: 5000, // 5 second timeout
       }
     );
+    
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
