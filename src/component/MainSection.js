@@ -1,147 +1,101 @@
 "use client"
 import { useEffect, useState } from "react"
+import Form from "./Form"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import Button from "./Button"
 import Image from "next/image"
-import { motion } from "framer-motion"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { easeIn } from "framer-motion"
 import { IMAGE_PATH } from "@/configs/config"
 
-// --- Animation settings for a smooth, spring-like transition ---
-const transition = {
-  type: "spring",
-  stiffness: 200,
-  damping: 40,
-  mass: 1,
-}
-
 const MainSection = ({ data }) => {
-  const slides = [
-    "/image/mimt/hero-section/website-varun.jpg",
-    "/image/mimt/hero-section/sadhguru-mimt.jpg",
-    "/image/mimt/hero-section/new-ipl-session.jpg",
-    "/image/mimt/hero-section/new-website-jobfair.jpg",
-    "/image/mimt/hero-section/slider-2023.jpg",
-  ]
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const d = data?.pageData
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [nextImageIndex, setNextImageIndex] = useState(1)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length)
-  }
+  const buildingImages = d?.Hero_Banners
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length)
-  }
+  useGSAP(() => {
+    gsap.from(".slide", { x: -1000, duration: 0.7, ease: easeIn })
+    gsap.from(".popup", { x: 1000, opacity: 0, duration: 0.7, ease: easeIn })
+  })
 
-  // Autoplay functionality
   useEffect(() => {
-    const autoplayInterval = setInterval(handleNext, 4000) // Change slide every 4 seconds
-    return () => clearInterval(autoplayInterval)
-  }, [currentIndex, slides.length]) // Add dependencies for autoplay reset
+    if (!Array.isArray(buildingImages) || buildingImages.length === 0) return
 
-  if (!slides || slides.length === 0) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        No banners to display.
-      </div>
-    )
-  }
+    const interval = setInterval(() => {
+      setIsTransitioning(true)
+
+      // Start fade out current image
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => {
+          const newIndex = (prevIndex + 1) % buildingImages.length
+          setNextImageIndex((newIndex + 1) % buildingImages.length)
+          return newIndex
+        })
+        setIsTransitioning(false)
+      }, 800) // Half of transition duration
+    }, 8000)
+
+    return () => clearInterval(interval)
+  }, [buildingImages])
 
   return (
-    <div className="mt-10 relative flex items-center justify-center w-full h-[45vh] sm:h-[55vh] md:h-[75vh] lg:h-[85vh] xl:h-screen overflow-hidden bg-black">
-      {/* Background Gradient & Blur Effect (remains the same) */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          key={slides[currentIndex]} // Use image src as key to ensure re-render
-          src={slides[currentIndex]}
-          width={1920}
-          height={1080}
-          alt="Background"
-          className="w-full h-full object-cover blur-3xl scale-125 opacity-50 transition-opacity duration-1000"
-        />
-        <div className="absolute inset-0 bg-white/90"></div>
-      </div>
+    <div className="overflow-hidden relative">
+      <div className="flex justify-center relative z-20 min-h-screen">
+        <div className="grid grid-cols-2 max-lg:grid-cols-1 max-lg:pb-10">
+          <div className="slide flex justify-center max-w-3xl flex-col pl-20 max-lg:mt-52 max-lg:items-center max-lg:px-5">
+            <h1 className="max-w-4xl font-novaThin max-sm:text-3xl tracking-tight text-white max-xl:text-5xl text-5xl max-lg:text-center max-[350px]:text-2xl">
+              {d?.Hero_Subheading} <br />
+              <span className="relative whitespace-nowrap">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 418 42"
+                  className="absolute left-0 top-2/3 h-[0.58em] w-full fill-yellow-300/90"
+                  preserveAspectRatio="none"
+                >
+                  <path d="M203.371.916c-26.013-2.078-76.686 1.963-124.73 9.946L67.3 12.749C35.421 18.062 18.2 21.766 6.004 25.934 1.244 27.561.828 27.778.874 28.61c.07 1.214.828 1.121 9.595-1.176 9.072-2.377 17.15-3.92 39.246-7.496C123.565 7.986 157.869 4.492 195.942 5.046c7.461.108 19.25 1.696 19.17 2.582-.107 1.183-7.874 4.31-25.75 10.366-21.992 7.45-35.43 12.534-36.701 13.884-2.173 2.308-.202 4.407 4.442 4.734 2.654.187 3.263.157 15.593-.78 35.401-2.686 57.944-3.488 88.365-3.143 46.327.526 75.721 2.23 130.788 7.584 19.787 1.924 20.814 1.98 24.557 1.332l.066-.011c1.201-.203 1.53-1.825.399-2.335-2.911-1.31-4.893-1.604-22.048-3.261-57.509-5.556-87.871-7.36-132.059-7.842-23.239-.254-33.617-.116-50.627.674-11.629.54-42.371 2.494-46.696 2.967-2.359.259 8.133-3.625 26.504-9.81 23.239-7.825 27.934-10.149 28.304-14.005.417-4.348-3.529-6-16.878-7.066Z"></path>
+                </svg>
+                <span className="relative font-novaSemi text-white uppercase">{d?.Hero_Highlight_Title}</span>
+              </span>
+            </h1>
 
-      {/* 3D Carousel Container */}
-      {/* Adjusted width and `perspective` for a better view of full images */}
-      <div className="relative z-10 w-full h-full sm:w-[90%] sm:h-[70vh]" style={{ perspective: "1500px" }}>
-        <div className="relative w-full h-full" style={{ transformStyle: "preserve-3d" }}>
-          {slides.map((imageSrc, index) => {
-            const offset = index - currentIndex
-            const isCurrent = offset === 0
-            const isLeft = offset === -1 || (offset === slides.length - 1 && currentIndex === 0) // Handle wrap around for left
-            const isRight = offset === 1 || (offset === -(slides.length - 1) && currentIndex === slides.length - 1) // Handle wrap around for right
-            const isVisible = isCurrent || isLeft || isRight;
-
-
-            // --- Calculate dynamic styles for each slide ---
-            let transform = "";
-            let opacity = 0;
-            let zIndex = 0;
-            let filter = "brightness(50%)"; // Default for non-current
-
-            if (isCurrent) {
-              transform = `translateX(0%) translateZ(0px) rotateY(0deg) scale(1)`;
-              opacity = 1;
-              zIndex = slides.length; // Ensure current is always on top
-              filter = "brightness(100%)";
-            } else if (isLeft) {
-              transform = `translateX(-60%) translateZ(-300px) rotateY(35deg) scale(0.8)`; // Adjusted for full image
-              opacity = 1;
-              zIndex = slides.length - 1;
-            } else if (isRight) {
-              transform = `translateX(60%) translateZ(-300px) rotateY(-35deg) scale(0.8)`; // Adjusted for full image
-              opacity = 1;
-              zIndex = slides.length - 1;
-            } else {
-              // For images far out, make them invisible and put them behind
-              transform = `translateX(${offset > 0 ? '150%' : '-150%'}) translateZ(-500px) rotateY(${offset > 0 ? '-60deg' : '60deg'}) scale(0.6)`;
-              opacity = 0;
-              zIndex = 0;
-            }
-
-            return (
-              <motion.div
-                key={imageSrc}
-                className="absolute w-full sm:w-[80%] h-full top-0 sm:left-[10%] overflow-hidden pointer-events-none" // Increased width, adjusted left
-                style={{
-                  zIndex,
-                  transformOrigin: "center center",
-                  filter,
-                }}
-                animate={{
-                  transform,
-                  opacity,
-                }}
-                transition={transition}
-              >
-                <Image
-                  src={imageSrc}
-                  width={1200}
-                  height={800}
-                  alt={`Banner ${index + 1}`}
-                  priority={isCurrent}
-                  className={`w-full h-full object-contain`}
-                />
-              </motion.div>
-            )
-          })}
+            <p className="mt-4 text-white text-xl font-novaReg max-lg:text-base max-lg:text-center">
+              {d?.Hero_Paragraph}
+            </p>
+            <div className="h-20">
+              <Button
+                text={"Apply Today"}
+                onClick={() => setIsModalOpen(!isModalOpen)}
+                className="py-3 max-sm:px-6 max-sm:text-xs px-10 mt-5 text-[15px] rounded-xl font-novaBold uppercase bg-yellow-400 animate-gradient text-black w-max hover:bg-yellow-500 hover:border-b-4 hover:border-black hover:transform scale-y-105 tracking-widest"
+              />
+            </div>
+          </div>
+          {isModalOpen && (
+            <Form setIsModalOpen={setIsModalOpen} />
+          )}
         </div>
       </div>
 
-      {/* Minimalist Navigation Buttons */}
-      <button
-        onClick={handlePrev}
-        className="absolute z-20 left-1 md:left-5 lg:left-10 top-1/2 -translate-y-1/2 p-1 md:p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all"
-        aria-label="Previous Banner"
-      >
-        <ChevronLeft size={32} />
-      </button>
-      <button
-        onClick={handleNext}
-        className="absolute z-20 right-1 md:right-5 lg:right-10 top-1/2 -translate-y-1/2 p-1 md:p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all"
-        aria-label="Next Banner"
-      >
-        <ChevronRight size={32} />
-      </button>
+      {/* Gradient overlay */}
+      <div className="w-full h-full object-cover absolute left-0 top-0 z-10 bg-gradient-to-r from-black/70 to-white/0"></div>
+
+      {/* Image carousel with fade animation */}
+      {Array.isArray(buildingImages) && buildingImages.length > 0 && (
+        <div className="w-full h-full absolute left-0 top-0 z-0">
+          <Image
+            src={IMAGE_PATH + buildingImages[currentImageIndex] || "/placeholder.svg"}
+            width={1920}
+            height={1080}
+            alt="Building"
+            priority
+            className={`w-full h-full object-cover absolute left-0 top-0 transition-opacity duration-1000 ease-in-out animate-zoomInOut ${isTransitioning ? "opacity-0" : "opacity-100"
+              }`}
+          />
+        </div>
+      )}
     </div>
   )
 }

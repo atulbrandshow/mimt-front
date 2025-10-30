@@ -10,7 +10,7 @@ export function AppDataProvider({ children }) {
 
     const fetchHomeData = async () => {
         try {
-            const response = await fetch(`${API_NODE_URL}slug?path=/home`);
+            const response = await fetch(`${API_NODE_URL}slug?path=/`);
             const result = await response.json();
             console.log(result);
             
