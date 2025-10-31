@@ -5,6 +5,7 @@ import CampusSlider from "@/component/CampusSlider";
 import { EventSection } from "@/component/EventSection";
 import ExploreCourses from "@/component/ExploreCourses";
 import FooterCard from "@/component/FooterCard";
+import HeroSection from "@/component/HeroSection";
 import HomeLogoSlider from "@/component/HomeLogoSlider";
 import HomeTopCard from "@/component/HomeTopCard";
 import InnovationShowcase from "@/component/InnovationShowcase";
@@ -26,20 +27,21 @@ import { StudentTestimonial } from "@/component/StudentTestimonial";
 export default function HomePage({ data }) {
 
   console.log(data);
-  
+
 
   return (
     <>
-      {data && <MainSection data={data} />}
+      <MainSection />
+      {/* <HeroSection /> */}
       {data && <AboutSection />}
       {data && <MilestonesSection data={data} />}
       {data && <ExploreCourses data={data} />}
-      {data &&<ProgramSection />}
+      {data && <ProgramSection />}
       {/* {data && <HomeTopCard data={data} />} */}
-      {data && <EventSection /> }
+      {data && <EventSection />}
       {data && <SlickSlider data={data} />}
       {data && <NotificationSlider data={data} />}
-      {data &&<NewsSection />}
+      {data && <NewsSection />}
       {data && <InnovationShowcase />}
       {/* {data && <PlacementHighlights data={data} />} */}
       {data && <PlacementOverview />}

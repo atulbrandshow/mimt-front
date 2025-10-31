@@ -9,7 +9,6 @@ import { AppDataProvider } from '@/context/AppDataContext';
 import LatestNavbar from '@/component/LatestNavbar';
 import '../../public/global.css'
 import LatestFooter from '@/component/LatestFooter';
-import SmoothScroll from '@/component/SmoothScroll';
 function MyApp({ Component, pageProps }) {
     const [isShowNavAndFooter, setIsShowNavAndFooter] = useState(false);
     const router = useRouter();
@@ -28,7 +27,6 @@ function MyApp({ Component, pageProps }) {
         <AppDataProvider>
             {isShowNavAndFooter && <LatestNavbar />}
             <Component {...pageProps} />
-            <SmoothScroll />
             <ToastContainer
                 position="top-right"
                 autoClose={1000}
