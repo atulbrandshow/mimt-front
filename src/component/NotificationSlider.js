@@ -15,7 +15,7 @@ const NotificationSlider = ({ data }) => {
     const fetchEvents = async () => {
         try {
             const response = await fetch(
-                `${API_NODE_URL}list-detail-page/all?type=Event`, {
+                `${API_NODE_URL}list-detail-page/all`, {
                 credentials: "include",
             })
             const data = await response.json()
@@ -77,18 +77,18 @@ const NotificationSlider = ({ data }) => {
                         <div className="grid grid-cols-12 h-full">
                             <div className="col-span-2 max-sm:hidden p-2 flex justify-center items-center">
                                 <img
-                                    src={IMAGE_PATH + d?.AKG_Logo}
+                                    src={IMAGE_PATH + d?.MIMT_Logo}
                                     alt="AKG Logo"
-                                    className="w-28 aspect-square"
+                                    className="w-28 aspect-square rounded-full"
                                 />
                             </div>
                             <div className="col-span-5 max-sm:col-span-5 flex justify-center items-center">
-                                <h2 className="uppercase text-center max-w-96 font-novaBold leading-5 text-xl max-lg:text-base max-md:text-sm max-sm:text-xs text-white" dangerouslySetInnerHTML={{ __html: d?.AKG_Desc }} />
+                                <h2 className="uppercase text-center max-w-96 font-novaBold leading-5 text-xl max-lg:text-base max-md:text-sm max-sm:text-xs text-white" dangerouslySetInnerHTML={{ __html: d?.MIMT_Desc }} />
                             </div>
                             <div className="col-span-5 max-sm:col-span-7">
                                 <img
-                                    className="rounded-xl max-2xl:h-full h-full w-full ml-auto max-lg:w-full max-lg:ml-0 object-cover"
-                                    src={IMAGE_PATH + d?.AKG_Building_Image}
+                                    className="rounded-xl max-2xl:h-full h-52 w-full ml-auto max-lg:w-full max-lg:ml-0 object-cover object-top"
+                                    src={IMAGE_PATH + d?.MIMT_Building_Image}
                                     alt="AKG Building"
                                 />
                             </div>

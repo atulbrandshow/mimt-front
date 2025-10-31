@@ -26,7 +26,7 @@ export default function HomePage({ data }) {
       {data && <HomeTopCard data={data} />}
       {data && <ExploreCourses data={data} />}
       {data && <SlickSlider data={data} />}
-      {/* {data && <NotificationSlider data={data} />}
+      {data && <NotificationSlider data={data} />}
       {data && <MilestonesSection data={data} />}
       {data && <PlacementHighlights data={data} />}
       {data && <HomeLogoSlider data={data} />}
@@ -34,7 +34,7 @@ export default function HomePage({ data }) {
       {data && <StudentReviews data={data} />}
       {data && <NewsEvents data={data} />}
       {data && <FooterCard data={data} />}
-      {data && <ResearchEnvironment data={data} />} */}
+      {data && <ResearchEnvironment data={data} />}
     </>
   );
 }
