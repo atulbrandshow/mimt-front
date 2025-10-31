@@ -1,7 +1,6 @@
 'use client';
 
 import '../styles/globals.css';
-import Footer from '@/component/Footer';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
@@ -9,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AppDataProvider } from '@/context/AppDataContext';
 import LatestNavbar from '@/component/LatestNavbar';
 import '../../public/global.css'
+import LatestFooter from '@/component/LatestFooter';
 function MyApp({ Component, pageProps }) {
     const [isShowNavAndFooter, setIsShowNavAndFooter] = useState(false);
     const router = useRouter();
@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
                 pauseOnHover
             />
             {/* {isShowNavAndFooter && <StickyFooter streamId={pageProps?.data?.data?.stream} />} */}
-            {isShowNavAndFooter && <Footer />}
+            {isShowNavAndFooter && <LatestFooter />}
         </AppDataProvider>
     );
 }

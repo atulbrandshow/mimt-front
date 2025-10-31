@@ -51,7 +51,7 @@ const MilestonesSection = ({ data }) => {
             </svg>
 
           </div>
-          <h2 className="text-5xl font-novaLight max-lg:text-4xl max-md:text-3xl text-gray-800 mt-5">{first} {" "}<span className='font-novaSemi bg-text-gradient bg-clip-text text-transparent animate-gradient'>{last}</span>!</h2>
+          <h2 className="text-5xl font-novaLight max-lg:text-4xl max-md:text-3xl text-gray-800 mt-5">{first} {" "}<span className='font-novaSemi bg-text-gradient bg-clip-text text-transparent animate-gradient'>{last}</span></h2>
           <div className="my-14 flex justify-center space-x-14 max-lg:grid max-lg:grid-cols-3 max-sm:grid-cols-3 max-lg:space-x-0 max-lg:gap-4 max-lg:place-items-center">
             {logos?.map((logo, index) => (
               <img
