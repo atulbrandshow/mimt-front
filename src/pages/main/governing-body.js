@@ -79,48 +79,60 @@ export default function GoverningBodyPage() {
 
 
       {/* ✅ Sections */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        {sections.map((sec, i) => (
-          <div key={i} className="mb-20">
+     <div className="max-w-7xl mx-auto px-6 py-20">
+  {sections.map((sec, i) => (
+    <div key={i} className="mb-20">
 
-            {/* Section Title */}
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 border-l-8 border-[#fdd023] pl-4">
-              {sec.title}
-            </h2>
+      {/* Section Title */}
+      <h2 className="text-3xl font-bold text-gray-900 mb-8 border-l-8 border-[#fdd023] pl-4">
+        {sec.title}
+      </h2>
 
-            {/* Cards Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {sec.items.map((m, idx) => (
-                <div
-                  key={idx}
-                  className="
-              p-6 
+      {/* Cards Grid */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {sec.items.map((m, idx) => (
+          <div
+            key={idx}
+            className="
+              group
               rounded-2xl 
+              p-6 
+              bg-gradient-to-br from-[#ffffff]/80 to-[#f7f7f7]/40
               border border-gray-200 
-              bg-white/40 
               backdrop-blur-sm
-              transition-all 
-              hover:-translate-y-1 
-              hover:bg-white/60
+              transition-all duration-300
+              hover:-translate-y-2 
+              hover:shadow-lg 
+              hover:bg-white
             "
-                >
-                  <h3 className="text-xl font-semibold text-gray-900 leading-tight">
-                    {m.name}
-                  </h3>
+          >
 
-                  <p className="text-gray-700 mt-2 font-medium">
-                    {m.role}
-                  </p>
+            {/* Line Accent */}
+            <div className="w-12 h-1 bg-[#fdd023] rounded mb-4 transition-all group-hover:w-20"></div>
 
-                  <p className="text-gray-600 text-sm mt-1">
-                    {m.org}
-                  </p>
-                </div>
-              ))}
-            </div>
+            {/* Name */}
+            <h3 className="text-xl font-semibold text-gray-900 group-hover:text-black transition">
+              {m.name}
+            </h3>
+
+            {/* Role */}
+            <p className="text-gray-700 mt-2 font-medium">
+              {m.role}
+            </p>
+
+            {/* Organization */}
+            <p className="text-gray-600 text-sm mt-1">
+              {m.org}
+            </p>
+
           </div>
         ))}
       </div>
+
+    </div>
+  ))}
+</div>
+
 
     </div>
   );
