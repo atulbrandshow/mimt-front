@@ -7,7 +7,7 @@ export default function ViceChairmanMessagePage() {
 
       {/* ✅ BANNER */}
       <div
-        className="relative w-full h-[80vh] bg-cover bg-center flex items-center"
+        className="relative w-full h-[70vh] bg-cover bg-center flex items-center"
         style={{
           backgroundImage: "url('/image/about/mangalmay-campus.webp')",
         }}
