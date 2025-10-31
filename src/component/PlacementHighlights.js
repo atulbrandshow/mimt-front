@@ -1,7 +1,7 @@
 'use client';
 
 import Button from "./Button";
-import PlacementSlider from "./PlacementSlider";
+import PlacementStudentSlider from "./PlacementStudentSlider";
 
 export default function PlacementHighlights({ data }) {
     const d = data?.pageData;
@@ -66,10 +66,10 @@ export default function PlacementHighlights({ data }) {
             </div>
             <div className="flex flex-col justify-center my-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-sm:gap-2 max-sm:px-2 max-xl:px-5">
-                    <PlacementSlider placement={placement1} delay={4000} />
-                    <PlacementSlider placement={placement2} delay={3000} />
-                    <PlacementSlider placement={placement3} delay={3500} />
-                    <PlacementSlider placement={placement4} delay={4500} />
+                    <PlacementStudentSlider placement={placement1} delay={4000} />
+                    <PlacementStudentSlider placement={placement2} delay={3000} />
+                    <PlacementStudentSlider placement={placement3} delay={3500} />
+                    <PlacementStudentSlider placement={placement4} delay={4500} />
                 </div>
             </div>
         </div>
