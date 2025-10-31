@@ -4,64 +4,111 @@ import Image from "next/image";
 export default function AboutUs() {
   return (
     <section className="w-full font-sans">
-      {/* HERO SECTION */}
+
+      {/* ✅ HERO SECTION — Modern, Clean, Left-Aligned */}
+      {/* ✅ HERO SECTION — Clean, Premium, Balanced */}
       <div
-        className="relative w-full h-[80vh] bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: "url('/image/about/mangalmay-campus.webp')" }}
+        className="relative w-full h-[85vh] bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/image/about/mangalmay_institute.webp')",
+        }}
       >
+        {/* Soft Left Gradient Just Behind Text */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
 
-        {/* LEFT CONTENT BOX */}
-        <div className="absolute top-1/2 left-14 -translate-y-1/2 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl max-w-xl shadow-[0px_0px_30px_rgba(0,0,0,0.25)]">
-          <h2 className="text-white text-3xl font-bold mb-4 leading-snug drop-shadow-lg">
-            About Mangalmay Group
-          </h2>
-          <p className="text-white/85 leading-relaxed text-sm">
-            Established in 2002, Mangalmay Group of Institutions is one of the premier
-            NAAC accredited institutions focused on Innovation, Excellence, and
-            nurturing future-ready global leaders.
-          </p>
-        </div>
-      </div>
+        {/* Left-Aligned Centered Content */}
+        <div className="absolute inset-0 flex items-center pl-10 md:pl-20">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-10 rounded-2xl max-w-xl shadow-lg">
 
-      {/* MAIN CONTENT SECTION */}
-      <div className="w-full py-20 bg-gray-100 px-4 flex justify-center">
-        <div className="max-w-5xl w-full">
-          <h2 className="text-3xl font-bold text-black mb-6 tracking-wide border-l-8 border-[#fdd023] pl-4">
-            About Mangalmay Group of Institutions
-          </h2>
+            <h1 className="text-white text-2xl md:text-3xl font-bold mb-4 leading-tight">
+              About Mangalmay Group
+            </h1>
 
-          <div className="space-y-6 text-gray-700 leading-relaxed text-lg border-l-4 border-[#fdd023] pl-6">
-            <p>
-              Established in 2002, Mangalmay Group of Institutions is one of the premier NAAC accredited Institution with a prime focus on Innovation, Excellence and Nurturing global leaders for a sustainable future. We incorporate Knowledge, Industry experience, Research, and International exposure in our curriculum, to offer comprehensive educational program to the students. The post graduate and graduate programmes offered at Mangalmay are affiliated to AKTU, Lucknow (formally known as U.P.Technical University) and approved by the All India Council for Technical Education (AICTE) Ministry of HRD, New Delhi. Institute is also affiliated to C.C.S University Meerut.
+            <p className="text-white/80 text-lg leading-relaxed">
+              Established in 2002, Mangalmay Group of Institutions is one of the premier
+              NAAC accredited institutions focused on innovation, excellence, and
+              nurturing future-ready global leaders.
             </p>
 
-            <p>
-              Our vision is to disseminate knowledge in the field of Management, Engineering, Bio-Technology, Commerce and Education. Driven by creativity and curiosity, Mangalmay strive to provide an educationally outstanding experience for students. Mangalmay has been ranked among the best MBA and B.Tech college in Delhi NCR.
-            </p>
-
-            <p>
-              Mangalmay Institute of Engineering and Technology has evolved as one of the best B.Tech college with global reputation that strives for high quality education. The mission of the group is to offer innovative opportunities to our students to showcase their creativity and talent thereby making positive impact on the society.
-            </p>
-
-            <p>
-              In the record time of 23 years, Mangalmay Institute of Management and Technology (MIMT) has earned a distinct position for itself and been ranked as the best MBA college in Delhi NCR. MBA admissions are based on merit basis.
-            </p>
-
-            <p>
-              <strong>Dr. Atul Mangal</strong>, Chairman, believes in inculcating a culture of innovation and imparting quality education for students. He emphasizes whole-person integral growth.
-            </p>
-
-            <p>
-              <strong>Dr. Aayush Mangal</strong>, Vice Chairman, is an enthusiastic visionary who focuses on excellent academic delivery, modern infrastructure, and all-round student development.
-            </p>
-
-            <p>
-              There is a strong focus on research and development of faculty members from different streams. The institution also offers cross-organizational collaboration and liaises with various business communities.
-            </p>
           </div>
         </div>
       </div>
+
+
+
+      {/* ✅ MAIN CONTENT SECTION — Clean, Spacious, Modern */}
+     <div className="w-full py-20 bg-gray-100 px-4 flex justify-center">
+  <div className="max-w-5xl w-full">
+
+    {/* Title */}
+    <h2 className="text-4xl font-bold text-gray-900 mb-12 tracking-wide border-l-8 border-[#fdd023] pl-4">
+      About Mangalmay Group of Institutions
+    </h2>
+
+    {/* Content Area */}
+    <div className="space-y-10 text-gray-700 leading-[1.9] text-[1.1rem]">
+
+      <p className="text-gray-700">
+        Established in 2002, Mangalmay Group of Institutions is one of the premier 
+        NAAC accredited Institution with a major focus on innovation, excellence 
+        and nurturing global leaders for a sustainable future. Mangalmay blends 
+        knowledge, industry experience, research and international exposure to 
+        offer a comprehensive educational ecosystem. Our programs are affiliated 
+        to AKTU, Lucknow and approved by AICTE, New Delhi, and CCS University, Meerut.
+      </p>
+
+      {/* Highlighted Vision Box */}
+      <p className="bg-[#fafafa] p-6 rounded-xl border-l-4 border-[#fdd023] shadow-sm text-gray-800">
+        Our vision is to disseminate knowledge in Management, Engineering,
+        Biotechnology, Commerce and Education. Mangalmay strives to offer an
+        academically outstanding experience and has been ranked among the top
+        MBA and B.Tech colleges in Delhi NCR.
+      </p>
+
+      <p>
+        Mangalmay Institute of Engineering and Technology has emerged as a 
+        reputed B.Tech institution with a global outlook. Our mission is to 
+        provide innovative learning opportunities that encourage creativity, 
+        talent and societal contribution.
+      </p>
+
+      <p>
+        Over the last 23 years, Mangalmay Institute of Management and Technology (MIMT) 
+        has built a strong reputation and continues to consistently rank among the best 
+        MBA colleges in Delhi NCR. Admissions for MBA programs are merit-based ensuring 
+        academic excellence.
+      </p>
+
+      {/* Leadership Section */}
+      <div className="p-8 bg-[#fff7d9] border border-[#fdd023] rounded-xl shadow-sm">
+        <h3 className="text-2xl font-semibold mb-4 text-gray-900">
+          Leadership
+        </h3>
+
+        <p className="mb-4">
+          <strong>Dr. Atul Mangal</strong>, Chairman, believes in nurturing a culture 
+          of innovation and delivering quality education that promotes holistic growth 
+          of students.
+        </p>
+
+        <p>
+          <strong>Dr. Aayush Mangal</strong>, Vice Chairman, is a visionary academic 
+          leader focused on excellence, modern infrastructure and overall student 
+          development.
+        </p>
+      </div>
+
+      <p>
+        The institution maintains a strong emphasis on research, faculty development 
+        and interdisciplinary collaboration. Mangalmay actively engages with industries 
+        and business communities to ensure practical learning and global exposure for 
+        students.
+      </p>
+      
+    </div>
+  </div>
+</div>
+
     </section>
   );
 }
