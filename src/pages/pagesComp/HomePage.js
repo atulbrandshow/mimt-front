@@ -33,18 +33,18 @@ export default function HomePage({ data }) {
       {data && <MainSection data={data} />}
       {data && <AboutSection />}
       {data && <MilestonesSection data={data} />}
-      {data && <EventSection /> }
+      {data && <ExploreCourses data={data} />}
       {data &&<ProgramSection />}
       {/* {data && <HomeTopCard data={data} />} */}
-      {data && <ExploreCourses data={data} />}
+      {data && <EventSection /> }
       {data && <SlickSlider data={data} />}
       {data && <NotificationSlider data={data} />}
       {data &&<NewsSection />}
-      {data && <StudentTestimonial />}
+      {data && <InnovationShowcase />}
       {/* {data && <PlacementHighlights data={data} />} */}
       {data && <PlacementOverview />}
       {data && <RecruiterTestimonial />}
-      {data && <InnovationShowcase />}
+      {data && <StudentTestimonial />}
       {/* {data && <HomeLogoSlider data={data} />} */}
       {/* {data && <CampusSlider data={data} />} */}
       {/* {data && <StudentReviews data={data} />} */}

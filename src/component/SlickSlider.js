@@ -1,6 +1,7 @@
 "use client"
 import { IMAGE_PATH } from "@/configs/config"
 import { useState, useEffect } from "react"
+import TitleInfo from "./TitleInfo"
 
 export default function SlickSlider({ data }) {
   const d = data?.pageData
@@ -88,15 +89,8 @@ export default function SlickSlider({ data }) {
     <>
       <section className="h-full bg-[#F3F3F3] py-8">
         <div className="break1:max-w-[1500px] break2:max-w-[1320px] break3:max-w-[1200px] break4:max-w-[1040px] mx-auto">
-          <header className="text-center mb-8 max-xl:mb-5">
-            <h1 className="text-[42px] font-novaReg max-lg:text-4xl max-md:text-3xl max-sm:px-4 text-gray-700">
-              {first}{" "}
-              <span className="font-novaSemi bg-text-gradient bg-clip-text text-transparent animate-gradient">
-                {last}
-              </span>
-            </h1>
-          </header>
-          <div className="grid grid-cols-12 gap-4">
+          <TitleInfo first="Vibrant Journey" second={d?.Vibrant_Journey_Title} color='black' />
+          <div className="mt-16 grid grid-cols-12 gap-4">
             <div className="col-span-4 max-lg:col-span-12 max-lg:mb-4 flex items-center relative">
               {/* Unique Design Elements */}
               <div className="absolute left-[-30%] top-[-10%] h-64 w-64 transform rotate-45 bg-gradient-to-br from-yellow-300 via-yellow-500 to-orange-500 opacity-30 blur-xl rounded-full z-0" />

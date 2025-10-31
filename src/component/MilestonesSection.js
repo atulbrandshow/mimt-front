@@ -1,6 +1,7 @@
 "use client";
 import { IMAGE_PATH } from '@/configs/config';
 import React from 'react';
+import TitleInfo from './TitleInfo';
 
 const MilestonesSection = ({ data }) => {
   const d = data?.pageData;
@@ -49,9 +50,8 @@ const MilestonesSection = ({ data }) => {
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-star">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
-
           </div>
-          <h2 className="text-5xl font-novaLight max-lg:text-4xl max-md:text-3xl text-gray-800 mt-5">{first} {" "}<span className='font-novaSemi bg-text-gradient bg-clip-text text-transparent animate-gradient'>{last}</span></h2>
+          <TitleInfo first="Achievements" second={d?.Achievements_Title} color='black' />
           <div className="my-14 flex justify-center space-x-14 max-lg:grid max-lg:grid-cols-3 max-sm:grid-cols-3 max-lg:space-x-0 max-lg:gap-4 max-lg:place-items-center">
             {logos?.map((logo, index) => (
               <img
