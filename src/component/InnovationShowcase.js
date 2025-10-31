@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import TitleInfo from "./TitleInfo"
 
 export default function InnovationShowcase() {
     const [activeTab, setActiveTab] = useState("labs")
@@ -94,7 +95,8 @@ export default function InnovationShowcase() {
     }
 
     return (
-        <section className="h-full bg-black">
+        <section className="h-full bg-black py-16">
+            <TitleInfo first="Labs & Research" second="Innovate and Inspire Be a Future Innovator" color='white' />
             <div className="max-w-[1600px] mx-auto text-white p-8 md:p-16">
                 {/* Header with Tab Buttons */}
                 <div className="flex items-center gap-4 mb-16">
@@ -123,7 +125,7 @@ export default function InnovationShowcase() {
                     {/* Left Section - Text Content */}
                     <div className="lg:col-span-1 flex flex-col justify-start">
                         <div>
-                            <h1 className="text-4xl md:text-8xl font-novaBold mb-6 text-balance">{currentContent.title}</h1>
+                            <h1 className="text-4xl md:text-8xl font-novaThin mb-6 text-balance">{currentContent.title}</h1>
                             <p className="text-gray-400 text-lg max-w-sm font-novaReg leading-relaxed">{currentContent.description}</p>
                         </div>
 

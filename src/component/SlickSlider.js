@@ -104,9 +104,8 @@ export default function SlickSlider({ data }) {
                   return (
                     <article
                       key={i}
-                      className={`p-6 max-xl:p-4 leading-5 max-lg:text-center ${
-                        i < 2 ? "border-b" : ""
-                      } ${i % 2 === 0 ? "border-r" : ""} border-gray-300`}
+                      className={`p-6 max-xl:p-4 leading-5 max-lg:text-center ${i < 2 ? "border-b" : ""
+                        } ${i % 2 === 0 ? "border-r" : ""} border-gray-300`}
                     >
                       <h2 className="text-5xl xl:text-5xl font-novaThin mb-2 max-lg:text-3xl max-lg:mb-3 text-gray-700">
                         <span className="whitespace-nowrap">

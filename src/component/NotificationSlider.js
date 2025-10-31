@@ -34,7 +34,7 @@ const NotificationSlider = ({ data }) => {
     !eventsData && fetchEvents();
 
     return (
-        <main className='bg-gray-100 py-2'>
+        <main className='bg-gray-100 pb-10'>
             <div className="max-w-[1500px] m-auto px-2 grid grid-cols-12 gap-4">
                 <section className="col-span-4 max-lg:col-span-12 max-lg:mb-4">
                     <div className="max-lg:px-10 max-md:px-8 max-sm:px-1 h-full ">
