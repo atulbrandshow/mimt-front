@@ -177,10 +177,10 @@ export default function NewNavBar() {
 
   return (
     <header
-      className={`navbar z-[100] w-full fixed top-0 left-0 transition-all duration-200 ${isScrolled ? "bg-blue-700" : "bg-white/0"}`}
+      className={`navbar z-[100] w-full sticky top-0 left-0 transition-all duration-200 pb-2 ${isScrolled ? "bg-black" : "bg-gray-800"}`}
     >
       <div
-        className={`hidden md:flex overflow-hidden w-full transition-all duration-300 ease-in-out ${isScrolled ? "-mt-4" : "py-1.5"} justify-end items-center px-3 border-b border-gray-400/30`}
+        className={`hidden md:flex overflow-hidden w-full transition-all duration-300 ease-in-out ${isScrolled ? "-translate-y-10" : "py-1.5"} justify-end items-center px-3 border-b border-gray-400/30`}
       >
         <div className="notification w-full">
           <Swiper
@@ -213,7 +213,7 @@ export default function NewNavBar() {
           ))}
         </div>
       </div>
-      <div className="flex justify-between items-center px-3 pt-1.5">
+      <div className={`flex justify-between items-center px-3 ${!isScrolled && "pt-1.5"} transition-all duration-300 ease-in-out`}>
         <div className="flex">
           <div className={`text-white flex `}>
             <div
@@ -295,13 +295,13 @@ export default function NewNavBar() {
           </div>
         </div>
         <div className="flex justify-end">
-          <div className="bg-blue-500 flex justify-between gap-8 items-center rounded-md p-1 sm:p-3">
+          <div className="bg-yellow-400 flex justify-between gap-8 items-center rounded-md p-1 sm:px-3 sm:py-1.5">
             <Link href="tel:1800-200-0777" className="hidden sm:block">
               <div className="flex gap-2">
-                <div className="h-10 w-10 flex items-center justify-center border-2 border-gray-300 rounded-full">
-                  <Phone size={20} className="text-white" />
+                <div className="h-10 w-10 flex items-center justify-center border-2 border-gray-900 rounded-full">
+                  <Phone size={20} className="text-black" />
                 </div>
-                <div className="flex flex-col justify-center leading-none text-white">
+                <div className="flex flex-col justify-center leading-none text-black">
                   <small className="font-novaReg text-xs">Admission Helpline</small>
                   <span className="font-novaBold whitespace-nowrap leading-none text-lg max-md:text-base">
                     1800-200-0777
@@ -328,7 +328,7 @@ export default function NewNavBar() {
           </div>
         </div>
       </div>
-      <div className="mt-3 px-3">
+      <div className="mt-2 px-3">
         <ul
           className={`${BigMenuToggle
             ? "fixed w-full h-full left-0 top-0 py-20 overflow-y-auto backdrop-blur-lg"

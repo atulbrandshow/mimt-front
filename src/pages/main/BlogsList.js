@@ -1,5 +1,5 @@
 "use client";
-import { API_NODE_URL } from "@/configs/config";
+import { API_NODE_URL, IMAGE_PATH } from "@/configs/config";
 import React, { useEffect, useState } from "react";
 
 const BlogsList = () => {
@@ -19,7 +19,6 @@ const BlogsList = () => {
     fetchBlogs(1);
   }, []);
 
-  // Fetch all blog categories
   const fetchCategories = async () => {
     try {
       const res = await fetch(`${API_NODE_URL}blog/get-blog-category`);
@@ -34,7 +33,6 @@ const BlogsList = () => {
     }
   };
 
-  // Fetch blogs with filters
   const fetchBlogs = async (page = 1, querySearch = search, category = selectedCategory) => {
     try {
       setLoading(true);
@@ -50,9 +48,10 @@ const BlogsList = () => {
       const query = new URLSearchParams(filters).toString();
       const res = await fetch(`${API_NODE_URL}blog?${query}`);
       const result = await res.json();
-      
+
       if (result.status) {
-        setBlogs(result.data.pages);
+        const sorted = result.data.pages.sort((a, b) => new Date(b.post_date_gmt) - new Date(a.post_date_gmt));
+        setBlogs(sorted);
         setPagination(result.data.pagination);
       } else {
         setBlogs([]);
@@ -64,36 +63,43 @@ const BlogsList = () => {
     }
   };
 
-  // Handle search typing (live filter)
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       fetchBlogs(1, search, selectedCategory);
-    }, 500); // debounce 500ms
+    }, 500);
     return () => clearTimeout(delayDebounce);
   }, [search]);
 
-  // Handle category selection
   const handleCategoryClick = (slug) => {
     setSelectedCategory(slug === selectedCategory ? "" : slug);
     fetchBlogs(1, search, slug === selectedCategory ? "" : slug);
   };
 
-  // Pagination
   const handlePageChange = (newPage) => {
     fetchBlogs(newPage);
   };
 
+  const featuredBlog = blogs.length > 0 ? blogs[0] : null;
+  const otherBlogs = blogs.slice(1);
+
+  // ✅ Helper function for formatted date (dd-mm-yyyy)
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-6 mt-14">
-      {/* Blog Navbar */}
+    <div className="min-h-screen bg-gray-50 py-16 px-6 mt-20">
+      {/* Navbar */}
       <nav className="bg-gradient-to-r from-indigo-600 to-blue-500 shadow-md py-4 px-6 mb-10 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
-          {/* Left: Blog Title */}
-          <h1 className="text-white text-2xl font-bold hover:text-yellow-300 transition">
-            Our Blog
-          </h1>
+          <h1 className="text-white text-2xl font-bold">Our Blog</h1>
 
-          {/* Middle: Categories */}
+          {/* Categories */}
           <div className="flex flex-wrap gap-3 justify-center flex-1">
             {categories.length > 0 ? (
               categories.map((cat) => (
@@ -114,7 +120,7 @@ const BlogsList = () => {
             )}
           </div>
 
-          {/* Right: Search Bar */}
+          {/* Search */}
           <div className="flex items-center bg-white rounded-full overflow-hidden shadow-sm">
             <input
               type="text"
@@ -133,68 +139,100 @@ const BlogsList = () => {
         </div>
       </nav>
 
-      {/* Blog Content */}
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
-          {selectedCategory
-            ? `Showing Blogs for "${selectedCategory}"`
-            : search
-            ? `Search Results for "${search}"`
-            : "All Latest Blogs"}
-        </h2>
-
-        {loading && <p className="text-center text-gray-500">Loading blogs...</p>}
-
-        {!loading && blogs.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog) => (
-              <div
-                key={blog._id}
-                className="bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
-              >
-                {blog.image ? (
-                  <img
-                    src={blog.image}
-                    alt={blog.name}
-                    className="w-full h-48 object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-48 bg-gradient-to-r from-indigo-200 to-blue-200 flex items-center justify-center text-gray-500">
-                    No Image
-                  </div>
-                )}
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">
-                    {blog.name || "Untitled Blog"}
-                  </h3>
-                  <div
-                    className="text-gray-600 text-sm mb-3 line-clamp-3"
-                    dangerouslySetInnerHTML={{
-                      __html: blog.description || "No description available.",
-                    }}
-                  />
-                  <div className="text-xs text-gray-500 mb-3">
-                    {blog.categorys?.length > 0 && (
-                      <span className="inline-block bg-indigo-100 text-indigo-600 px-2 py-1 rounded-md mr-2">
-                        {blog.categorys.map((c) => c.name).join(", ")}
-                      </span>
-                    )}
-                  </div>
+      <div className="max-w-7xl mx-auto space-y-14">
+        {/* Featured Article */}
+        {featuredBlog && (
+          console.log(featuredBlog),
+          
+          <section>
+            <h2 className="text-3xl font-bold text-gray-800 mb-6">Latest Blogs</h2>
+            <div className="grid md:grid-cols-2 bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition">
+              <img
+                src={IMAGE_PATH+ featuredBlog?.banner_img || "/placeholder.jpg"}
+                alt={featuredBlog.name}
+                className="w-full h-72 object-cover"
+              />
+              <div className="p-6 flex flex-col justify-center">
+                <span className="text-sm bg-yellow-100 text-yellow-700 font-semibold px-3 py-1 rounded-full w-fit mb-3">
+                  {featuredBlog.categorys?.[0]?.name || "General"}
+                </span>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+                  {featuredBlog.name}
+                </h3>
+                <p
+                  className="text-gray-600 text-sm mb-4 line-clamp-3"
+                  dangerouslySetInnerHTML={{
+                    __html: featuredBlog.description || "No description available.",
+                  }}
+                />
+                <div className="flex items-center justify-between">
+                  {/* ✅ Show formatted date */}
+                  <p className="text-orange-500 text-sm flex items-center gap-1">
+                    📅 <span>{formatDate(featuredBlog?.post_date_gmt)}</span>
+                  </p>
                   <a
-                    href={blog.path}
-                    className="text-blue-600 text-sm font-medium hover:underline"
+                    href={featuredBlog.path}
+                    className="text-blue-600 text-sm font-semibold hover:underline"
                   >
-                    Read More →
+                    Read more →
                   </a>
                 </div>
               </div>
-            ))}
-          </div>
-        ) : (
-          !loading && (
-            <p className="text-center text-gray-500">No blogs found.</p>
-          )
+            </div>
+          </section>
         )}
+
+        {/* More Blogs */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">More Blogs</h2>
+
+          {loading ? (
+            <p className="text-center text-gray-500">Loading blogs...</p>
+          ) : otherBlogs.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {otherBlogs.map((blog) => (
+                <div
+                  key={blog._id}
+                  className="bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition"
+                >
+                  <div className="relative">
+                    <img
+                      src={blog.image || "/placeholder.jpg"}
+                      alt={blog.name}
+                      className="w-full h-48 object-cover"
+                    />
+                    <span className="absolute top-3 left-3 bg-orange-100 text-orange-700 text-xs font-semibold px-3 py-1 rounded-full">
+                      {blog.categorys?.[0]?.name || "General"}
+                    </span>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+                      {blog.name}
+                    </h3>
+                    <p
+                      className="text-gray-600 text-sm mb-3 line-clamp-3"
+                      dangerouslySetInnerHTML={{
+                        __html: blog.description || "No description available.",
+                      }}
+                    />
+                    <div className="flex items-center justify-between">
+                      {/* ✅ Show formatted date instead of "5 min" */}
+                      <p className="text-orange-500 text-sm">📅 {formatDate(blog?.post_date_gmt)}</p>
+                      <a
+                        href={blog.path}
+                        className="text-blue-600 text-sm font-semibold hover:underline"
+                      >
+                        Read more →
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-gray-500">No more blogs found.</p>
+          )}
+        </section>
 
         {/* Pagination */}
         {!loading && blogs.length > 0 && (

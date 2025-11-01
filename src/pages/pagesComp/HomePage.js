@@ -27,8 +27,8 @@ import { StudentTestimonial } from "@/component/StudentTestimonial";
 export default function HomePage({ data }) {
   return (
     <>
-      <MainSection />
-      {/* <HeroSection /> */}
+      {/* <MainSection /> */}
+      <HeroSection />
       {data && <AboutSection />}
       {data && <MilestonesSection data={data} />}
       {data && <ExploreCourses data={data} />}
