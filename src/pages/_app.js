@@ -9,6 +9,7 @@ import { AppDataProvider } from '@/context/AppDataContext';
 import LatestNavbar from '@/component/LatestNavbar';
 import '../../public/global.css'
 import LatestFooter from '@/component/LatestFooter';
+import SlideNavbar from '@/component/SlideNavbar';
 function MyApp({ Component, pageProps }) {
     const [isShowNavAndFooter, setIsShowNavAndFooter] = useState(false);
     const router = useRouter();
@@ -25,7 +26,10 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <AppDataProvider>
-            {isShowNavAndFooter && <LatestNavbar />}
+            {/* {isShowNavAndFooter && <LatestNavbar />} */}
+            <div className='flex'>
+            {isShowNavAndFooter && <SlideNavbar/>}
+            <div>
             <Component {...pageProps} />
             <ToastContainer
                 position="top-right"
@@ -39,6 +43,8 @@ function MyApp({ Component, pageProps }) {
             />
             {/* {isShowNavAndFooter && <StickyFooter streamId={pageProps?.data?.data?.stream} />} */}
             {isShowNavAndFooter && <LatestFooter />}
+            </div>
+            </div>
         </AppDataProvider>
     );
 }
