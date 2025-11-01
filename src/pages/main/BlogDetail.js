@@ -19,12 +19,12 @@ const BlogDetails = ({ data }) => {
 
   const bannerImage =
     data?.banner_img || "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1920&q=80"
-  const formattedDate = data?.date
-    ? new Date(data.date).toLocaleDateString("en-US", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
+  const formattedDate = data?.post_date_gmt
+    ? new Date(data.post_date_gmt).toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
     : ""
 
   const stripHtmlTags = (html) => {
@@ -32,32 +32,18 @@ const BlogDetails = ({ data }) => {
     return doc.body.textContent || ""
   }
 
-  const excerpt = stripHtmlTags(data?.description || "").substring(0, 150) + "..."
+  const excerpt = data?.shortdesc ? stripHtmlTags(data?.shortdesc || "") : stripHtmlTags(data?.description || "").substring(0, 150) + "..."
 
   const tags = data?.tags || ["BBA", "Education", "Career", "Greater Noida"]
 
-  const categories = data?.categorys? (Array.isArray(data.categorys) ? data.categorys : [data.categorys]) : []
-  
+  const categories = data?.categorys ? (Array.isArray(data.categorys) ? data.categorys : [data.categorys]) : []
+
   return (
     <div className="min-h-screen bg-white">
-      {/* <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 md:px-8 py-4">
-          <nav className="flex items-center gap-2 text-sm">
-            <a href="/" className="text-blue-600 hover:text-blue-700 font-medium transition-colors">
-              Home
-            </a>
-            <span className="text-gray-400">/</span>
-            <a href="/blogs" className="text-blue-600 hover:text-blue-700 font-medium transition-colors">
-              Blogs
-            </a>
-            <span className="text-gray-400">/</span>
-            <span className="text-gray-700 font-medium truncate">{data?.name?.substring(0, 50)}...</span>
-          </nav>
-        </div>
-      </div> */}
+
 
       {/* Hero Banner Section */}
-      <section className="relative w-full h-96 md:h-[500px] overflow-hidden bg-gray-900">
+      <section className="relative w-full h-96 md:h-[500px] overflow-hidden bg-gray-900 mt-">
         <img
           src={bannerImage || "/placeholder.svg"}
           alt={data?.name || "Blog Banner"}
@@ -66,9 +52,24 @@ const BlogDetails = ({ data }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </section>
       {/* Content Container */}
-      <div className="max-w-5xl mx-auto px-6 md:px-8 -mt-32 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 -mt-32 relative z-10">
         {/* Header Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-10 mb-12">
+          <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200 mb-3">
+            <div className="max-w-7xl mx-auto px-6 md:px-8 py-4">
+              <nav className="flex items-center gap-2 text-sm">
+                <a href="/" className="text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                  Home
+                </a>
+                <span className="text-gray-400">/</span>
+                <a href="/blogs" className="text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                  Blogs
+                </a>
+                <span className="text-gray-400">/</span>
+                <span className="text-gray-700 font-medium truncate">{data?.name?.substring(0, 50)}...</span>
+              </nav>
+            </div>
+          </div>
           <div className="mb-6 flex flex-wrap items-center gap-3">
             {categories.length > 0 ? (
               categories.map((category, idx) => {
@@ -122,28 +123,29 @@ const BlogDetails = ({ data }) => {
                 <p className="text-base font-semibold text-gray-900">{formattedDate}</p>
               </div>
               <div className="hidden md:block w-px h-10 bg-gray-300" />
-              
+
             </div>
           </div>
 
           <div className="mt-6 pt-6 border-t border-gray-100">
             <p className="text-gray-700 text-lg leading-relaxed italic text-pretty">{excerpt}</p>
           </div>
+          {tags.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {tags.map((tag, idx) => (
+                <a
+                  key={idx}
+                  href={``}
+                  className="inline-block px-4 py-2 bg-gray-100 hover:bg-blue-50 text-gray-700 hover:text-blue-600 text-sm font-medium rounded-lg border border-gray-200 hover:border-blue-300 transition-all duration-200"
+                >
+                  #{tag?.name}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
-        {tags.length > 0 && (
-          <div className="mb-10 flex flex-wrap gap-2">
-            {tags.map((tag, idx) => (
-              <a
-                key={idx}
-                href={``}
-                className="inline-block px-4 py-2 bg-gray-100 hover:bg-blue-50 text-gray-700 hover:text-blue-600 text-sm font-medium rounded-lg border border-gray-200 hover:border-blue-300 transition-all duration-200"
-              >
-                #{tag?.name}
-              </a>
-            ))}
-          </div>
-        )}
+
 
         {/* Article Content */}
         <article className="bg-white rounded-2xl shadow-lg p-8 md:p-10 mb-16">
@@ -176,7 +178,7 @@ const BlogDetails = ({ data }) => {
           />
         </article>
 
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 md:p-10 mb-16 shadow-lg">
+        {/* <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 md:p-10 mb-16 shadow-lg">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <h3 className="text-2xl font-bold text-white mb-2">Share This Article</h3>
@@ -191,8 +193,8 @@ const BlogDetails = ({ data }) => {
               </button>
             </div>
           </div>
-        </div>
-{/* 
+        </div> */}
+        {/* 
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h3>
           <div className="grid md:grid-cols-3 gap-6">
