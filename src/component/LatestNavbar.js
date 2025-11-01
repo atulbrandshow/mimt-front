@@ -295,13 +295,13 @@ export default function NewNavBar() {
           </div>
         </div>
         <div className="flex justify-end">
-          <div className="bg-yellow-400 flex justify-between gap-8 items-center rounded-md p-1 sm:px-3 sm:py-1.5">
+          <div className="bg-[#911E75] flex justify-between gap-8 items-center rounded-md p-1 sm:px-3 sm:py-1.5">
             <Link href="tel:1800-200-0777" className="hidden sm:block">
               <div className="flex gap-2">
-                <div className="h-10 w-10 flex items-center justify-center border-2 border-gray-900 rounded-full">
-                  <Phone size={20} className="text-black" />
+                <div className="h-10 w-10 flex items-center justify-center border-2 border-gray-300 rounded-full">
+                  <Phone size={20} className="text-white" />
                 </div>
-                <div className="flex flex-col justify-center leading-none text-black">
+                <div className="flex flex-col justify-center leading-none text-white">
                   <small className="font-novaReg text-xs">Admission Helpline</small>
                   <span className="font-novaBold whitespace-nowrap leading-none text-lg max-md:text-base">
                     1800-200-0777

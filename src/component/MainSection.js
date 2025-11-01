@@ -25,7 +25,7 @@ const MainSection = () => {
       <div className="flex justify-center relative z-20 h-[95vh]">
         <div className="relative z-10 w-full h-full flex items-center py-10">
           <div className="px-40 w-full flex flex-col justify-center h-full">
-            <span className="text-sm font-novaReg text-white tracking-widest uppercase">best university in this Delhi NCR</span>
+            <span className="text-sm font-novaReg text-white tracking-widest uppercase">best <span className="text-[#911E75]">university</span> in this Delhi NCR</span>
             <h1 className="text-7xl uppercase font-cursiveFont font-thin max-w-lg text-white">
               Mangalmay Group of Institution
             </h1>
@@ -36,18 +36,18 @@ const MainSection = () => {
               <Button
                 text={"Apply Today"}
                 // onClick={() => setIsModalOpen(!isModalOpen)}
-                className="py-3 max-sm:px-6 max-sm:text-xs px-10 mt-5 text-[15px] rounded-xl font-novaBold uppercase bg-yellow-400 animate-gradient text-black w-max hover:bg-yellow-500 hover:border-b-4 hover:border-black hover:transform scale-y-105 tracking-widest"
+                className="py-3 max-sm:px-6 max-sm:text-xs px-10 mt-5 text-[15px] rounded-xl font-novaBold uppercase bg-[#911E75] animate-gradient text-white w-max hover:bg-[#791b61] hover:border-b-4 hover:border-black hover:transform scale-y-105 tracking-widest"
               />
             </div>
           </div>
           <div className="w-6/12 h-full flex flex-col items-end justify-end relative">
             {/* Navigation buttons */}
             <div className="flex gap-2 mb-5 mr-5">
-              <button id="prevButton" className="p-2 bg-white rounded-full shadow hover:bg-gray-200">
-                <ArrowLeft className="w-5 h-5 text-black" />
+              <button id="prevButton" className="p-2 bg-[#911E75] rounded-full shadow hover:bg-gray-200">
+                <ArrowLeft className="w-5 h-5 text-white" />
               </button>
-              <button id="nextButton" className="p-2 bg-white rounded-full shadow hover:bg-gray-200">
-                <ArrowRight className="w-5 h-5 text-black" />
+              <button id="nextButton" className="p-2 bg-[#911E75] rounded-full shadow hover:bg-gray-200">
+                <ArrowRight className="w-5 h-5 text-white" />
               </button>
             </div>
 
