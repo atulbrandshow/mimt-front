@@ -1,88 +1,149 @@
-"use client";
+"use client"
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import { motion } from "framer-motion"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { IMAGE_PATH } from "@/configs/config"
 
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { ArrowLeft, ArrowRight, SearchIcon } from "lucide-react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+// --- Animation settings for a smooth, spring-like transition ---
+const transition = {
+  type: "spring",
+  stiffness: 200,
+  damping: 40,
+  mass: 1,
+}
 
-const images = [
+const MainSection = ({ data }) => {
+  const slides = [
     "/image/mimt/hero-section/website-varun.jpg",
     "/image/mimt/hero-section/sadhguru-mimt.jpg",
     "/image/mimt/hero-section/new-ipl-session.jpg",
     "/image/mimt/hero-section/new-website-jobfair.jpg",
     "/image/mimt/hero-section/slider-2023.jpg",
-];
+  ]
+  const [currentIndex, setCurrentIndex] = useState(0)
 
-const HeroSection = () => {
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length)
+  }
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length)
+  }
+
+  // Autoplay functionality
+  useEffect(() => {
+    const autoplayInterval = setInterval(handleNext, 4000) // Change slide every 4 seconds
+    return () => clearInterval(autoplayInterval)
+  }, [currentIndex, slides.length]) // Add dependencies for autoplay reset
+
+  if (!slides || slides.length === 0) {
     return (
-        <section className="relative w-full h-[75vh] bg-blue-900">
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-transparent to-white"></div>
+      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+        No banners to display.
+      </div>
+    )
+  }
 
-            {/* Right-side background image */}
-            <div
-                className="absolute right-0 top-0 h-full w-1/2 bg-contain bg-center bg-no-repeat"
+  return (
+    <div className="relative flex items-center justify-center w-full h-[45vh] sm:h-[55vh] md:h-[75vh] lg:h-[85vh] overflow-hidden bg-black">
+      {/* Background Gradient & Blur Effect (remains the same) */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          key={slides[currentIndex]} // Use image src as key to ensure re-render
+          src={slides[currentIndex]}
+          width={1920}
+          height={1080}
+          alt="Background"
+          className="w-full h-full object-cover blur-3xl scale-125 opacity-50 transition-opacity duration-1000"
+        />
+        <div className="absolute inset-0 bg-gray-800"></div>
+      </div>
+
+      {/* 3D Carousel Container */}
+      {/* Adjusted width and `perspective` for a better view of full images */}
+      <div className="relative z-10 w-full h-full sm:w-[90%] sm:h-[70vh]" style={{ perspective: "1500px" }}>
+        <div className="relative w-full h-full" style={{ transformStyle: "preserve-3d" }}>
+          {slides.map((imageSrc, index) => {
+            const offset = index - currentIndex
+            const isCurrent = offset === 0
+            const isLeft = offset === -1 || (offset === slides.length - 1 && currentIndex === 0) // Handle wrap around for left
+            const isRight = offset === 1 || (offset === -(slides.length - 1) && currentIndex === slides.length - 1) // Handle wrap around for right
+            const isVisible = isCurrent || isLeft || isRight;
+
+
+            // --- Calculate dynamic styles for each slide ---
+            let transform = "";
+            let opacity = 0;
+            let zIndex = 0;
+            let filter = "brightness(50%)"; // Default for non-current
+
+            if (isCurrent) {
+              transform = `translateX(0%) translateZ(0px) rotateY(0deg) scale(1)`;
+              opacity = 1;
+              zIndex = slides.length; // Ensure current is always on top
+              filter = "brightness(100%)";
+            } else if (isLeft) {
+              transform = `translateX(-60%) translateZ(-300px) rotateY(35deg) scale(0.8)`; // Adjusted for full image
+              opacity = 1;
+              zIndex = slides.length - 1;
+            } else if (isRight) {
+              transform = `translateX(60%) translateZ(-300px) rotateY(-35deg) scale(0.8)`; // Adjusted for full image
+              opacity = 1;
+              zIndex = slides.length - 1;
+            } else {
+              // For images far out, make them invisible and put them behind
+              transform = `translateX(${offset > 0 ? '150%' : '-150%'}) translateZ(-500px) rotateY(${offset > 0 ? '-60deg' : '60deg'}) scale(0.6)`;
+              opacity = 0;
+              zIndex = 0;
+            }
+
+            return (
+              <motion.div
+                key={imageSrc}
+                className="absolute w-full sm:w-[80%] h-full top-0 sm:left-[10%] overflow-hidden pointer-events-none" // Increased width, adjusted left
                 style={{
-                    backgroundImage: "url('/image/accurate/about/accurate-building.webp')",
+                  zIndex,
+                  transformOrigin: "center center",
+                  filter,
                 }}
-            ></div>
+                animate={{
+                  transform,
+                  opacity,
+                }}
+                transition={transition}
+              >
+                <Image
+                  src={imageSrc}
+                  width={1200}
+                  height={800}
+                  alt={`Banner ${index + 1}`}
+                  priority={isCurrent}
+                  className={`w-full h-full object-contain`}
+                />
+              </motion.div>
+            )
+          })}
+        </div>
+      </div>
 
-            {/* Content and Slider */}
-            <div className="relative z-10 w-full h-full flex items-center py-10">
-                <div className="px-24 w-full flex h-full">
-                    {/* Left side content */}
-                    <div className="w-6/12 flex flex-col justify-center pr-8 max-sm:w-full">
-                        <h1 className="text-5xl font-bold mb-4 max-md:text-3xl max-sm:text-2xl text-white">Discover Your Potential with Accurate</h1>
-                        <p className="mb-6 text-lg text-white max-w-2xl">Unleash your potential with Accurate Institute. Choose from a diverse range of programs and discover endless opportunities for transformative learning.</p>
+      {/* Minimalist Navigation Buttons */}
+      <button
+        onClick={handlePrev}
+        className="absolute z-20 left-1 md:left-5 lg:left-10 top-1/2 -translate-y-1/2 p-1 md:p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all"
+        aria-label="Previous Banner"
+      >
+        <ChevronLeft size={32} />
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute z-20 right-1 md:right-5 lg:right-10 top-1/2 -translate-y-1/2 p-1 md:p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all"
+        aria-label="Next Banner"
+      >
+        <ChevronRight size={32} />
+      </button>
+    </div>
+  )
+}
 
-                        {/* Search Box */}
-                        <div className="flex items-center bg-white rounded-lg overflow-hidden shadow-md max-w-md gap-2">
-                            <input type="text" placeholder="Search what you are looking for..." className="flex-grow px-4 py-2 text-gray-700 outline-none" />
-                            <SearchIcon className="w-6 h-6 text-gray-500 mr-4" />
-                        </div>
-                    </div>
-
-                    {/* Right bottom slider with navigation buttons */}
-                    <div className="w-6/12 flex flex-col items-end justify-end relative">
-                        {/* Navigation buttons */}
-                        <div className="flex gap-2 mb-2">
-                            <button id="prevButton" className="p-2 bg-white rounded-full shadow hover:bg-gray-200">
-                                <ArrowLeft className="w-5 h-5 text-black" />
-                            </button>
-                            <button id="nextButton" className="p-2 bg-white rounded-full shadow hover:bg-gray-200">
-                                <ArrowRight className="w-5 h-5 text-black" />
-                            </button>
-                        </div>
-
-                        {/* Swiper */}
-                        <div className="w-[850px] h-[200px]">
-                            <Swiper
-                                modules={[Autoplay, Pagination, Navigation]}
-                                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                                loop={true}
-                                slidesPerView={2.4}
-                                spaceBetween={20}
-                                navigation={{
-                                    prevEl: "#prevButton",
-                                    nextEl: "#nextButton",
-                                }}
-                                className="rounded-2xl h-full"
-                            >
-                                {images.map((img, i) => (
-                                    <SwiperSlide key={i}>
-                                        <div className="w-full h-full bg-cover bg-center rounded-2xl" style={{ backgroundImage: `url(${img})` }}></div>
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-};
-
-export default HeroSection;
+export default MainSection
