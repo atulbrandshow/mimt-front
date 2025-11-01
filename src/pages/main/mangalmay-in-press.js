@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { API_NODE_URL } from "@/configs/config";
+import { useRouter } from "next/router";
 
 export default function DailyNewsPage() {
+  const router=useRouter()
   const [topNews, setTopNews] = useState([]);
   const [editor, setEditor] = useState([]);
   const [videos, setVideos] = useState([]);
@@ -122,6 +124,7 @@ export default function DailyNewsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {paginatedAllNews.map((item) => (
                 <div
+                onClick={()=>router.push(item?.path)}
                   key={item._id}
                   className="relative group h-[380px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
                 >
