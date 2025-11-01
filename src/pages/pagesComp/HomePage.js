@@ -25,10 +25,6 @@ import { StudentTestimonial } from "@/component/StudentTestimonial";
 
 
 export default function HomePage({ data }) {
-
-  console.log(data);
-
-
   return (
     <>
       <MainSection />
@@ -40,8 +36,8 @@ export default function HomePage({ data }) {
       {/* {data && <HomeTopCard data={data} />} */}
       {data && <EventSection />}
       {data && <SlickSlider data={data} />}
-      {data && <NotificationSlider data={data} />}
       {data && <NewsSection />}
+      {data && <NotificationSlider data={data} />}
       {data && <InnovationShowcase />}
       {/* {data && <PlacementHighlights data={data} />} */}
       {data && <PlacementOverview />}

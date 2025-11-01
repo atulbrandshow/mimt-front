@@ -7,10 +7,26 @@ import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 import { API_NODE_URL, IMAGE_PATH } from '@/configs/config';
 import Link from 'next/link';
+import TitleInfo from './TitleInfo';
 
 const NotificationSlider = ({ data }) => {
     const d = data?.pageData;
     const [eventsData, setEventsData] = useState(null);
+
+    const stats = []
+    for (let i = 1; i <= 10; i++) {
+        const count = d?.[`VJC-${i}`]
+        const title = d?.[`VJT-${i}`]
+        const desc = d?.[`VJD-${i}`]
+
+        if (count && title && desc) {
+            stats.push({
+                count,
+                title,
+                desc,
+            })
+        }
+    }
 
     const fetchEvents = async () => {
         try {
@@ -34,44 +50,42 @@ const NotificationSlider = ({ data }) => {
     !eventsData && fetchEvents();
 
     return (
-        <main className='bg-gray-100 pb-10'>
-            <div className="max-w-[1500px] m-auto px-2 grid grid-cols-12 gap-4">
-                <section className="col-span-4 max-lg:col-span-12 max-lg:mb-4">
-                    <div className="max-lg:px-10 max-md:px-8 max-sm:px-1 h-full ">
-                        <section className="swiper-container drop-shadow-lg">
-                            <Swiper
-                                slidesPerView={1}
-                                spaceBetween={10}
-                                // pagination={{ clickable: true }}
-                                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                                loop={true}
-                                modules={[Pagination, Autoplay]}
-                                className="mySwiper h-full"
-                            >
-                                {eventsData?.map((item) => (
-                                    <SwiperSlide key={item._id} className="h-full">
-                                        <article className="bg-[#FFFFFF] leading-none overflow-hidden p-5 h-52 max-md:h-40 max-sm:h-52 shadow-sm rounded-lg">
-                                            <h5 className="text-sm bg-gradient-to-r from-blue-600 to-rose-600 bg-clip-text text-transparent uppercase font-novaBold">
-                                                Upcoming Events
-                                            </h5>
-                                            <div className="mt-5">
-                                                <h3 className="font-novaSemi leading-none text-xl max-lg:text-base max-md:text-sm max-sm:text-sm">
-                                                    {item?.name}
-                                                </h3>
-                                                <Link
-                                                    href={item?.path}
-                                                    className="mt-5 max-sm:mt-3 bg-gradient-to-r from-amber-500 to-orange-700 bg-clip-text text-transparent text-[15px] font-novaBold uppercase w-full block text-right"
-                                                >
-                                                    Read More
-                                                </Link>
-                                            </div>
-                                        </article>
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        </section>
+        <main className='bg-gray-100 py-16'>
+            <TitleInfo first="Highlights" second="Placement Highlights" color="cyan" />
+            <div className="max-w-[1500px] mx-auto">
+                <div className="col-span-12 max-lg:mb-4 flex items-center relative">
+                    <div className="grid grid-cols-4 max-w-7xl mx-auto w-full place-items-center">
+                        {stats.map((item, i) => {
+                            const hasUnit = item.count.includes("LPA") || item.count.includes("CR")
+                            const [value, unit] = hasUnit ? item.count.split(" ") : [item.count, ""]
+                            return (
+                                <article
+                                    key={i}
+                                    className={`p-6 max-xl:p-4 leading-5 max-lg:text-center`}
+                                >
+                                    <h2 className="text-5xl xl:text-5xl font-novaThin mb-2 max-lg:text-3xl max-lg:mb-3 text-black">
+                                        <span className="whitespace-nowrap">
+                                            {value}
+                                            {unit && (
+                                                <span className="text-gray-600 font-novaLight text-xl pr-5 max-2xl:text-xl max-md:text-lg max-sm:text-base">
+                                                    {unit}
+                                                </span>
+                                            )}
+                                        </span>
+                                    </h2>
+                                    <span
+                                        className={`bg-yellow-400 text-black py-1 tracking-widest max-[400px]:py-1 max-[400px]:text-xs mb-2 px-2 text-sm uppercase font-novaBold rounded-md font-bold`}
+                                    >
+                                        {item.title}
+                                    </span>
+                                    <p className="mt-3 w-32 max-lg:mx-auto text-gray-600 text-[13px] font-novaReg max-md:text-xs leading-4">
+                                        {item.desc}
+                                    </p>
+                                </article>
+                            )
+                        })}
                     </div>
-                </section>
+                </div>
                 <section className="col-span-8 max-lg:col-span-12 h-full max-lg:mb-4 max-lg:px-10 max-md:px-8 max-sm:px-1 max-lg:ml-0 drop-shadow-lg">
                     <section className="bg-gradient-to-r from-cyan-500 to-indigo-600 animate-gradient rounded-lg h-full">
                         <div className="grid grid-cols-12 h-full">
