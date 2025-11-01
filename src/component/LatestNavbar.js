@@ -177,7 +177,7 @@ export default function NewNavBar() {
 
   return (
     <header
-      className={`navbar z-[100] w-full sticky top-0 left-0 transition-all duration-200 pb-2 ${isScrolled ? "bg-black" : "bg-gray-800"}`}
+      className={`navbar z-[100] w-full sticky top-0 left-0 transition-all duration-200 pb-2 ${isScrolled ? "bg-yellow-400" : "bg-white/90"}`}
     >
       <div
         className={`hidden md:flex overflow-hidden w-full transition-all duration-300 ease-in-out ${isScrolled ? "-translate-y-10" : "py-1.5"} justify-end items-center px-3 border-b border-gray-400/30`}
@@ -193,7 +193,7 @@ export default function NewNavBar() {
           >
             {notifications.map((notification, index) => (
               <SwiperSlide key={index}>
-                <p className={`text-center text-white font-novaReg cursor-pointer text-xs`}>
+                <p className={`text-center text-black font-novaReg cursor-pointer text-xs`}>
                   {notification}
                 </p>
               </SwiperSlide>
@@ -206,7 +206,7 @@ export default function NewNavBar() {
               href={item.url}
               target="_blank"
               key={index}
-              className="text-xs text-center flex flex-col justify-start items-center text-white"
+              className="text-xs text-center flex flex-col justify-start items-center text-black"
             >
               {item.svg}
             </Link>
@@ -215,7 +215,7 @@ export default function NewNavBar() {
       </div>
       <div className={`flex justify-between items-center px-3 ${!isScrolled && "pt-1.5"} transition-all duration-300 ease-in-out`}>
         <div className="flex">
-          <div className={`text-white flex `}>
+          <div className={`text-black flex `}>
             <div
               className={`flex justify-start items-center gap-2 ${BigMenuToggle && "relative z-[20] shadow-lg w-screen pb-1.5"}`}
             >
@@ -226,7 +226,7 @@ export default function NewNavBar() {
                     alt="AKG University Logo"
                     height={300}
                     width={800}
-                    className={`logo h-12 lg:h-12 bg-white w-fit rounded-md object-contain bg-blend-color-dodge cursor-pointer`}
+                    className={`logo h-12 lg:h-12 w-fit object-contain bg-blend-color-dodge cursor-pointer`}
                   />
                 </Link>
               </div>
@@ -257,7 +257,7 @@ export default function NewNavBar() {
         </div>
         <div className="hidden lg:flex justify-end items-center px-2">
           <div className={`flex gap-x-6 justify-end items-center`}>
-            <div className="flex gap-10 text-sm uppercase font-novaLight tracking-wider whitespace-nowrap text-white max-lg:gap-4 max-xl:gap-6">
+            <div className="flex gap-10 text-sm uppercase font-novaLight tracking-wider whitespace-nowrap text-black max-lg:gap-4 max-xl:gap-6">
               <Link href="#" className={`hover:underline hover:text-gray-400 transition duration-500`}>
                 Campus
               </Link>
@@ -309,7 +309,7 @@ export default function NewNavBar() {
                 </div>
               </div>
             </Link>
-            <button onClick={() => setBigMenuToggle(!BigMenuToggle)} className="block lg:hidden text-white">
+            <button onClick={() => setBigMenuToggle(!BigMenuToggle)} className="block lg:hidden text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -333,7 +333,7 @@ export default function NewNavBar() {
           className={`${BigMenuToggle
             ? "fixed w-full h-full left-0 top-0 py-20 overflow-y-auto backdrop-blur-lg"
             : `hidden relative`
-            } bg-white/30 lg:pt-2 rounded-xl lg:flex items-center justify-between max-lg:space-y-3 gap-2 text-white font-novaSemi px-4 lg:px-8 text-sm 2xl:text-base xl:px-6 2xl:px-20`}
+            } ${isScrolled ? "bg-white/90" : "bg-black/5"} lg:pt-2 rounded-xl lg:flex items-center justify-between max-lg:space-y-3 gap-2 text-black font-novaSemi px-4 lg:px-8 text-sm 2xl:text-base xl:px-6 2xl:px-20`}
         >
           {BigMenuToggle && (
             <>
@@ -405,7 +405,7 @@ export default function NewNavBar() {
                   <div className="bg-About bg-cover bg-center bg-black bg-blend-darken bg-opacity-80">
                     <div className="flex flex-col items-center p-5">
                       <p className="flex flex-col">
-                        <span className="text-center font-normal text-xl font-novaLight text-white">
+                        <span className="text-center font-normal text-xl font-novaLight text-black">
                           MIMT University
                         </span>
                         <span className="text-center font-novaBold text-3xl text-secondary leading-none">
@@ -580,7 +580,7 @@ export default function NewNavBar() {
                   >
                     <div className="absolute inset-0 bg-black opacity-70 rounded-lg"></div>
                   </div>
-                  <div className="relative z-10 p-6 text-white">
+                  <div className="relative z-10 p-6 text-black">
                     <h3 className="text-xl font-novaLight">University of</h3>
                     <h2 className="text-3xl font-novaBold leading-none text-secondary">
                       Top Placements
@@ -656,7 +656,7 @@ export default function NewNavBar() {
                 <div className="col-span-4 max-md:hidden h-full">
                   <div className="bg-Academics bg-cover bg-black bg-blend-multiply bg-opacity-70 h-full flex flex-col justify-between">
                     <div className="flex flex-col items-center mt-20">
-                      <span className="text-center text-lg font-novaLight text-white">
+                      <span className="text-center text-lg font-novaLight text-black">
                         Milestones in
                       </span>
                       <span className="text-center text-2xl font-novaBold leading-none text-secondary">
@@ -664,7 +664,7 @@ export default function NewNavBar() {
                       </span>
                     </div>
                     <div className="grid grid-cols-2 bg-indigo-950">
-                      <div className="flex flex-col items-center text-white border-r border-t-white/50 p-7">
+                      <div className="flex flex-col items-center text-black border-r border-t-white/50 p-7">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="40"
@@ -690,11 +690,11 @@ export default function NewNavBar() {
                           <path d="m12 8 4.74-2.85" />
                           <path d="M12 13.5V8" />
                         </svg>
-                        <span className="mt-2 text-xs text-white font-novaLight">
+                        <span className="mt-2 text-xs text-black font-novaLight">
                           Flexible Choice
                         </span>
                       </div>
-                      <div className="flex flex-col items-center text-white border-t-white/50 p-7">
+                      <div className="flex flex-col items-center text-black border-t-white/50 p-7">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="40"
@@ -714,11 +714,11 @@ export default function NewNavBar() {
                           <path d="M2 18h4" />
                           <path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
                         </svg>
-                        <span className="mt-2 text-xs text-white font-novaLight">
+                        <span className="mt-2 text-xs text-black font-novaLight">
                           Electives
                         </span>
                       </div>
-                      <div className="flex flex-col items-center text-white border-t border-r border-t-white/50 p-7">
+                      <div className="flex flex-col items-center text-black border-t border-r border-t-white/50 p-7">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="40"
@@ -736,11 +736,11 @@ export default function NewNavBar() {
                           <path d="M12 17v4" />
                           <path d="M8 21h8" />
                         </svg>
-                        <span className="mt-2 text-xs text-white font-novaLight">
+                        <span className="mt-2 text-xs text-black font-novaLight">
                           Technologies
                         </span>
                       </div>
-                      <div className="flex flex-col items-center text-white border-t border-t-white/50 p-7">
+                      <div className="flex flex-col items-center text-black border-t border-t-white/50 p-7">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="40"
@@ -758,7 +758,7 @@ export default function NewNavBar() {
                           <path d="M18 19c-2.8 0-5-2.2-5-5v8" />
                           <circle cx="20" cy="19" r="2" />
                         </svg>
-                        <span className="mt-2 text-xs text-center text-white font-novaLight">
+                        <span className="mt-2 text-xs text-center text-black font-novaLight">
                           Experiential Learning
                         </span>
                       </div>
@@ -827,13 +827,13 @@ export default function NewNavBar() {
                   <div className="absolute inset-0 bg-indigo-950 opacity-70 rounded-lg"></div>
                 </div>
                 <div className="relative bg-indigo-950">
-                  <div className="relative h-1/2 z-10 text-white">
+                  <div className="relative h-1/2 z-10 text-black">
                     <h3 className="text-xl py-2 text-center font-novaLight">
                       Open Doors to Your Future
                     </h3>
                   </div>
                   <div className="flex justify-evenly">
-                    <div className="flex flex-col items-center text-white p-7">
+                    <div className="flex flex-col items-center text-black p-7">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="40"
@@ -850,9 +850,9 @@ export default function NewNavBar() {
                         <path d="M22 10v6" />
                         <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
                       </svg>
-                      <span className="mt-2 text-xs text-white font-novaLight">Scholarships</span>
+                      <span className="mt-2 text-xs text-black font-novaLight">Scholarships</span>
                     </div>
-                    <div className="flex flex-col items-center text-white p-7">
+                    <div className="flex flex-col items-center text-black p-7">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="40"
@@ -871,11 +871,11 @@ export default function NewNavBar() {
                         <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
                         <path d="M3 4h8" />
                       </svg>
-                      <span className="mt-2 text-xs text-white font-novaLight">
+                      <span className="mt-2 text-xs text-black font-novaLight">
                         Education Loan
                       </span>
                     </div>
-                    <div className="flex flex-col items-center text-white p-7">
+                    <div className="flex flex-col items-center text-black p-7">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="40"
@@ -891,7 +891,7 @@ export default function NewNavBar() {
                         <path d="M3 3v16a2 2 0 0 0 2 2h16" />
                         <path d="M7 16c.5-2 1.5-7 4-7 2 0 2 3 4 3 2.5 0 4.5-5 5-7" />
                       </svg>
-                      <span className="mt-2 text-xs text-white font-novaLight">Futuristic</span>
+                      <span className="mt-2 text-xs text-black font-novaLight">Futuristic</span>
                     </div>
                   </div>
                 </div>
@@ -958,13 +958,13 @@ export default function NewNavBar() {
                       <div className="absolute inset-0 bg-black opacity-70 rounded-lg"></div>
                     </div>
                     <div className="relative bg-indigo-950">
-                      <div className="relative h-1/2 z-10 text-white">
+                      <div className="relative h-1/2 z-10 text-black">
                         <h3 className="text-xl py-2 text-center font-novaLight">
                           Place Like Home
                         </h3>
                       </div>
                       <div className="flex justify-evenly text-center">
-                        <div className="flex flex-col items-center text-white p-7">
+                        <div className="flex flex-col items-center text-black p-7">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -987,11 +987,11 @@ export default function NewNavBar() {
                             <path d="M8 22h8" />
                             <path d="M18 18.7a9 9 0 1 0-12 0" />
                           </svg>
-                          <span className="mt-2 text-xs text-white font-novaLight">
+                          <span className="mt-2 text-xs text-black font-novaLight">
                             Technology Infusion
                           </span>
                         </div>
-                        <div className="flex flex-col items-center text-white p-7">
+                        <div className="flex flex-col items-center text-black p-7">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -1010,11 +1010,11 @@ export default function NewNavBar() {
                             <circle cx="16" cy="9" r="2.9" />
                             <circle cx="6" cy="5" r="3" />
                           </svg>
-                          <span className="mt-2 text-xs text-white font-novaLight">
+                          <span className="mt-2 text-xs text-black font-novaLight">
                             Student centered
                           </span>
                         </div>
-                        <div className="flex flex-col items-center text-white p-7">
+                        <div className="flex flex-col items-center text-black p-7">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"
@@ -1033,7 +1033,7 @@ export default function NewNavBar() {
                             <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
                             <path d="M3 4h8" />
                           </svg>
-                          <span className="mt-2 text-xs text-white font-novaLight">
+                          <span className="mt-2 text-xs text-black font-novaLight">
                             Supportive Environment
                           </span>
                         </div>
@@ -1085,33 +1085,33 @@ export default function NewNavBar() {
                   <div className="bg-Placement bg-cover bg-black bg-blend-multiply bg-opacity-50">
                     <div className="flex flex-col items-center p-4">
                       <p className="flex flex-col">
-                        <span className="text-center font-novaLight text-base text-white">
+                        <span className="text-center font-novaLight text-base text-black">
                           Corporate Ties
                         </span>
                         <span className="text-center font-novaBold text-2xl text-secondary">
                           &
                         </span>
-                        <span className="text-center font-novaLight text-base text-white">
+                        <span className="text-center font-novaLight text-base text-black">
                           Career Opportunities
                         </span>
                       </p>
                     </div>
                     <div className="grid grid-cols-2 bg-indigo-950">
-                      <div className="flex flex-col items-center text-white border-r border-b border-t-white/50 p-7">
+                      <div className="flex flex-col items-center text-black border-r border-b border-t-white/50 p-7">
                         <img src="/image/navbar/Google-logo.png" alt="google" />
-                        <span className="mt-2 text-xs text-white font-novaSemi">Google</span>
+                        <span className="mt-2 text-xs text-black font-novaSemi">Google</span>
                       </div>
-                      <div className="mt-3 flex flex-col items-center text-white border-b border-t-white/50 p-7">
+                      <div className="mt-3 flex flex-col items-center text-black border-b border-t-white/50 p-7">
                         <img src="/image/navbar/Amazon-Logo.png" alt="Amazon" />
-                        <span className="mt-2 text-xs text-white font-novaSemi">Amazon</span>
+                        <span className="mt-2 text-xs text-black font-novaSemi">Amazon</span>
                       </div>
-                      <div className="flex flex-col items-center text-white border-r border-t-white/50 p-7">
+                      <div className="flex flex-col items-center text-black border-r border-t-white/50 p-7">
                         <img src="/image/navbar/infosys-logo-png.png" alt="Infosys" />
-                        <span className="mt-2 text-xs text-white font-novaSemi">Microsoft</span>
+                        <span className="mt-2 text-xs text-black font-novaSemi">Microsoft</span>
                       </div>
-                      <div className="flex flex-col items-center text-white border-t-white/50 p-7">
+                      <div className="flex flex-col items-center text-black border-t-white/50 p-7">
                         <img src="/image/navbar/TCS.NS_BIG.png" alt="TCS" />
-                        <span className="mt-4 text-xs text-white font-novaSemi">TCS</span>
+                        <span className="mt-4 text-xs text-black font-novaSemi">TCS</span>
                       </div>
                     </div>
                   </div>
@@ -1151,12 +1151,12 @@ export default function NewNavBar() {
                   <div className="bg-Research bg-cover bg-black bg-blend-multiply bg-opacity-70">
                     <div className="flex flex-col justify-start items-start pt-5 px-6">
                       <p className="flex flex-col pb-10">
-                        <span className="font-novaLight text-xl text-white"> Our Academic</span>
-                        <span className="font-novaLight text-xl text-white">Ambitions</span>
+                        <span className="font-novaLight text-xl text-black"> Our Academic</span>
+                        <span className="font-novaLight text-xl text-black">Ambitions</span>
                       </p>
                     </div>
                     <div className="h-full">
-                      <div className="relative z-10 p-6 text-white">
+                      <div className="relative z-10 p-6 text-black">
                         <div className="grid grid-cols-2 gap-4 mt-3">
                           <div className="bg-indigo-950 w-36 px-10 py-4 rounded-md flex flex-col items-center text-center">
                             <h3 className="text-3xl font-novaBold">19K+</h3>
