@@ -2,7 +2,7 @@
 export default function DynamicPageWrapper({ children }) {
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-grow bg-orange-50">
+      <main className="flex-grow">
         {children}
       </main>
     </div>

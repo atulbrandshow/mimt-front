@@ -1,6 +1,7 @@
 "use client";
 import { API_NODE_URL, IMAGE_PATH } from "@/configs/config";
 import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation"; // ✅ Import Next.js hook for URL handling
 
 const BlogsList = () => {
   const [blogs, setBlogs] = useState([]);
@@ -13,6 +14,25 @@ const BlogsList = () => {
     totalPages: 1,
     limit: 9,
   });
+
+  const pathname = usePathname(); // ✅ Get current URL path
+
+  // ✅ Extract category slug from the URL if the user is on /category/[slug]
+  useEffect(() => {
+    const pathParts = pathname.split("/");
+    if (pathParts.includes("category")) {
+      const slugIndex = pathParts.indexOf("category");
+      const slugFromUrl = pathParts[slugIndex + 1] || "";
+      if (slugFromUrl && slugFromUrl !== selectedCategory) {
+        setSelectedCategory(slugFromUrl);
+        fetchBlogs(1, search, slugFromUrl);
+      }
+    } else if (selectedCategory) {
+      // Clear selected category if URL changes back to /blogs
+      setSelectedCategory("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   useEffect(() => {
     fetchCategories();
@@ -50,7 +70,9 @@ const BlogsList = () => {
       const result = await res.json();
 
       if (result.status) {
-        const sorted = result.data.pages.sort((a, b) => new Date(b.post_date_gmt) - new Date(a.post_date_gmt));
+        const sorted = result.data.pages.sort(
+          (a, b) => new Date(b.post_date_gmt) - new Date(a.post_date_gmt)
+        );
         setBlogs(sorted);
         setPagination(result.data.pagination);
       } else {
@@ -71,8 +93,17 @@ const BlogsList = () => {
   }, [search]);
 
   const handleCategoryClick = (slug) => {
-    setSelectedCategory(slug === selectedCategory ? "" : slug);
-    fetchBlogs(1, search, slug === selectedCategory ? "" : slug);
+    const newCategory = slug === selectedCategory ? "" : slug;
+    setSelectedCategory(newCategory);
+
+    // ✅ Update URL dynamically without full reload
+    if (newCategory) {
+      window.history.pushState({}, "", `/category/${newCategory}`);
+    } else {
+      window.history.pushState({}, "", `/blogs`);
+    }
+
+    fetchBlogs(1, search, newCategory);
   };
 
   const handlePageChange = (newPage) => {
@@ -142,44 +173,60 @@ const BlogsList = () => {
       <div className="max-w-7xl mx-auto space-y-14">
         {/* Featured Article */}
         {featuredBlog && (
-          console.log(featuredBlog),
-          
-          <section>
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Latest Blogs</h2>
-            <div className="grid md:grid-cols-2 bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition">
-              <img
-                src={IMAGE_PATH+ featuredBlog?.banner_img || "/placeholder.jpg"}
-                alt={featuredBlog.name}
-                className="w-full h-72 object-cover"
-              />
-              <div className="p-6 flex flex-col justify-center">
-                <span className="text-sm bg-yellow-100 text-yellow-700 font-semibold px-3 py-1 rounded-full w-fit mb-3">
-                  {featuredBlog.categorys?.[0]?.name || "General"}
-                </span>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                  {featuredBlog.name}
-                </h3>
-                <p
-                  className="text-gray-600 text-sm mb-4 line-clamp-3"
-                  dangerouslySetInnerHTML={{
-                    __html: featuredBlog.description || "No description available.",
-                  }}
+          <>
+            <section>
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">Latest Blogs</h2>
+              <div className="grid md:grid-cols-2 bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition">
+                <img
+                  src={featuredBlog?.banner_img || "/placeholder.jpg"}
+                  alt={featuredBlog.name}
+                  className="w-full h-72 object-cover"
                 />
-                <div className="flex items-center justify-between">
-                  {/* ✅ Show formatted date */}
-                  <p className="text-orange-500 text-sm flex items-center gap-1">
-                    📅 <span>{formatDate(featuredBlog?.post_date_gmt)}</span>
-                  </p>
-                  <a
-                    href={featuredBlog.path}
-                    className="text-blue-600 text-sm font-semibold hover:underline"
-                  >
-                    Read more →
-                  </a>
+                <div className="p-6 flex flex-col justify-center">
+                  <div className="mb-6 flex flex-wrap items-center gap-3">
+                    {featuredBlog.categorys.length > 0 &&
+                      featuredBlog.categorys.map((category, idx) => {
+                        const categoryColors = [
+                          { bg: "bg-gradient-to-r from-blue-100 to-blue-50", text: "text-blue-700", border: "border-blue-200" },
+                          { bg: "bg-gradient-to-r from-purple-100 to-purple-50", text: "text-purple-700", border: "border-purple-200" },
+                          { bg: "bg-gradient-to-r from-emerald-100 to-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
+                          { bg: "bg-gradient-to-r from-amber-100 to-amber-50", text: "text-amber-700", border: "border-amber-200" },
+                          { bg: "bg-gradient-to-r from-rose-100 to-rose-50", text: "text-rose-700", border: "border-rose-200" },
+                        ];
+                        const colorClass = categoryColors[idx % categoryColors.length];
+                        return (
+                          <a
+                            key={category.term_id}
+                            href={`blogs/category/${category.slug}`}
+                            className={`inline-block px-4 py-2 ${colorClass.bg} ${colorClass.text} text-xs font-bold uppercase tracking-widest rounded-full border ${colorClass.border} hover:shadow-md transition-all duration-200`}
+                          >
+                            {category.name}
+                          </a>
+                        );
+                      })}
+                  </div>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-3">{featuredBlog.name}</h3>
+                  <p
+                    className="text-gray-600 text-sm mb-4 line-clamp-3"
+                    dangerouslySetInnerHTML={{
+                      __html: featuredBlog.description || "No description available.",
+                    }}
+                  />
+                  <div className="flex items-center justify-between">
+                    <p className="text-orange-500 text-sm flex items-center gap-1">
+                      📅 <span>{formatDate(featuredBlog?.post_date_gmt)}</span>
+                    </p>
+                    <a
+                      href={featuredBlog.path}
+                      className="text-blue-600 text-sm font-semibold hover:underline"
+                    >
+                      Read more →
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </>
         )}
 
         {/* More Blogs */}
@@ -197,13 +244,32 @@ const BlogsList = () => {
                 >
                   <div className="relative">
                     <img
-                      src={blog.image || "/placeholder.jpg"}
-                      alt={blog.name}
+                      src={blog?.banner_img || "/placeholder.jpg"}
+                      alt={blog?.name}
                       className="w-full h-48 object-cover"
                     />
-                    <span className="absolute top-3 left-3 bg-orange-100 text-orange-700 text-xs font-semibold px-3 py-1 rounded-full">
-                      {blog.categorys?.[0]?.name || "General"}
-                    </span>
+                    <div className="flex flex-wrap items-center gap-3 px-5 mt-2">
+                      {blog.categorys.length > 0 &&
+                        blog.categorys.map((category, idx) => {
+                          const categoryColors = [
+                            { bg: "bg-gradient-to-r from-blue-100 to-blue-50", text: "text-blue-700", border: "border-blue-200" },
+                            { bg: "bg-gradient-to-r from-purple-100 to-purple-50", text: "text-purple-700", border: "border-purple-200" },
+                            { bg: "bg-gradient-to-r from-emerald-100 to-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
+                            { bg: "bg-gradient-to-r from-amber-100 to-amber-50", text: "text-amber-700", border: "border-amber-200" },
+                            { bg: "bg-gradient-to-r from-rose-100 to-rose-50", text: "text-rose-700", border: "border-rose-200" },
+                          ];
+                          const colorClass = categoryColors[idx % categoryColors.length];
+                          return (
+                            <a
+                              key={category.term_id}
+                              href={`/blogs/category/${category.slug}`}
+                              className={`inline-block px-2 py-1 ${colorClass.bg} ${colorClass.text} text-xs font-semibold uppercase tracking-widest rounded-full border ${colorClass.border} hover:shadow-md transition-all duration-200`}
+                            >
+                              {category.name}
+                            </a>
+                          );
+                        })}
+                    </div>
                   </div>
                   <div className="p-5">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
@@ -216,8 +282,9 @@ const BlogsList = () => {
                       }}
                     />
                     <div className="flex items-center justify-between">
-                      {/* ✅ Show formatted date instead of "5 min" */}
-                      <p className="text-orange-500 text-sm">📅 {formatDate(blog?.post_date_gmt)}</p>
+                      <p className="text-orange-500 text-sm">
+                        📅 {formatDate(blog?.post_date_gmt)}
+                      </p>
                       <a
                         href={blog.path}
                         className="text-blue-600 text-sm font-semibold hover:underline"
