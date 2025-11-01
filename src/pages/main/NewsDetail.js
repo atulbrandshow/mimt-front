@@ -28,7 +28,7 @@ const NewsDetails = ({ data }) => {
   };
 
   const excerpt =
-    stripHtmlTags(data?.description || "").substring(0, 150) + "...";
+    stripHtmlTags(data?.description || "").substring(0, 160) + "...";
 
   const categories = data?.category
     ? Array.isArray(data.category)
@@ -37,63 +37,57 @@ const NewsDetails = ({ data }) => {
     : [];
 
   return (
-    <div className="min-h-screen bg-[#f7f7f7]">
+    <div className="min-h-screen bg-[#f5f5f5] py-10">
+      
+      {/* ✅ Header Section (Image Left + Title Right) */}
+      <section className="max-w-6xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-10">
 
-      {/* ✅ Premium Hero Section */}
-      <section className="relative w-full h-[380px] md:h-[500px] overflow-hidden">
-        <img
-          src={bannerImage}
-          alt={data?.title || "News Banner"}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            e.target.src = fallbackImage;
-          }}
-        />
+        {/* Image */}
+        <div className="rounded-2xl overflow-hidden shadow-xl border bg-white">
+          <img
+            src={bannerImage}
+            onError={(e) => (e.target.src = fallbackImage)}
+            className="w-full h-[350px] object-cover"
+          />
+        </div>
 
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+        {/* Title & Meta */}
+        <div className="flex flex-col justify-center">
+          {categories.length > 0 && (
+            <div className="flex flex-wrap gap-3 mb-3">
+              {categories.map((cat, i) => (
+                <span
+                  key={i}
+                  className="px-4 py-1 text-xs bg-[#fdd023]/20 text-[#b58a00] border border-[#fdd023]/40 rounded-full"
+                >
+                  {cat}
+                </span>
+              ))}
+            </div>
+          )}
 
-        {/* Center Title */}
-        <div className="absolute bottom-10 w-full text-center px-6">
-          <h1 className="text-3xl md:text-5xl font-bold text-white max-w-4xl mx-auto leading-tight drop-shadow-lg">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-snug">
             {data?.title}
           </h1>
+
+          <p className="mt-4 text-gray-600 text-lg leading-relaxed">
+            {excerpt}
+          </p>
+
+          <p className="mt-4 text-sm text-gray-500 font-medium">
+            📅 {formattedDate}
+          </p>
         </div>
       </section>
 
-      {/* ✅ Floating Info Card */}
-      <div className="max-w-5xl mx-auto px-6 -mt-16 relative z-10">
-        <div className="rounded-2xl bg-white/80 backdrop-blur-xl shadow-xl border border-gray-200 p-8">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            {categories.map((cat, i) => (
-              <span
-                key={i}
-                className="px-4 py-1.5 text-xs font-semibold bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-full"
-              >
-                {cat}
-              </span>
-            ))}
-          </div>
-
-          <p className="text-gray-600 text-sm font-medium">
-            📅 Published on{" "}
-            <span className="font-semibold text-gray-900">{formattedDate}</span>
-          </p>
-
-          <p className="mt-4 text-gray-700 text-[17px] leading-relaxed italic">
-            {excerpt}
-          </p>
-        </div>
-      </div>
-
-      {/* ✅ Main Article Layout */}
-      <div className="max-w-5xl mx-auto px-6 mt-12">
+      {/* ✅ ARTICLE CONTENT */}
+      <section className="max-w-5xl mx-auto px-6 mt-10">
         <article className="bg-white rounded-2xl shadow-md border border-gray-200 p-10 md:p-12">
 
-          {/* Section Divider */}
-          <div className="w-full h-[2px] bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 my-6"></div>
+          {/* Elegant Divider */}
+          <div className="w-full h-[2px] bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 mb-8" />
 
-          {/* ✅ Article Content */}
+          {/* ✅ Actual News Description */}
           <div
             className="prose prose-lg max-w-none
               prose-headings:font-bold prose-headings:text-gray-900
@@ -105,10 +99,9 @@ const NewsDetails = ({ data }) => {
             }}
           />
         </article>
+      </section>
 
-        {/* ✅ Footer Spacer */}
-        <div className="h-20" />
-      </div>
+      <div className="h-16" />
     </div>
   );
 };
