@@ -1,170 +1,205 @@
 "use client";
+import { useEffect, useState } from "react";
 import { API_NODE_URL } from "@/configs/config";
-import React, { useEffect, useState } from "react";
 
-const NewsList = () => {
-  const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [pagination, setPagination] = useState({
-    currentPage: 1,
-    totalPages: 1,
-    limit: 9,
-  });
+export default function DailyNewsPage() {
+  const [topNews, setTopNews] = useState([]);
+  const [editor, setEditor] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const allNews = [...editor, ...videos];
+
+
+
+  // Pagination for editor section
+  const [page, setPage] = useState(1);
+  const perPage = 6;
+
+  // Placeholder images
+  const heroPlaceholder = "image/about/news_img2.webp";
+  const cardPlaceholder = "image/about/News_img.jpeg";
 
   useEffect(() => {
-    fetchNews(1);
+    fetchAll();
   }, []);
 
-  const fetchNews = async (page = 1) => {
+  const fetchAll = async () => {
     try {
-      setLoading(true);
-      const query = new URLSearchParams({
-        type: "News",
-        page,
-        limit: pagination.limit,
-      }).toString();
-
-      const res = await fetch(`${API_NODE_URL}blog?${query}`);
+      const res = await fetch(`${API_NODE_URL}blog?type=News&page=1&limit=50`);
       const result = await res.json();
-
       if (result.status) {
-        setNews(result.data.pages);
-        setPagination(result.data.pagination);
-      } else {
-        setNews([]);
+        setTopNews(result.data.pages.slice(0, 3));
+        setEditor(result.data.pages.slice(3, 40));
+        setVideos(result.data.pages.slice(40, 50));
       }
-    } catch (error) {
-      console.error("Error fetching news:", error);
-    } finally {
-      setLoading(false);
+    } catch (e) {
+      console.error(e);
     }
+    setLoading(false);
   };
 
-  const handlePageChange = (newPage) => {
-    fetchNews(newPage);
-  };
+  const totalPages = Math.ceil(editor.length / perPage);
+  const paginatedEditor = editor.slice((page - 1) * perPage, page * perPage);
+  const paginatedAllNews = allNews.slice((page - 1) * perPage, page * perPage);
+
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-6 mt-14">
-      {/* Header Section */}
-      <header className="max-w-7xl mx-auto mb-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-          Latest News
-        </h1>
-        <p className="text-gray-600 text-lg">
-          Stay updated with the latest happenings and announcements.
-        </p>
-      </header>
-
-      <div className="max-w-7xl mx-auto">
-        {loading && (
-          <p className="text-center text-gray-500 text-lg">Loading news...</p>
-        )}
-
-        {!loading && news.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            {news.map((item) => (
-              <div
-                key={item._id}
-                className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden"
-              >
-                {/* Image */}
-                {item.image ? (
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-56 object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-56 bg-gradient-to-r from-gray-200 to-gray-300 flex items-center justify-center text-gray-500 text-sm">
-                    No Image Available
-                  </div>
-                )}
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3 line-clamp-2">
-                    {item.name || "Untitled News"}
+    <div className="mt-14 w-full bg-white">
+      {loading ? (
+        <p className="text-center py-20 text-gray-500">Loading...</p>
+      ) : (
+        <>
+          {/* HERO SECTION */}
+          <section
+            className="relative w-full h-[90vh] bg-cover bg-center flex items-center transition duration-1000 ease-out transform hover:scale-105"
+            style={{
+              backgroundImage: `url(${topNews[0]?.image || heroPlaceholder})`,
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70"></div>
+            <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10">
+              <div className="md:col-span-7 text-white animate-fadeInLeft">
+                <span className="px-4 py-1 bg-[#fdd023] text-sm font-semibold rounded-md">
+                  BREAKING
+                </span>
+                <h1 className="text-4xl md:text-6xl font-bold mt-4 leading-tight drop-shadow-lg">
+                  {topNews[0]?.name}
+                </h1>
+                <p className="text-lg opacity-90 mt-4 max-w-xl">
+                  {topNews[0]?.shortDescription}
+                </p>
+                <div className="mt-12">
+                  <h3 className="text-sm uppercase font-semibold opacity-90 flex items-center gap-2">
+                    <span>🔥</span> Trending Now
                   </h3>
-
-                  <div
-                    className="text-gray-600 text-sm mb-4 line-clamp-3"
-                    dangerouslySetInnerHTML={{
-                      __html: item.description || "No description available.",
-                    }}
-                  />
-
-                  <a
-                    href={item.path}
-                    className="inline-block text-blue-600 font-medium text-sm hover:underline"
-                  >
-                    Read Full Story →
-                  </a>
-                </div>
-
-                {/* Footer */}
-                <div className="px-6 py-3 border-t border-gray-100 text-xs text-gray-500 flex justify-between items-center">
-                  <span>
-                    {item.createdAt
-                      ? new Date(item.createdAt).toLocaleDateString("en-IN", {
-                          day: "2-digit",
-                          month: "short",
-                          year: "numeric",
-                        })
-                      : "Unknown Date"}
-                  </span>
-                  {item.categorys?.length > 0 && (
-                    <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-md">
-                      {item.categorys.map((c) => c.name).join(", ")}
-                    </span>
-                  )}
+                  <div className="grid grid-cols-3 gap-6 mt-4">
+                    {topNews.map((item, i) => (
+                      <div key={i} className="group cursor-pointer animate-fadeInUp delay-100">
+                        <img
+                          src={item.image || cardPlaceholder}
+                          className="h-28 w-full object-cover rounded-lg group-hover:scale-110 transition duration-500"
+                        />
+                        <p className="text-sm mt-2 group-hover:text-yellow-300 transition">
+                          {item.name}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        ) : (
-          !loading && (
-            <p className="text-center text-gray-500 text-lg">
-              No news articles found.
-            </p>
-          )
-        )}
+              <div className="md:col-span-5 text-white mt-12 md:mt-0 animate-fadeInRight">
+                <h3 className="text-sm font-semibold uppercase mb-6 flex items-center gap-2">
+                  ⚡ Latest Updates
+                </h3>
+                <div className="space-y-8">
+                  {topNews.map((item, i) => (
+                    <div key={i} className="flex gap-4 hover:bg-white/10 p-3 rounded-lg transition cursor-pointer animate-fadeInUp delay-200">
+                      <img
+                        src={item.image || cardPlaceholder}
+                        className="w-20 h-20 object-cover rounded-md"
+                      />
+                      <div>
+                        <p className="font-medium mb-1">{item.name}</p>
+                        <span className="text-xs opacity-75">
+                          {new Date(item.createdAt).toDateString()}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
 
-        {/* Pagination */}
-        {!loading && news.length > 0 && (
-          <div className="flex justify-center items-center mt-12 space-x-4">
-            <button
-              disabled={pagination.currentPage === 1}
-              onClick={() => handlePageChange(pagination.currentPage - 1)}
-              className={`px-5 py-2 rounded-lg text-sm font-medium border transition ${
-                pagination.currentPage === 1
+
+          {/* MERGED NEWS SECTION */}
+          <section className="max-w-7xl mx-auto px-6 py-20">
+            <h2 className="text-3xl font-bold mb-10 border-l-8 border-[#fdd023] pl-4">
+              Latest News
+            </h2>
+
+            {/* GRID */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {paginatedAllNews.map((item) => (
+                <div
+                  key={item._id}
+                  className="relative group h-[380px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                >
+                  {/* Image */}
+                  <img
+                    src={item.image || cardPlaceholder}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+
+                  {/* Category Tag */}
+                  <span className="absolute top-4 left-4 px-4 py-1 text-xs font-semibold bg-white text-black rounded-full shadow">
+                    {item.categorys?.[0]?.name || "News"}
+                  </span>
+
+                  {/* Content */}
+                  <div className="absolute bottom-0 p-6 text-white">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-[#fdd023] transition">
+                      {item.name}
+                    </h3>
+                    <p className="text-sm opacity-90 line-clamp-3">
+                      {item.shortDescription}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* PAGINATION */}
+            <div className="flex justify-center gap-2 mt-12">
+              {/* Prev */}
+              <button
+                disabled={page === 1}
+                onClick={() => setPage((p) => p - 1)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold ${page === 1
                   ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                  : "bg-white text-gray-700 hover:bg-gray-100"
-              }`}
-            >
-              ← Prev
-            </button>
+                  : "bg-black text-white hover:bg-[#fdd023]"
+                  }`}
+              >
+                ← Prev
+              </button>
 
-            <span className="text-gray-700 text-sm">
-              Page {pagination.currentPage} of {pagination.totalPages}
-            </span>
+              {/* Page Numbers */}
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPage(i + 1)}
+                  className={`w-10 h-10 rounded-full text-sm font-semibold
+          border transition-all duration-300
+          ${page === i + 1
+                      ? "bg-[#fdd023] text-white border-[#fdd023]"
+                      : "bg-white border-gray-300 hover:bg-[#fdd023] hover:text-white"
+                    }
+        `}
+                >
+                  {i + 1}
+                </button>
+              ))}
 
-            <button
-              disabled={pagination.currentPage === pagination.totalPages}
-              onClick={() => handlePageChange(pagination.currentPage + 1)}
-              className={`px-5 py-2 rounded-lg text-sm font-medium border transition ${
-                pagination.currentPage === pagination.totalPages
+              {/* Next */}
+              <button
+                disabled={page === totalPages}
+                onClick={() => setPage((p) => p + 1)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold ${page === totalPages
                   ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                  : "bg-white text-gray-700 hover:bg-gray-100"
-              }`}
-            >
-              Next →
-            </button>
-          </div>
-        )}
-      </div>
+                  : "bg-black text-white hover:bg-[#fdd023]"
+                  }`}
+              >
+                Next →
+              </button>
+            </div>
+          </section>
+
+
+        </>
+      )}
     </div>
   );
-};
-
-export default NewsList;
+}
