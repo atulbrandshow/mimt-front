@@ -1,91 +1,109 @@
-import React from "react";
+"use client";
 
-const Page = ({ data }) => {
-  if (!data) return <p>No data available</p>;
+const NewsDetails = ({ data }) => {
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-slate-50 to-white">
+        <p className="text-gray-500 text-lg">Loading news...</p>
+      </div>
+    );
+  }
 
-  // ✅ Helper to check if a value has meaningful content
-  const hasContent = (value) => {
-    if (
-      value === null ||
-      value === undefined ||
-      value === false ||
-      value === ""
-    )
-      return false;
+  const fallbackImage =
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1920&q=80";
 
-    if (Array.isArray(value)) return value.some((item) => hasContent(item));
+  const bannerImage = data?.banner_img || fallbackImage;
 
-    if (typeof value === "object")
-      return Object.keys(value).some((k) => hasContent(value[k]));
+  const formattedDate = data?.created_at
+    ? new Date(data.created_at).toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : "";
 
-    return true;
+  const stripHtmlTags = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
   };
 
-  // ✅ Recursive renderer
-  const renderValue = (value) => {
-    if (!hasContent(value)) return null;
+  const excerpt =
+    stripHtmlTags(data?.description || "").substring(0, 160) + "...";
 
-    // Render HTML strings safely
-    if (typeof value === "string" && /<[^>]+>/.test(value)) {
-      return (
-        <div
-          className="prose max-w-none custom-prose"
-          dangerouslySetInnerHTML={{ __html: value }}
-        />
-      );
-    }
-
-    // Render arrays
-    if (Array.isArray(value)) {
-      const filteredArray = value.filter((item) => hasContent(item));
-      if (filteredArray.length === 0) return null;
-      return (
-        <ul className="list-disc ml-6">
-          {filteredArray.map((item, index) => (
-            <li key={index}>{renderValue(item)}</li>
-          ))}
-        </ul>
-      );
-    }
-
-    // Render objects
-    if (typeof value === "object") {
-      const entries = Object.entries(value).filter(([_, v]) => hasContent(v));
-      if (entries.length === 0) return null;
-      return (
-        <div className="ml-4 border-l border-gray-400 pl-4">
-          {entries.map(([k, v]) => (
-            <div key={k} className="mb-2">
-              <strong className="text-black">{k}:</strong>
-              <div className="ml-2 mt-1">{renderValue(v)}</div>
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    // Primitive values
-    return <span className="text-black">{value.toString()}</span>;
-  };
-
-  // ✅ Filter top-level keys
-  const filteredData = Object.entries(data).filter(([_, value]) =>
-    hasContent(value)
-  );
-
-  if (filteredData.length === 0)
-    return <p className="text-black">No meaningful data available</p>;
+  const categories = data?.category
+    ? Array.isArray(data.category)
+      ? data.category
+      : [data.category]
+    : [];
 
   return (
-    <div className="p-6 bg-gray-200 min-h-screen  text-black mt-32">
-      {filteredData.map(([key, value]) => (
-        <div key={key} className="mb-6">
-          <strong className="text-lg font-semibold text-black">{key}:</strong>
-          <div className="ml-3 mt-2">{renderValue(value)}</div>
+    <div className="min-h-screen bg-[#f5f5f5] py-10">
+      
+      {/* ✅ Header Section (Image Left + Title Right) */}
+      <section className="max-w-6xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+
+        {/* Image */}
+        <div className="rounded-2xl overflow-hidden shadow-xl border bg-white">
+          <img
+            src={bannerImage}
+            onError={(e) => (e.target.src = fallbackImage)}
+            className="w-full h-[350px] object-cover"
+          />
         </div>
-      ))}
+
+        {/* Title & Meta */}
+        <div className="flex flex-col justify-center">
+          {categories.length > 0 && (
+            <div className="flex flex-wrap gap-3 mb-3">
+              {categories.map((cat, i) => (
+                <span
+                  key={i}
+                  className="px-4 py-1 text-xs bg-[#fdd023]/20 text-[#b58a00] border border-[#fdd023]/40 rounded-full"
+                >
+                  {cat}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-snug">
+            {data?.title}
+          </h1>
+
+          <p className="mt-4 text-gray-600 text-lg leading-relaxed">
+            {excerpt}
+          </p>
+
+          <p className="mt-4 text-sm text-gray-500 font-medium">
+            📅 {formattedDate}
+          </p>
+        </div>
+      </section>
+
+      {/* ✅ ARTICLE CONTENT */}
+      <section className="max-w-5xl mx-auto px-6 mt-10">
+        <article className="bg-white rounded-2xl shadow-md border border-gray-200 p-10 md:p-12">
+
+          {/* Elegant Divider */}
+          <div className="w-full h-[2px] bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 mb-8" />
+
+          {/* ✅ Actual News Description */}
+          <div
+            className="prose prose-lg max-w-none
+              prose-headings:font-bold prose-headings:text-gray-900
+              prose-p:text-gray-700 prose-p:leading-8
+              prose-img:rounded-xl prose-img:shadow-lg prose-img:border prose-img:my-8
+              prose-li:text-gray-700 prose-strong:text-gray-900 prose-a:text-blue-600"
+            dangerouslySetInnerHTML={{
+              __html: data?.description || "<p>No content available</p>",
+            }}
+          />
+        </article>
+      </section>
+
+      <div className="h-16" />
     </div>
   );
 };
 
-export default Page;
+export default NewsDetails;
