@@ -2,7 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 
-const SideBar = ({ title, LinkList }) => {
+const SideBarLink = [
+    { name: "Our Identity", link: "/overview" },
+    { name: "Leadership", link: "" },
+    { name: "Governance", link: "" },
+    { name: "Recognition and Approvals", link: "" },
+    { name: "Awards and Rankings", link: "" },
+    { name: "Institution Social Responsibility", link: "" }
+]
+
+const SideBar = () => {
     const router = useRouter();
     return (
         <section className='drop-shadow-xl rounded-3xl overflow-hidden bg-white'>
@@ -19,7 +28,7 @@ const SideBar = ({ title, LinkList }) => {
                         <h2 className="text-2xl font-novaReg text-black pl-6 p-4 max-lg:p-5">Quick Link</h2>
                         {/* <h2 className="text-2xl font-novaReg pl-6 p-4 max-lg:p-5">{title}</h2> */}
                         <div>
-                            {LinkList?.map((item, index) => (
+                            {SideBarLink?.map((item, index) => (
                                 <button
                                     key={index}
                                     onClick={() => router.push(item.link)}

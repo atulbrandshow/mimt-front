@@ -1,24 +1,7 @@
 import React from "react";
 import Header from "@/component/Header";
 import SideBar from "@/component/SideBar";
-
-const BreadCrumb = [
-  {
-    name: "About",
-    Link: "#",
-  },
-]
-
 export default function AboutUs({ data }) {
-
-  const SideBarLink = [
-    { name: "Our Identity", link: "/overview" },
-    { name: "Leadership", link: "" },
-    { name: "Governance", link: "" },
-    { name: "Recognition and Approvals", link: "" },
-    { name: "Awards and Rankings", link: "" },
-    { name: "Institution Social Responsibility", link: "" }
-  ]
 
   return (
     <div className="bg-white">
@@ -28,7 +11,7 @@ export default function AboutUs({ data }) {
           <div dangerouslySetInnerHTML={{ __html: data?.pageData?.AboutDescription }} />
         </div>
         <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
-          <SideBar title={"About Us"} LinkList={SideBarLink} />
+          <SideBar />
         </div>
       </section>
     </div>
