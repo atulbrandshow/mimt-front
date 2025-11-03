@@ -1,128 +1,61 @@
-"use client";
 import React from "react";
+import Header from "@/component/Header";
+import SideBar from "@/component/SideBar";
+import { IMAGE_PATH } from "@/configs/config";
+import { descriptionCss } from "@/configs/css.config";
 
-const ChairmanMessagePage = () => {
+export default function Page({ data }) {
+  if (!data) return <p>No data available</p>;
+
+  const page = data?.pageData;
+
+  const SideBarLink = [
+    { name: "Our Identity", link: "/overview" },
+    { name: "Leadership", link: "" },
+    { name: "Governance", link: "" },
+    { name: "Recognition and Approvals", link: "" },
+    { name: "Awards and Rankings", link: "" },
+    { name: "Institution Social Responsibility", link: "" }
+  ];
+
   return (
-    <>
-      <div
-        className="relative w-full h-[70vh] bg-cover bg-left"
-        style={{
-          backgroundImage: "url('/image/about/mangalmay-campus.webp')",
-        }}
-      >
-        {/* Dark Gradient from Left */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+    <div className="bg-white">
+      <Header BreadCrumb={data?.breadCrumb} data={data} />
 
-        {/* Left-Aligned Centered Content */}
-        <div className="absolute inset-0 flex items-center pl-10 md:pl-20">
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-10 rounded-2xl max-w-xl shadow-lg">
+      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-20 px-3 sm:px-6 gap-10">
 
-            <h1 className="text-white text-2xl md:text-3xl font-bold mb-4 leading-tight">
-              Chairman’s Message
-            </h1>
+        {/* ✅ LEFT CONTENT */}
+        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
 
-            <p className="text-white/80 text-lg leading-relaxed">
-              A vision-driven approach to education, preparing future-ready leaders
-              through excellence, innovation and strong value-based learning.
-            </p>
+          {/* ✅ IMAGE + CONTENT IN A ROW (Modern Layout) */}
+          <div className="flex flex-col md:flex-row gap-8 items-start">
 
-          </div>
-        </div>
-      </div>
-
-
-      {/* ✅ MAIN CONTENT – Ultra Modern Split Layout */}
-      <div className="w-full py-24 px-6 bg-white flex justify-center">
-        <div className="max-w-7xl w-full">
-
-          {/* ✅ SECTION HEADER */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 tracking-tight">
-              Message from the Chairman
-            </h2>
-            <div className="mx-auto mt-4 h-1 w-24 bg-[#fdd023] rounded-full"></div>
-          </div>
-
-          {/* ✅ FLEX LAYOUT */}
-          <div className="grid lg:grid-cols-3 gap-16">
-
-            {/* ✅ LEFT SIDE — Image + Name */}
-            <div className="flex flex-col items-center lg:items-start">
-
-              {/* Image Box */}
-              <div className="relative w-full rounded-3xl overflow-hidden shadow-xl">
+            {/* ✅ Much Smaller Left Image with Elegant Design */}
+            {page?.ChairmanImage && (
+              <div className="md:w-[220px] w-full flex justify-start">
                 <img
-                  src="/image/about/chairman.jpg"
+                  src={IMAGE_PATH + page.ChairmanImage}
                   alt="Chairman"
-                  className="w-full h-[420px] object-cover"
+                  className="rounded-xl shadow-md object-cover w-[220px] h-[180px] border border-gray-200"
                 />
-
-                {/* Gradient overlay bottom */}
-                <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-black/70 to-transparent"></div>
-
-                {/* Name inside image */}
-                <div className="absolute bottom-6 left-6">
-                  <h3 className="text-white text-2xl font-semibold">Dr. Atul Mangal</h3>
-                  <p className="text-white/80 text-lg">Chairman, Mangalmay Group</p>
-                </div>
               </div>
-            </div>
+            )}
 
-            {/* ✅ RIGHT SIDE — Premium Editorial Text */}
-            <div className="lg:col-span-2">
-
-              <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-
-                <p className="text-xl text-gray-600 border-l-4 border-[#fdd023] pl-4 italic">
-                  “Education is not preparation for life; education is life itself — and at Mangalmay,
-                  we shape leaders who shape tomorrow.”
-                </p>
-
-                <p>
-                  With India emerging as a Global Superpower within the next 15 years, the education
-                  sector is encountering a paradigm shift to meet new demands. The need for Management
-                  Graduates, Teachers, Bio-Technologists, Engineers and IT Specialists is so high that
-                  a vast portion of the population can transition into the employable workforce.
-                </p>
-
-                <p>
-                  Despite global financial challenges, job opportunities in India continue to rise,
-                  and career possibilities remain abundant.
-                </p>
-
-                <p>
-                  Mangalmay offers a fertile breeding ground for aspiring managers and engineers.
-                  Supported by state-of-the-art infrastructure, a committed faculty, an innovative
-                  culture and a results-driven environment, the institution has earned an honourable
-                  standing among top educational institutes.
-                </p>
-
-                <p>
-                  Our goal is to shape individuals who possess adaptability, emotional intelligence,
-                  and strategic decision-making abilities to excel in a dynamic global environment.
-                </p>
-
-                <p>
-                  Mangalmay stands as a temple of excellence — an institute where the pursuit of
-                  perfection never ends. Our Management School ranks among the best MBA colleges,
-                  and our Engineering School among India’s leading institutions.
-                </p>
-
-                {/* Signature Section */}
-                <div className="mt-10 pt-6 border-t border-gray-300">
-                  <h3 className="text-2xl font-semibold text-gray-900">Dr. Atul Mangal</h3>
-                  <p className="text-gray-600 text-lg">Chairman, Mangalmay Group</p>
-                </div>
-
-              </div>
-            </div>
+            {/* ✅ Text Content (Right Side) */}
+            {page?.ChairmanDescription && (
+              <div
+                className={`${descriptionCss} w-full leading-relaxed`}
+                dangerouslySetInnerHTML={{ __html: page.ChairmanDescription }}
+              />
+            )}
           </div>
         </div>
-      </div>
 
-
-    </>
+        {/* ✅ RIGHT SIDEBAR */}
+        <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
+          <SideBar title={"About Us"} LinkList={SideBarLink} />
+        </div>
+      </section>
+    </div>
   );
-};
-
-export default ChairmanMessagePage;
+}
