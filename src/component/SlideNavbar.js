@@ -27,7 +27,7 @@ function SlideNavbar() {
         }
     }, [currentMenu, NAV_ITEMS]);
     return (
-        <div className="fixed top-0 h-full z-[9999999] bg-primary px-4">
+        <div className="sticky top-0 h-screen z-[9999999] bg-primary px-4">
             {/* Menu Icon */}
             {!isMenuOpen ? (
                 <Menu

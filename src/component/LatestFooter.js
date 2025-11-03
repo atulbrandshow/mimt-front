@@ -126,12 +126,12 @@ const navigation2 = [
 
 export default function LatestFooter() {
     return (
-        <footer className="bg-primary text-white py-20">
+        <footer className="bg-secondary text-black py-20">
             <div className="mx-auto max-w-[1400px] max-[1400px]:max-w-7xl max-[1300px]:max-w-6xl max-[1160px]:max-w-5xl px-4">
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                     {navigation?.map((section, index) => (
                         <div key={index} className="w-full mb-6">
-                            <h3 className="font-novaSemi mb-4 text-[#62cdd7]">{section.name}</h3>
+                            <h3 className="font-novaSemi mb-4 text-primary">{section.name}</h3>
                             <ul className='space-y-3'>
                                 {section.links?.map((link, index) => (
                                     <li key={index} className="mb-2 text-sm font-novaSemi">
@@ -144,14 +144,14 @@ export default function LatestFooter() {
                         </div>
                     ))}
                     <div>
-                        <h3 className="text-base font-novaSemi text-[#62cdd7] mb-4">Get in Touch</h3>
+                        <h3 className="text-base font-novaSemi text-primary mb-4">Get in Touch</h3>
                         <p className="text-sm font-novaSemi">Mangalmay Group of Institution</p>
                         <p className="mb-1 text-sm font-novaSemi">Plot No. 8 & 9 Knowledge Park II, Greater Noida, Delhi NCR</p>
-                        <p className="mb-2 text-sm font-novaSemi text-[#62cdd7]"><strong>Student Helpline No:</strong></p>
+                        <p className="mb-2 text-sm font-novaSemi text-primary"><strong>Student Helpline No:</strong></p>
                         <p className="mb-2 text-sm font-novaSemi">9910255400</p>
-                        <p className="mb-2 text-sm font-novaSemi text-[#62cdd7]"><strong>Toll Free:</strong></p>
+                        <p className="mb-2 text-sm font-novaSemi text-primary"><strong>Toll Free:</strong></p>
                         <p className="mb-2 text-sm font-novaSemi">18001033797</p>
-                        <p className="text-sm font-novaSemi text-[#62cdd7]"><strong>Email:</strong></p>
+                        <p className="text-sm font-novaSemi text-primary"><strong>Email:</strong></p>
                         <p><a href="mailto:info@mangalmay.org" className="text-sm hover:underline font-novaSemi">info@mangalmay.org</a></p>
                     </div>
                 </div>
@@ -190,9 +190,9 @@ export default function LatestFooter() {
                         </div>
                     </div>
                     <div className="text-center font-light md:text-left">
-                        <h2 className="text-base font-novaSemi text-[#62cdd7] mb-2">About Us</h2>
+                        <h2 className="text-base font-novaSemi text-primary mb-2">About Us</h2>
                         <p className='text-sm font-novaSemi leading-none'>
-                            Ajay Kumar Garg University (AKGU), Ghaziabad, affiliated with Dr. A.P.J. Abdul Kalam Technical University, offers NBA-accredited B.Tech programs in various engineering disciplines, including Computer Science, IT, AI & ML, and more. It also provides M.Tech and MCA courses. Established in 1998, AKGU is AICTE-approved.<a href="#" className="text-[#62cdd7] text-xs font-novaSemi hover:underline"> Apply Now</a>
+                            Ajay Kumar Garg University (AKGU), Ghaziabad, affiliated with Dr. A.P.J. Abdul Kalam Technical University, offers NBA-accredited B.Tech programs in various engineering disciplines, including Computer Science, IT, AI & ML, and more. It also provides M.Tech and MCA courses. Established in 1998, AKGU is AICTE-approved.<a href="#" className="text-primary text-xs font-novaSemi hover:underline"> Apply Now</a>
                         </p>
                     </div>
                     <div className="px-20">
@@ -202,13 +202,13 @@ export default function LatestFooter() {
 
                 <div className="items-center justify-center mt-4 mx-auto grid grid-cols-12 gap-8 place-items-center">
                     <div className="col-span-5 max-[1160px]:col-span-6 max-[850px]:col-span-12 flex items-center space-x-4">
-                        <div className="flex justify-center py-2 w-32 max-[420px]:w-24 max-[360px]:w-20 max-[420px]:py-0 bg-white">
+                        <div className="flex justify-center p-1 bg-white">
                             <img src="/image/nba.jpg" alt="NBA" className="h-16 max-[360px]:h-14" />
                         </div>
-                        <div className="flex justify-center py-2 w-32 max-[420px]:w-24 max-[360px]:w-20 max-[420px]:py-0 bg-white">
+                        <div className="flex justify-center p-1 bg-white">
                             <img src="/image/qs-i-gauge.jpg" alt="QS-IGAUGE" className="h-16 max-[360px]:h-14" />
                         </div>
-                        <div className="flex justify-center py-2 w-32 max-[420px]:w-24 max-[360px]:w-20 max-[420px]:py-0 bg-white">
+                        <div className="flex justify-center p-1 bg-white">
                             <img src="/image/NaaC.webp" alt="UN Academic Impact" className="h-16 max-[360px]:h-14" />
                         </div>
                     </div>
@@ -227,7 +227,7 @@ export default function LatestFooter() {
                     </div>
                     <div className="col-span-4 max-[1160px]:col-span-12 max-[850px]:col-span-6 max-sm:col-span-12 flex justify-center space-x-10 md:order-2">
                         {navigation2?.map((item, index) => (
-                            <a key={index} href={item.href} className="text-white hover:text-gray-500">
+                            <a key={index} href={item.href} className="text-primary hover:text-gray-500">
                                 <span className="sr-only">{item.name}</span>
                                 <item.icon aria-hidden="true" className="h-6 w-6" />
                             </a>
