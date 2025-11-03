@@ -23,7 +23,7 @@ const MainSection = () => {
   return (
     <div className="overflow-hidden relative">
       <div className="flex justify-center relative z-20 h-screen">
-        <div className="relative z-10 w-full h-full flex items-center py-10">
+        <div className="relative z-10 w-full h-full grid max-xl:grid-cols-1 grid-cols-2 py-10">
           <div className="px-40 w-full flex flex-col justify-center h-full">
             <span className="text-sm font-novaReg text-white tracking-widest uppercase">best <span className="text-secondary">university</span> in this Delhi NCR</span>
             <h1 className="text-7xl uppercase font-cursiveFont font-thin max-w-lg text-white">
@@ -40,7 +40,7 @@ const MainSection = () => {
               />
             </div>
           </div>
-          <div className="w-6/12 h-full flex flex-col items-end justify-end relative">
+          <div className="h-full flex flex-col items-end justify-end relative">
             {/* Navigation buttons */}
             <div className="flex gap-2 mb-5 mr-5">
               <button id="prevButton" className="p-2 bg-primary rounded-full shadow hover:bg-gray-200">
@@ -57,7 +57,7 @@ const MainSection = () => {
                 modules={[Autoplay, Pagination, Navigation]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 loop={true}
-                slidesPerView={2.4}
+                slidesPerView={2.3}
                 spaceBetween={20}
                 navigation={{
                   prevEl: "#prevButton",
