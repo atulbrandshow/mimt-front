@@ -1,125 +1,74 @@
+"use client";
 
 export default function ShimmerContent() {
-    return (
-        <div className="min-h-screen bg-white">
-            <div className="h-[80vh] w-full flex justify-center items-center">
-                <div className="dot-spinner">
-                    <div className="dot-spinner__dot"></div>
-                    <div className="dot-spinner__dot"></div>
-                    <div className="dot-spinner__dot"></div>
-                    <div className="dot-spinner__dot"></div>
-                    <div className="dot-spinner__dot"></div>
-                    <div className="dot-spinner__dot"></div>
-                    <div className="dot-spinner__dot"></div>
-                    <div className="dot-spinner__dot"></div>
-                </div>
-            </div>
-            <style jsx>{`
-                .dot-spinner {
-                --uib-size: 2.8rem;
-                --uib-speed: .9s;
-                --uib-color: #183153;
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                height: var(--uib-size);
-                width: var(--uib-size);
-                }
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="relative flex flex-col items-center justify-center">
+        {/* 3D Gradient Orb */}
+        <div className="relative w-20 h-20 rounded-full bg-gradient-to-tr from-primary to-primary/70 shadow-xl shadow-primary/40 animate-orb"></div>
 
-                .dot-spinner__dot {
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                height: 100%;
-                width: 100%;
-                }
-
-                .dot-spinner__dot::before {
-                content: '';
-                height: 20%;
-                width: 20%;
-                border-radius: 50%;
-                background-color: var(--uib-color);
-                transform: scale(0);
-                opacity: 0.5;
-                animation: pulse0112 calc(var(--uib-speed) * 1.111) ease-in-out infinite;
-                box-shadow: 0 0 20px rgba(18, 31, 53, 0.3);
-                }
-
-                .dot-spinner__dot:nth-child(2) {
-                transform: rotate(45deg);
-                }
-
-                .dot-spinner__dot:nth-child(2)::before {
-                animation-delay: calc(var(--uib-speed) * -0.875);
-                }
-
-                .dot-spinner__dot:nth-child(3) {
-                transform: rotate(90deg);
-                }
-
-                .dot-spinner__dot:nth-child(3)::before {
-                animation-delay: calc(var(--uib-speed) * -0.75);
-                }
-
-                .dot-spinner__dot:nth-child(4) {
-                transform: rotate(135deg);
-                }
-
-                .dot-spinner__dot:nth-child(4)::before {
-                animation-delay: calc(var(--uib-speed) * -0.625);
-                }
-
-                .dot-spinner__dot:nth-child(5) {
-                transform: rotate(180deg);
-                }
-
-                .dot-spinner__dot:nth-child(5)::before {
-                animation-delay: calc(var(--uib-speed) * -0.5);
-                }
-
-                .dot-spinner__dot:nth-child(6) {
-                transform: rotate(225deg);
-                }
-
-                .dot-spinner__dot:nth-child(6)::before {
-                animation-delay: calc(var(--uib-speed) * -0.375);
-                }
-
-                .dot-spinner__dot:nth-child(7) {
-                transform: rotate(270deg);
-                }
-
-                .dot-spinner__dot:nth-child(7)::before {
-                animation-delay: calc(var(--uib-speed) * -0.25);
-                }
-
-                .dot-spinner__dot:nth-child(8) {
-                transform: rotate(315deg);
-                }
-
-                .dot-spinner__dot:nth-child(8)::before {
-                animation-delay: calc(var(--uib-speed) * -0.125);
-                }
-
-                @keyframes pulse0112 {
-                0%,
-                100% {
-                    transform: scale(0);
-                    opacity: 0.5;
-                }
-
-                50% {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-                }
-
-            `}</style>
+        {/* Glow ring */}
+        <div className="absolute w-28 h-28 rounded-full border border-primary/30 animate-glow">
         </div>
-    )
+
+        {/* Loading Text */}
+        <p className="mt-6 text-gray-700 text-sm font-semibold tracking-wide animate-fade">
+          Please wait, loading content...
+        </p>
+      </div>
+
+      <style jsx>{`
+        @keyframes orb {
+          0% {
+            transform: scale(1);
+            filter: brightness(1);
+          }
+          50% {
+            transform: scale(1.15);
+            filter: brightness(1.3);
+          }
+          100% {
+            transform: scale(1);
+            filter: brightness(1);
+          }
+        }
+
+        @keyframes glow {
+          0%,
+          100% {
+            opacity: 0.4;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.15);
+          }
+        }
+
+        @keyframes fade {
+          0% {
+            opacity: 0.4;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0.4;
+          }
+        }
+
+        .animate-orb {
+          animation: orb 1.8s ease-in-out infinite;
+        }
+
+        .animate-glow {
+          animation: glow 2.4s ease-in-out infinite;
+        }
+
+        .animate-fade {
+          animation: fade 2.5s ease-in-out infinite;
+        }
+      `}</style>
+    </div>
+  );
 }

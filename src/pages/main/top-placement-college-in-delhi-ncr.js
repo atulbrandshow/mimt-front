@@ -1,91 +1,83 @@
 import React from "react";
+import Header from "@/component/Header";
+import { IMAGE_PATH } from "@/configs/config";
 
-const Page = ({ data }) => {
-  if (!data) return <p>No data available</p>;
-
-  // ✅ Helper to check if a value has meaningful content
-  const hasContent = (value) => {
-    if (
-      value === null ||
-      value === undefined ||
-      value === false ||
-      value === ""
-    )
-      return false;
-
-    if (Array.isArray(value)) return value.some((item) => hasContent(item));
-
-    if (typeof value === "object")
-      return Object.keys(value).some((k) => hasContent(value[k]));
-
-    return true;
-  };
-
-  // ✅ Recursive renderer
-  const renderValue = (value) => {
-    if (!hasContent(value)) return null;
-
-    // Render HTML strings safely
-    if (typeof value === "string" && /<[^>]+>/.test(value)) {
-      return (
-        <div
-          className="prose max-w-none custom-prose"
-          dangerouslySetInnerHTML={{ __html: value }}
-        />
-      );
-    }
-
-    // Render arrays
-    if (Array.isArray(value)) {
-      const filteredArray = value.filter((item) => hasContent(item));
-      if (filteredArray.length === 0) return null;
-      return (
-        <ul className="list-disc ml-6">
-          {filteredArray.map((item, index) => (
-            <li key={index}>{renderValue(item)}</li>
-          ))}
-        </ul>
-      );
-    }
-
-    // Render objects
-    if (typeof value === "object") {
-      const entries = Object.entries(value).filter(([_, v]) => hasContent(v));
-      if (entries.length === 0) return null;
-      return (
-        <div className="ml-4 border-l border-gray-400 pl-4">
-          {entries.map(([k, v]) => (
-            <div key={k} className="mb-2">
-              <strong className="text-black">{k}:</strong>
-              <div className="ml-2 mt-1">{renderValue(v)}</div>
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    // Primitive values
-    return <span className="text-black">{value.toString()}</span>;
-  };
-
-  // ✅ Filter top-level keys
-  const filteredData = Object.entries(data).filter(([_, value]) =>
-    hasContent(value)
-  );
-
-  if (filteredData.length === 0)
-    return <p className="text-black">No meaningful data available</p>;
+export default function Page({ data }) {
+  const SideBarLink = [
+    { name: "Our Identity", link: "/overview" },
+    { name: "Leadership", link: "" },
+    { name: "Governance", link: "" },
+    { name: "Recognition and Approvals", link: "" },
+    { name: "Awards and Rankings", link: "" },
+    { name: "Institution Social Responsibility", link: "" },
+  ];
 
   return (
-    <div className="p-6 bg-gray-200 min-h-screen  text-black mt-32">
-      {filteredData.map(([key, value]) => (
-        <div key={key} className="mb-6">
-          <strong className="text-lg font-semibold text-black">{key}:</strong>
-          <div className="ml-3 mt-2">{renderValue(value)}</div>
+    <div className="bg-[#f4f7ff] min-h-screen">
+      <Header BreadCrumb={data?.breadCrumb} data={data} />
+      <section className="w-full max-w-[1600px] mx-auto py-20 px-4 sm:px-8">
+        <PlacementCards pageData={data?.pageData} />
+      </section>
+    </div>
+  );
+}
+
+function PlacementCards({ pageData }) {
+  if (!pageData) return null;
+
+  // Group dynamic backend data
+  const groupedCards = Object.keys(pageData).reduce((acc, key) => {
+    const match = key.match(/_(\d+)$/);
+    if (match) {
+      const index = match[1];
+      if (!acc[index]) acc[index] = {};
+      const cleanKey = key.replace(/_\d+$/, "");
+      acc[index][cleanKey] = pageData[key];
+    }
+    return acc;
+  }, {});
+
+  const cardsArray = Object.values(groupedCards);
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+      {cardsArray.map((card, idx) => (
+        <div
+          key={idx}
+          className="relative cursor-pointer flex flex-col items-center text-center bg-white text-gray-800 rounded-2xl shadow-xl p-6 overflow-hidden group transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-blue-900 border-t-4"
+        >
+          {/* Gradient Background Hover */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0d1b4c] to-[#182b74] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+          {/* Profile Image */}
+          <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#0d1b4c] shadow-md bg-white z-10">
+            <img
+              src={IMAGE_PATH + card.Card_img}
+              alt={card.Card_Name}
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 mt-6 space-y-2 group-hover:text-white transition-colors">
+            <h3 className="text-lg font-semibold">{card.Card_Name}</h3>
+            <p className="text-sm opacity-80">{card.Card_Course}</p>
+            {card.Card_Company && (
+              <p className="text-sm font-medium text-[#4ea8ff] group-hover:text-[#b7d7ff]">
+                {card.Card_Company.replace("Company :", "").trim()}
+              </p>
+            )}
+            <p className="text-sm font-bold text-green-600 group-hover:text-green-300">
+              {card.Card_CTC}
+            </p>
+          </div>
+
+          {/* Description */}
+          <p className="relative z-10 mt-4 text-sm text-gray-500 px-3 group-hover:text-gray-200 transition-colors">
+            Proudly showcasing our student achievements in top organizations.
+          </p>
         </div>
       ))}
     </div>
   );
-};
-
-export default Page;
+}

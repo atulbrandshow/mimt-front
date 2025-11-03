@@ -16,3 +16,25 @@
   color: black !important;
   font-weight: bold;
 }
+/* Custom icon list style for prose */
+.prose ul li::before {
+  content: "";
+  position: absolute;
+  left: -1.5rem;
+  top: 0.1rem;;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("/icons/star-check.svg"); /* ✅ remove /public */
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+
+/* Adjust spacing for smaller devices */
+@media (max-width: 640px) {
+  .prose ul li::before {
+    width: 0.8rem;
+    height: 0.8rem;
+    top: 0.55rem;
+  }
+}
