@@ -12,6 +12,7 @@ import LatestFooter from '@/component/LatestFooter';
 import SlideNavbar from '@/component/SlideNavbar';
 import MainHeader from '@/component/MainHeader';
 import SmoothScroll from '@/component/SmoothScroll';
+import Scroller from '@/component/scroller';
 function MyApp({ Component, pageProps }) {
     const [isShowNavAndFooter, setIsShowNavAndFooter] = useState(false);
     const router = useRouter();
@@ -47,6 +48,7 @@ function MyApp({ Component, pageProps }) {
                         pauseOnHover
                     />
                     {/* {isShowNavAndFooter && <StickyFooter streamId={pageProps?.data?.data?.stream} />} */}
+                    <Scroller/>
                     {isShowNavAndFooter && <LatestFooter />}
                 </div>
             </div>
