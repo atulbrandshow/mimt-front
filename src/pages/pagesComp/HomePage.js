@@ -26,7 +26,7 @@ import { StudentTestimonial } from "@/component/StudentTestimonial";
 
 export default function HomePage({ data }) {
   return (
-    <>
+    <div className="bg-primary">
       <MainSection />
       {/* <HeroSection /> */}
       {data && <AboutSection />}
@@ -49,6 +49,6 @@ export default function HomePage({ data }) {
       {/* {data && <NewsEvents data={data} />} */}
       {/* {data && <FooterCard data={data} />} */}
       {/* {data && <ResearchEnvironment data={data} />} */}
-    </>
+    </div>
   );
 }

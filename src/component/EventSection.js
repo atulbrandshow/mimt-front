@@ -39,7 +39,7 @@ export function EventSection() {
         },
     ];
     return (
-        <div className="relative overflow-hidden bg-black w-full h-full pt-16 pb-32">
+        <div className="relative overflow-hidden bg-black pt-16 pb-32">
             <TitleInfo first="Events" second="Explore Our Events" color="white" />
             <p className="mb-10 md:text-lg font-novaReg text-slate-400 text-center max-w-4xl mx-auto">
                 Our events provide students with opportunities to learn beyond the classroom, connect with industry experts, showcase their talents, and create memories that last a lifetime.

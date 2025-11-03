@@ -27,17 +27,17 @@ function SlideNavbar() {
         }
     }, [currentMenu, NAV_ITEMS]);
     return (
-        <div className="relative min-h-screen bg-yellow-600 px-4">
+        <div className="fixed top-0 h-full z-[9999999] bg-primary px-4">
             {/* Menu Icon */}
             {!isMenuOpen ? (
                 <Menu
-                    className="mt-6  cursor-pointer text-white"
+                    className="mt-6 cursor-pointer text-white"
                     size={30}
                     onClick={handleToggleMenu}
                 />
             ) : (
                 <ChevronLeft
-                    className="mt-6  cursor-pointer text-white"
+                    className="mt-6 cursor-pointer text-white"
                     size={30}
                     onClick={handleToggleMenu}
                 />
@@ -68,7 +68,7 @@ function SlideNavbar() {
                     // onClick={handleToggleMenu}
                     >
                         {/* <div className="flex items-center justify-between p-4 border-b">
-              <h2 className="text-lg font-semibold text-gray-700">Menu</h2>
+              <h2 className="text-lg font-novaReg text-gray-700">Menu</h2>
               <ChevronLeft
                 className="cursor-pointer text-gray-600"
                 onClick={handleToggleMenu}
@@ -89,7 +89,7 @@ function SlideNavbar() {
                                             setCurrentMenu(ele?.links);
                                         }}
                                         onMouseOver={() => setCurrentMenu(ele?.links)}
-                                        className={`hover:text-yellow-400 cursor-pointer w-max text-2xl font-bold text-left ${currentPath === ele?.links ? "text-yellow-400" : ""
+                                        className={`hover:text-secondary cursor-pointer w-max text-2xl font-novaReg text-left ${currentPath === ele?.links ? "text-secondary" : ""
                                             }`}
                                     >
                                         {ele?.name}
@@ -111,7 +111,7 @@ function SlideNavbar() {
                                                 router.push(ele?.url);
                                                 handleToggleMenu();
                                             }}
-                                            className="hover:text-yellow-400 cursor-pointer w-max text-lg font-bold text-left"
+                                            className="hover:text-yellow-400 cursor-pointer w-max text-lg font-novaReg text-left"
                                         >
                                             {ele?.name}
                                         </button>

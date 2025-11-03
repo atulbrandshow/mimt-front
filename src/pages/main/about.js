@@ -1,44 +1,26 @@
 import React from "react";
 import Image from "next/image";
+import Breadcrumb from "@/component/Breadcrumb";
+import Header from "@/component/Header";
 
-export default function AboutUs() {
+const BreadCrumb = [
+  {
+    name: "About",
+    Link: "#",
+  },
+]
+
+export default function AboutUs({ data }) {
+
+  console.log(data);
+  
   return (
     <section className="w-full font-sans">
-
-
-      {/* ✅ HERO SECTION  */}
-      <div
-        className="relative w-full h-[70vh] bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/image/about/mangalmay_institute.webp')",
-        }}
-      >
-        {/* Soft Left Gradient Just Behind Text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
-
-        {/* Left-Aligned Centered Content */}
-        <div className="absolute inset-0 flex items-center pl-10 md:pl-20">
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-10 rounded-2xl max-w-xl shadow-lg">
-
-            <h1 className="text-white text-2xl md:text-3xl font-bold mb-4 leading-tight">
-              About Mangalmay Group
-            </h1>
-
-            <p className="text-white/80 text-lg leading-relaxed">
-              Established in 2002, Mangalmay Group of Institutions is one of the premier
-              NAAC accredited institutions focused on innovation, excellence, and
-              nurturing future-ready global leaders.
-            </p>
-
-          </div>
-        </div>
-      </div>
-
-
+      <Header BreadCrumb={data?.breadCrumb} />
 
       {/* ✅ MAIN CONTENT SECTION — Clean, Spacious, Modern */}
       <div className="w-full py-20 bg-gray-100 px-4 flex justify-center">
-        <div className="max-w-5xl w-full">
+        <div className="max-w-[1600px] mx-auto px-3 sm:px-6">
 
           {/* Title */}
           <h2 className="text-4xl font-bold text-gray-900 mb-12 tracking-wide border-l-8 border-[#fdd023] pl-4">

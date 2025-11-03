@@ -7,7 +7,7 @@ import TitleInfo from "./TitleInfo";
 export function RecruiterTestimonial() {
     return (
         <div
-            className="h-full py-16 rounded-md flex flex-col antialiased bg-white bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+            className="py-16 rounded-md flex flex-col antialiased bg-white bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
             <TitleInfo first="Recruiter Testimonials" second="What Our Recruiters Says" color="black" />
             <p className="mb-10 md:text-lg font-novaReg text-slate-600 text-center max-w-4xl mx-auto">
                 Hear from our students and alumni as they share their experiences, success stories, and the impact our programs have had on their careers and personal growth.

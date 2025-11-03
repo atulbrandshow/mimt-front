@@ -28,22 +28,22 @@ function MyApp({ Component, pageProps }) {
         <AppDataProvider>
             {/* {isShowNavAndFooter && <LatestNavbar />} */}
             <div className='flex'>
-            {isShowNavAndFooter && <SlideNavbar/>}
-            <div>
-            <Component {...pageProps} />
-            <ToastContainer
-                position="top-right"
-                autoClose={1000}
-                hideProgressBar={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-            {/* {isShowNavAndFooter && <StickyFooter streamId={pageProps?.data?.data?.stream} />} */}
-            {isShowNavAndFooter && <LatestFooter />}
-            </div>
+                {isShowNavAndFooter && <SlideNavbar />}
+                <div className='flex-grow'>
+                    <Component {...pageProps} />
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={1000}
+                        hideProgressBar={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
+                    {/* {isShowNavAndFooter && <StickyFooter streamId={pageProps?.data?.data?.stream} />} */}
+                    {isShowNavAndFooter && <LatestFooter />}
+                </div>
             </div>
         </AppDataProvider>
     );

@@ -32,7 +32,7 @@ const AboutSection = () => {
     };
 
     return (
-        <section className='bg-gradient-to-t from-yellow-100 via-transparent to-transparent'>
+        <section className='bg-gradient-to-t from-secondary via-white to-white'>
             <div className='max-w-[1400px] mx-auto px-4 py-10 sm:py-20'>
                 <TitleInfo first="Top Ranked Institution" second="Mangalmay Group Of Institutions – One of India's Best Ranked Institutions" color='black' />
 
@@ -120,7 +120,7 @@ const AboutSection = () => {
                 <div className='mt-20 flex justify-center'>
                     <Button
                         borderRadius="1rem"
-                        className="bg-yellow-400 text-black font-novaBold border-neutral-200"
+                        className="bg-primary text-white font-novaBold border-neutral-200"
                     >
                         Read More
                     </Button>

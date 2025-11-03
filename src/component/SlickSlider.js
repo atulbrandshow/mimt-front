@@ -81,7 +81,7 @@ export default function SlickSlider({ data }) {
 
   return (
     <>
-      <section className="h-full bg-[#F3F3F3] py-8">
+      <section className="bg-[#F3F3F3] py-8">
         <div className="break1:max-w-[1500px] break2:max-w-[1320px] break3:max-w-[1200px] break4:max-w-[1040px] mx-auto">
           <TitleInfo first="Vibrant Journey" second={d?.Vibrant_Journey_Title} color='black' />
           <div className="mt-10 grid grid-cols-12 gap-4">

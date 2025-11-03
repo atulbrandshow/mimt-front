@@ -53,7 +53,7 @@ export default function NewsSection() {
     const activeNews = cards[activeCard];
 
     return (
-        <section className="flex flex-col justify-start items-center px-2 py-16">
+        <section className="bg-white flex flex-col justify-start items-center px-2 py-16">
             <div className="max-w-7xl mx-auto flex flex-col justify-center items-center">
                 {/* Header Section */}
                 <TitleInfo first="News" second="Discover Latest News" color="black" />

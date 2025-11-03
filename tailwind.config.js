@@ -110,6 +110,17 @@ module.exports = {
         'break3': '1200px',
         'break4': '992px',
       },
+      colors: {
+        primary: '#911E75',
+        secondary: '#FECC00',
+        dark: '#4B0E3C',
+        light: '#FBEFF6',
+        textPrimary: '#1A1A1A',
+        textSecondary: '#5A5A5A',
+        border: '#E0E0E0',
+        success: '#2ECC71',
+        error: '#E63946',
+      },
     },
     fontFamily: {
       novaReg: ['nova-regular', 'proximanova-regular'],
@@ -131,10 +142,17 @@ module.exports = {
           transform: 'translate(calc(-50% - 0.5rem))',
         },
       },
+      'infinite-scroll': {
+        '0%': { transform: 'translateX(0)' },
+        // This moves the content left by 50% of its total width
+        // Since we duplicated the list, 50% is exactly one full copy of the list
+        '100%': { transform: 'translateX(-50%)' },
+      },
     },
     animation: {
       zoomInOut: 'zoomInOut 16s ease-in-out infinite',
       scroll: 'scroll var(--animation-duration, 60s) var(--animation-direction, forwards) linear infinite',
+      'infinite-scroll': 'infinite-scroll 20s linear infinite',
     },
   },
   plugins: [

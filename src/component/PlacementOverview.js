@@ -28,7 +28,7 @@ const statsData = [
 
 const PlacementOverview = () => {
     return (
-        <section className='pt-16 overflow-hidden'>
+        <section className='bg-white pt-16 overflow-hidden'>
             <div className='w-full text-center'>
                 <TitleInfo first="Placement" second="Placement Overview" color='gray' />
                 <p className='text-gray-500 font-novaReg'>Top Global Brands Trust Our Talent</p>
