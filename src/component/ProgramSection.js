@@ -33,7 +33,7 @@ export function ProgramSection() {
     ];
 
     return (
-        <main className="w-full rounded-tl-[100px] bg-white py-16 px-4">
+        <main className="w-full rounded-l-[100px] bg-white py-16 px-4">
             <TitleInfo first="Programs" second="Our Academic Programs" color="black" />
             <p className="text-lg font-novaReg text-slate-500 text-center max-w-4xl mx-auto mt-4">
                 Explore a diverse range of programs designed to empower students with knowledge, skills, and industry exposure. From management and technology to commerce and education, our courses are crafted to build future leaders and innovators ready to excel in their chosen fields.

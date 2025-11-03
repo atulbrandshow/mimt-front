@@ -39,12 +39,14 @@ export function EventSection() {
         },
     ];
     return (
-        <div className="relative overflow-hidden bg-black pt-16 pb-32">
-            <TitleInfo first="Events" second="Explore Our Events" color="white" />
-            <p className="mb-10 md:text-lg font-novaReg text-slate-400 text-center max-w-4xl mx-auto">
-                Our events provide students with opportunities to learn beyond the classroom, connect with industry experts, showcase their talents, and create memories that last a lifetime.
-            </p>
-            <Carousel slides={slideData} />
-        </div>
+        <section className="bg-gradient-to-r from-primary to-white">
+            <div className="rounded-[100px] relative overflow-hidden bg-primary pt-24 pb-40">
+                <TitleInfo first="Events" second="Explore Our Events" color="white" />
+                <p className="mb-10 md:text-lg font-novaReg text-slate-200 text-center max-w-4xl mx-auto">
+                    Our events provide students with opportunities to learn beyond the classroom, connect with industry experts, showcase their talents, and create memories that last a lifetime.
+                </p>
+                <Carousel slides={slideData} />
+            </div>
+        </section>
     );
 }

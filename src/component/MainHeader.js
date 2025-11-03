@@ -1,5 +1,6 @@
 import React from "react";
 import { Search } from "lucide-react";
+import Link from "next/link";
 
 function MainHeader() {
   return (
@@ -7,22 +8,24 @@ function MainHeader() {
 
       {/* Top Bar */}
       <div className=" bg-white">
-      <div className="bg-primary text-white text-sm flex justify-center items-center py-1 rounded-br-2xl">
-        <span className="font-semibold">
-          Toll Free: <span className="font-bold">1800-103-3797</span>
-        </span>
-      </div>
+        <div className="bg-primary text-white text-sm flex justify-center items-center py-1 rounded-br-2xl">
+          <span className="font-semibold">
+            Toll Free: <span className="font-bold">1800-103-3797</span>
+          </span>
+        </div>
       </div>
       <div className=" rounded-tl-3xl bg-white">
         {/* Main Header */}
         <div className="flex flex-wrap justify-between items-center px-3 sm:px-6 py-3 max-w-[1600px] mx-auto ">
           {/* Left: Logos */}
           <div className="flex items-center gap-4">
-            <img
-              src="https://www.mangalmay.org/assets/images/best-college-logo.webp"
-              alt="Mangalmay Logo"
-              className="h-14 w-auto object-contain"
-            />
+            <Link href="/">
+              <img
+                src="https://www.mangalmay.org/assets/images/best-college-logo.webp"
+                alt="Mangalmay Logo"
+                className="h-14 w-auto object-contain"
+              />
+            </Link>
             <img
               src="https://www.mangalmay.org/assets/images/logo-naac.png"
               alt="NAAC Logo"

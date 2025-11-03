@@ -53,86 +53,87 @@ export default function NewsSection() {
     const activeNews = cards[activeCard];
 
     return (
-        <section className="bg-white flex flex-col justify-start items-center px-2 py-16">
-            <div className="max-w-7xl mx-auto flex flex-col justify-center items-center">
-                {/* Header Section */}
-                <TitleInfo first="News" second="Discover Latest News" color="black" />
-                <p className="text-lg font-novaReg text-slate-500 text-center max-w-4xl mx-auto mt-4">
-                    Explore a diverse range of programs designed to empower students with knowledge, skills, and industry exposure. From management and technology to commerce and education, our courses are crafted to build future leaders and innovators ready to excel in their chosen fields.
-                </p>
+        <section className="bg-gradient-to-r from-primary to-white">
+            <section className="rounded-[100px] bg-primary flex flex-col justify-start items-center px-2 py-24">
+                <div className="max-w-7xl mx-auto flex flex-col justify-center items-center">
+                    {/* Header Section */}
+                    <TitleInfo first="News" second="Discover Latest News" color="white" />
+                    <p className="text-lg font-novaReg text-slate-200 text-center max-w-4xl mx-auto mt-4">
+                        Explore a diverse range of programs designed to empower students with knowledge, skills, and industry exposure. From management and technology to commerce and education, our courses are crafted to build future leaders and innovators ready to excel in their chosen fields.
+                    </p>
 
-                {/* Content Section */}
-                <div className="self-stretch px-4 md:px-9 overflow-hidden flex justify-start items-center">
-                    <div className="flex-1 py-8 md:py-11 flex flex-col md:flex-row justify-start items-center gap-6 md:gap-12">
-                        {/* Left Column - Feature Cards */}
-                        <div className="w-full md:w-auto md:max-w-[400px] flex flex-col justify-center items-center gap-4 order-2 md:order-1">
-                            {cards.map((card, index) => {
-                                const isActive = index === activeCard
+                    {/* Content Section */}
+                    <div className="self-stretch px-4 md:px-9 overflow-hidden flex justify-start items-center">
+                        <div className="flex-1 py-8 md:py-11 flex flex-col md:flex-row justify-start items-center gap-6 md:gap-12">
+                            {/* Left Column - Feature Cards */}
+                            <div className="w-full md:w-auto md:max-w-[400px] flex flex-col justify-center items-center gap-4 order-2 md:order-1">
+                                {cards.map((card, index) => {
+                                    const isActive = index === activeCard
 
-                                return (
-                                    <div
-                                        key={index}
-                                        onClick={() => handleCardClick(index)}
-                                        className={`w-full overflow-hidden flex flex-col justify-start items-start transition-all duration-300 cursor-pointer rounded-xl ${isActive
-                                            ? "bg-white shadow-[0px_0px_0px_1px_#E0DEDB_inset,_0_4px_12px_-2px_rgba(0,0,0,0.05)]"
-                                            : "border border-gray-300"
-                                            }`}
-                                    >
-                                        <div className="w-full h-0.5 bg-transparent">
-                                            {/* --- THE FIX IS HERE --- */}
-                                            {/* Only render the progress bar for the active card */}
-                                            {isActive && (
-                                                <div
-                                                    key={animationKey}
-                                                    className="h-0.5 bg-[#322D2B] animate-[progressBar_5s_linear_forwards] will-change-transform"
-                                                    onAnimationEnd={handleAnimationEnd}
-                                                />
-                                            )}
+                                    return (
+                                        <div
+                                            key={index}
+                                            onClick={() => handleCardClick(index)}
+                                            className={`w-full overflow-hidden flex flex-col justify-start items-start transition-all duration-300 cursor-pointer rounded-xl ${isActive
+                                                ? "bg-gray-100 shadow-[0px_0px_0px_1px_#E0DEDB_inset,_0_4px_12px_-2px_rgba(0,0,0,0.05)]"
+                                                : "border border-gray-300"
+                                                }`}
+                                        >
+                                            <div className="w-full h-0.5 bg-transparent">
+                                                {/* --- THE FIX IS HERE --- */}
+                                                {/* Only render the progress bar for the active card */}
+                                                {isActive && (
+                                                    <div
+                                                        key={animationKey}
+                                                        className="h-0.5 bg-[#322D2B] animate-[progressBar_5s_linear_forwards] will-change-transform"
+                                                        onAnimationEnd={handleAnimationEnd}
+                                                    />
+                                                )}
+                                            </div>
+                                            <div className="px-6 py-4 w-full flex flex-col gap-2">
+                                                <div className={`self-stretch flex justify-center flex-col ${isActive ? "text-black" : "text-white"} font-novaBold leading-6 font-sans`}>
+                                                    {card.title}
+                                                </div>
+                                                <div className="text-xs text-slate-900 uppercase font-novaSemi bg-gray-200 w-fit px-2 py-0.5 rounded-lg">
+                                                    {card.date}
+                                                </div>
+                                                <div className={`self-stretch line-clamp-2 text-sm font-normal leading-snug font-novaReg whitespace-pre-line ${isActive ? "text-black" : "text-white"}`}>
+                                                    {card.description}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="px-6 py-4 w-full flex flex-col gap-2">
-                                            <div className="self-stretch flex justify-center flex-col text-[#49423D] font-novaBold leading-6 font-sans">
-                                                {card.title}
-                                            </div>
-                                            <div className="text-xs text-slate-700 uppercase font-novaSemi bg-gray-200 w-fit px-2 py-0.5 rounded-lg">
-                                                {card.date}
-                                            </div>
-                                            <div className="self-stretch line-clamp-2 text-[#605A57] text-sm font-normal leading-snug font-novaReg whitespace-pre-line">
-                                                {card.description}
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-
-                        {/* Right Column - Main News Display */}
-                        <div className="w-full md:flex-1 flex flex-col justify-center items-start gap-4 order-1 md:order-2">
-                            <div className="w-full h-auto bg-white shadow-lg overflow-hidden rounded-lg">
-                                <img
-                                    key={activeNews.title} // Add key to force re-render for fade effect
-                                    src={activeNews.image}
-                                    alt={activeNews.title}
-                                    className="w-full h-[250px] md:h-[380px] object-cover animate-[fadeIn_0.5s_ease-in-out]"
-                                />
+                                    )
+                                })}
                             </div>
-                            <div className="w-full flex justify-between items-center px-1">
-                                <div>
-                                    <h3 className="text-xl font-bold font-novaBold text-slate-800">{activeNews.title}</h3>
-                                    <p className="text-sm text-slate-500 font-novaSemi">{activeNews.date}</p>
+
+                            {/* Right Column - Main News Display */}
+                            <div className="w-full md:flex-1 flex flex-col justify-center items-start gap-4 order-1 md:order-2">
+                                <div className="w-full h-auto bg-white shadow-lg overflow-hidden rounded-lg">
+                                    <img
+                                        key={activeNews.title} // Add key to force re-render for fade effect
+                                        src={activeNews.image}
+                                        alt={activeNews.title}
+                                        className="w-full h-[250px] md:h-[380px] object-cover animate-[fadeIn_0.5s_ease-in-out]"
+                                    />
                                 </div>
-                                <a
-                                    href={activeNews.link}
-                                    className="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors duration-300 font-novaBold text-sm whitespace-nowrap"
-                                >
-                                    Read More &rarr;
-                                </a>
+                                <div className="w-full flex justify-between items-center px-1">
+                                    <div>
+                                        <h3 className="text-xl font-bold font-novaBold text-slate-100">{activeNews.title}</h3>
+                                        <p className="text-sm text-slate-300 font-novaSemi">{activeNews.date}</p>
+                                    </div>
+                                    <a
+                                        href={activeNews.link}
+                                        className="px-4 py-2 bg-secondary text-black rounded-md hover:bg-slate-700 transition-colors duration-300 font-novaBold text-sm whitespace-nowrap"
+                                    >
+                                        Read More &rarr;
+                                    </a>
+                                </div>
                             </div>
+
                         </div>
-
                     </div>
-                </div>
 
-                <style jsx>{`
+                    <style jsx>{`
                     @keyframes progressBar {
                       0% {
                         transform: translateX(-100%);
@@ -150,7 +151,8 @@ export default function NewsSection() {
                       }
                     }
                   `}</style>
-            </div>
+                </div>
+            </section>
         </section>
     )
 }

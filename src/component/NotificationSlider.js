@@ -50,7 +50,7 @@ const NotificationSlider = ({ data }) => {
     !eventsData && fetchEvents();
 
     return (
-        <main className='bg-gray-100 py-16'>
+        <main className='rounded-l-[100px] bg-white py-24'>
             <TitleInfo first="Highlights" second="Placement Highlights" color="cyan" />
             <div className="max-w-[1500px] mx-auto">
                 <div className="col-span-12 max-lg:mb-4 flex items-center relative">
@@ -87,7 +87,7 @@ const NotificationSlider = ({ data }) => {
                     </div>
                 </div>
                 <section className="col-span-8 max-lg:col-span-12 h-full max-lg:mb-4 max-lg:px-10 max-md:px-8 max-sm:px-1 max-lg:ml-0 drop-shadow-lg">
-                    <section className="bg-gradient-to-r from-cyan-500 to-indigo-600 animate-gradient rounded-lg h-full">
+                    <section className="bg-gradient-to-r from-cyan-500 to-green-600 animate-gradient rounded-lg h-full">
                         <div className="grid grid-cols-12 h-full">
                             <div className="col-span-2 max-sm:hidden p-2 flex justify-center items-center">
                                 <img

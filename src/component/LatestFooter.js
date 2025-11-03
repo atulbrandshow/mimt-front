@@ -126,7 +126,7 @@ const navigation2 = [
 
 export default function LatestFooter() {
     return (
-        <footer className="bg-secondary text-black py-20">
+        <footer className="rounded-tl-[100px] bg-white text-black py-20">
             <div className="mx-auto max-w-[1400px] max-[1400px]:max-w-7xl max-[1300px]:max-w-6xl max-[1160px]:max-w-5xl px-4">
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                     {navigation?.map((section, index) => (

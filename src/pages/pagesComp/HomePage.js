@@ -30,9 +30,9 @@ export default function HomePage({ data }) {
       <MainSection />
       {/* <HeroSection /> */}
       {data && <AboutSection />}
-      {data && <MilestonesSection data={data} />}
+      {/* {data && <ProgramSection />} */}
       {data && <ExploreCourses data={data} />}
-      {data && <ProgramSection />}
+      {data && <MilestonesSection data={data} />}
       {/* {data && <HomeTopCard data={data} />} */}
       {data && <EventSection />}
       {data && <SlickSlider data={data} />}

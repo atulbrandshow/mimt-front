@@ -95,126 +95,128 @@ export default function InnovationShowcase() {
     }
 
     return (
-        <section className="bg-black pt-16">
-            <TitleInfo first="Labs & Research" second="Innovate and Inspire Be a Future Innovator" color='white' />
-            <div className="max-w-[1600px] mx-auto text-white p-8 md:p-16">
-                {/* Header with Tab Buttons */}
-                <div className="flex items-center gap-4 mb-16">
-                    <button
-                        onClick={() => handleTabChange("labs")}
-                        className={`text-2xl md:text-4xl font-novaBold transition-all duration-500 ${activeTab === "labs" ? "text-white" : "text-gray-500 hover:text-gray-400"
-                            }`}
-                    >
-                        Innovation Labs
-                    </button>
+        <section className="bg-gradient-to-r from-primary to-white">
+            <section className="rounded-[100px] bg-primary py-24">
+                <TitleInfo first="Labs & Research" second="Innovate and Inspire Be a Future Innovator" color='white' />
+                <div className="max-w-[1600px] mx-auto text-white p-8 md:p-16">
+                    {/* Header with Tab Buttons */}
+                    <div className="flex items-center gap-4 mb-16">
+                        <button
+                            onClick={() => handleTabChange("labs")}
+                            className={`text-2xl md:text-4xl font-novaBold transition-all duration-500 ${activeTab === "labs" ? "text-white" : "text-gray-300 hover:text-gray-400"
+                                }`}
+                        >
+                            Innovation Labs
+                        </button>
 
-                    {/* Accent dot */}
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        {/* Accent dot */}
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
 
-                    <button
-                        onClick={() => handleTabChange("research")}
-                        className={`text-2xl md:text-4xl font-novaBold transition-all duration-500 ${activeTab === "research" ? "text-white" : "text-gray-500 hover:text-gray-400"
-                            }`}
-                    >
-                        Research
-                    </button>
-                </div>
-
-                {/* Main Content */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    {/* Left Section - Text Content */}
-                    <div className="lg:col-span-1 flex flex-col justify-start">
-                        <div>
-                            <h1 className="text-4xl md:text-8xl font-novaThin mb-6 text-balance">{currentContent.title}</h1>
-                            <p className="text-gray-400 text-lg max-w-sm font-novaReg leading-relaxed">{currentContent.description}</p>
-                        </div>
-
-                        {/* Navigation Arrows */}
-                        <div className="flex gap-4 mt-12">
-                            <button
-                                onClick={handlePrevCard}
-                                className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:border-white transition-colors duration-300"
-                            >
-                                <ChevronLeft size={20} />
-                            </button>
-                            <button
-                                onClick={handleNextCard}
-                                className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:border-white transition-colors duration-300"
-                            >
-                                <ChevronRight size={20} />
-                            </button>
-                        </div>
+                        <button
+                            onClick={() => handleTabChange("research")}
+                            className={`text-2xl md:text-4xl font-novaBold transition-all duration-500 ${activeTab === "research" ? "text-white" : "text-gray-300 hover:text-gray-400"
+                                }`}
+                        >
+                            Research
+                        </button>
                     </div>
 
-                    {/* Right Section - Carousel */}
-                    <div className="lg:col-span-2">
-                        <div className="relative h-96 overflow-hidden rounded-lg">
-                            {/* Cards Container */}
-                            <div className="relative w-full h-full">
-                                {currentContent.cards.map((card, index) => (
-                                    <div
-                                        key={card.id}
-                                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === carouselIndex ? "opacity-100" : "opacity-0"
-                                            }`}
-                                    >
-                                        {/* Card Image */}
-                                        <img src={card.image || "/placeholder.svg"} alt={card.title} className="w-full h-full object-cover object-bottom" />
+                    {/* Main Content */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                        {/* Left Section - Text Content */}
+                        <div className="lg:col-span-1 flex flex-col justify-start">
+                            <div>
+                                <h1 className="text-4xl md:text-8xl font-novaThin mb-6 text-balance">{currentContent.title}</h1>
+                                <p className="text-gray-300 text-lg max-w-sm font-novaReg leading-relaxed">{currentContent.description}</p>
+                            </div>
 
-                                        {/* Card Info Overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                                            <div className="flex items-center gap-3">
-                                                <span className="text-2xl">{card.logo}</span>
-                                                <div>
-                                                    <p className="text-white font-novaSemi text-sm md:text-base">{card.title}</p>
+                            {/* Navigation Arrows */}
+                            <div className="flex gap-4 mt-12">
+                                <button
+                                    onClick={handlePrevCard}
+                                    className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center hover:border-white transition-colors duration-300"
+                                >
+                                    <ChevronLeft size={20} />
+                                </button>
+                                <button
+                                    onClick={handleNextCard}
+                                    className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center hover:border-white transition-colors duration-300"
+                                >
+                                    <ChevronRight size={20} />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Right Section - Carousel */}
+                        <div className="lg:col-span-2">
+                            <div className="relative h-96 overflow-hidden rounded-lg">
+                                {/* Cards Container */}
+                                <div className="relative w-full h-full">
+                                    {currentContent.cards.map((card, index) => (
+                                        <div
+                                            key={card.id}
+                                            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === carouselIndex ? "opacity-100" : "opacity-0"
+                                                }`}
+                                        >
+                                            {/* Card Image */}
+                                            <img src={card.image || "/placeholder.svg"} alt={card.title} className="w-full h-full object-cover object-bottom" />
+
+                                            {/* Card Info Overlay */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                                            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                                                <div className="flex items-center gap-3">
+                                                    <span className="text-2xl">{card.logo}</span>
+                                                    <div>
+                                                        <p className="text-white font-novaSemi text-sm md:text-base">{card.title}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </div>
+                                    ))}
+                                </div>
 
-                            {/* Carousel Indicators */}
-                            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
-                                {currentContent.cards.map((_, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => {
-                                            setCarouselIndex(index)
-                                            setIsAutoSliding(false)
-                                        }}
-                                        className={`w-2 h-2 rounded-full transition-all duration-300 ${index === carouselIndex ? "bg-white w-6" : "bg-gray-500"
-                                            }`}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Additional Cards Carousel (scrollable grid) */}
-                        <div className="mt-8 overflow-x-auto scrollbar-hide p-1">
-                            <div className="flex gap-4 pb-4">
-                                {currentContent.cards.map((card, index) => (
-                                    <div
-                                        key={card.id}
-                                        onClick={() => {
-                                            setCarouselIndex(index)
-                                            setIsAutoSliding(false)
-                                        }}
-                                        className={`flex-shrink-0 w-48 h-32 rounded-lg cursor-pointer transition-all duration-300 ${index === carouselIndex ? "ring-2 ring-red-500 opacity-100" : "opacity-60 hover:opacity-80"
-                                            }`}
-                                    >
-                                        <img
-                                            src={card.image || "/placeholder.svg"}
-                                            alt={card.title}
-                                            className="w-full h-full object-cover rounded-lg"
+                                {/* Carousel Indicators */}
+                                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+                                    {currentContent.cards.map((_, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => {
+                                                setCarouselIndex(index)
+                                                setIsAutoSliding(false)
+                                            }}
+                                            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === carouselIndex ? "bg-white w-6" : "bg-gray-500"
+                                                }`}
                                         />
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Additional Cards Carousel (scrollable grid) */}
+                            <div className="mt-8 overflow-x-auto scrollbar-hide p-1">
+                                <div className="flex gap-4 pb-4">
+                                    {currentContent.cards.map((card, index) => (
+                                        <div
+                                            key={card.id}
+                                            onClick={() => {
+                                                setCarouselIndex(index)
+                                                setIsAutoSliding(false)
+                                            }}
+                                            className={`flex-shrink-0 w-48 h-32 rounded-lg cursor-pointer transition-all duration-300 ${index === carouselIndex ? "ring-2 ring-red-500 opacity-100" : "opacity-60 hover:opacity-80"
+                                                }`}
+                                        >
+                                            <img
+                                                src={card.image || "/placeholder.svg"}
+                                                alt={card.title}
+                                                className="w-full h-full object-cover rounded-lg"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </section>
     )
 }

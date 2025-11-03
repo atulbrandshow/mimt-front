@@ -1,12 +1,35 @@
-import { IMAGE_PATH } from "@/configs/config";
-import Link from "next/link";
 import TitleInfo from "./TitleInfo";
+import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
+
+const programs = [
+    {
+        title: "MBA & MBA++ COURSE",
+        school: "School Of Management - Pg",
+        imageUrl: "https://www.mangalmay.org/assets/images/home/top-campus-noida.jpg",
+        link: "#",
+    },
+    {
+        title: "B.TECH & BCA COURSE",
+        school: "School Of TECHNOLOGY",
+        imageUrl: "https://www.mangalmay.org/assets/images/home/campus-delhincr.jpg",
+        link: "#",
+    },
+    {
+        title: "BBA PLATINA, BBA & B.COM",
+        school: "School Of Management - Ug",
+        imageUrl: "https://www.mangalmay.org/assets/images/home/top-campus-up.jpg",
+        link: "#",
+    },
+    {
+        title: "B.A B.ED",
+        school: "Education Program",
+        imageUrl: "https://www.mangalmay.org/assets/images/home/campus-noida.jpg",
+        link: "#",
+    },
+];
 
 export default function ExploreCourses({ data }) {
     const d = data?.pageData;
-
-    console.log(data);
-
 
     const words = d?.Courses_Title?.trim().split(" ");
     const last = words?.pop();
@@ -44,8 +67,8 @@ export default function ExploreCourses({ data }) {
     }
 
     return (
-        <section className="bg-white">
-            <section className="bg-primary rounded-r-[100px] py-10 sm:py-16">
+        <section className="bg-gradient-to-t from-white to-secondary">
+            <section className="bg-primary rounded-r-[100px] py-10 sm:py-16 md:py-24">
                 <div className="break2:max-w-[1320px] break3:max-w-[1140px] break4:max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8 text-white">
                     <TitleInfo first="Our Courses" second={d?.Courses_Title} color="white" />
                     <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl lg:text-[22px] leading-snug text-gray-200 mx-auto max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-screen-lg font-novaLight text-center">
@@ -65,37 +88,44 @@ export default function ExploreCourses({ data }) {
                             ))}
                         </dl>
                     </div>
-                    <div className="mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:gap-5 " >
-                        {posts?.map((post, index) => (
-                            <article key={index} className="relative bg-gray-900 rounded-lg shadow-md overflow-hidden">
-                                <img
-                                    alt="Course"
-                                    src={IMAGE_PATH + post.image}
-                                    className="h-[180px] sm:h-[220px] md:h-[240px] lg:h-[260px] w-full object-cover object-top"
-                                />
-                                <div className="bg-white p-4 h-full ">
-                                    <div className="flex flex-col ">
-                                        <div className="h-16 max-xl:h-24 max-md:h-12">
-                                            <h3 className="text-sm md:text-base lg:text-lg font-novaBold text-gray-900">
-                                                {post.title}
-                                            </h3>
-                                            <p
-                                                className="text-xs md:text-sm font-novaSemi text-gray-800"
-                                            >{post.description}</p>
-
-                                        </div>
-                                        <Link
-                                            href={post.link}
-                                            className="mt-1 cursor-pointer text-[12px] sm:text-[13px] md:text-[14px] uppercase font-novaBold text-secondary hover:text-[#3c5686] duration-300 self-end"
-                                        >
-                                            Read More
-                                        </Link>
+                    <div className="mt-10 max-w-6xl mx-auto max-[480px]:grid-cols-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                        {programs.map((item, index) => (
+                            <CardContainer className="inter-var">
+                                <CardBody
+                                    className="bg-gray-50 relative group/card border-black/[0.1] w-full h-auto rounded-2xl p-4 border shadow-xl">
+                                    <CardItem
+                                        translateZ="50"
+                                        className="text-center w-full font-novaBold text-neutral-600">
+                                        {item.title}
+                                    </CardItem>
+                                    <CardItem
+                                        as="p"
+                                        translateZ="60"
+                                        className="text-neutral-500 text-center w-full uppercase text-xs font-novaSemi">
+                                        {item.school}
+                                    </CardItem>
+                                    <CardItem translateZ="100" className="w-full mt-4">
+                                        <img
+                                            src={item.imageUrl}
+                                            height="1000"
+                                            width="1000"
+                                            className="h-96 sm:h-72 w-full object-cover object-top border rounded-xl group-hover/card:shadow-xl"
+                                            alt="thumbnail" />
+                                    </CardItem>
+                                    <div className="flex justify-center items-center mt-5">
+                                        <CardItem
+                                            translateZ={20}
+                                            as="a"
+                                            href={item.link}
+                                            target="__blank"
+                                            className="px-4 py-2 rounded-xl bg-black text-white text-xs font-novaBold uppercase tracking-wider">
+                                            View Details
+                                        </CardItem>
                                     </div>
-                                </div>
-                            </article>
+                                </CardBody>
+                            </CardContainer>
                         ))}
                     </div>
-
                 </div>
             </section>
         </section>

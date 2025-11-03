@@ -80,12 +80,12 @@ export default function SlickSlider({ data }) {
   }, [cardDetails.length]) // Only depend on length to avoid recreating intervals unnecessarily
 
   return (
-    <>
-      <section className="bg-[#F3F3F3] py-8">
+    <section className="bg-gradient-to-r from-primary to-white">
+      <main className="rounded-l-[100px] rounded-tr-[100px] bg-white py-8 sm:py-16 md:py-24">
         <div className="break1:max-w-[1500px] break2:max-w-[1320px] break3:max-w-[1200px] break4:max-w-[1040px] mx-auto">
           <TitleInfo first="Vibrant Journey" second={d?.Vibrant_Journey_Title} color='black' />
           <div className="mt-10 grid grid-cols-12 gap-4">
-            <div className="mt-10 col-span-12 max-lg:mx-auto">
+            <div className="col-span-12 max-lg:mx-auto">
               <section className="grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
                 {cardDetails.slice(0, 6).map((item) => (
                   <div
@@ -120,7 +120,7 @@ export default function SlickSlider({ data }) {
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </main>
+    </section>
   )
 }
