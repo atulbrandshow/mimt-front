@@ -31,13 +31,13 @@ function SlideNavbar() {
             {/* Menu Icon */}
             {!isMenuOpen ? (
                 <Menu
-                    className="mt-6 cursor-pointer text-white"
+                    className="mt-12 cursor-pointer text-white"
                     size={30}
                     onClick={handleToggleMenu}
                 />
             ) : (
                 <ChevronLeft
-                    className="mt-6 cursor-pointer text-white"
+                    className="mt-12 cursor-pointer text-white"
                     size={30}
                     onClick={handleToggleMenu}
                 />
@@ -89,7 +89,7 @@ function SlideNavbar() {
                                             setCurrentMenu(ele?.links);
                                         }}
                                         onMouseOver={() => setCurrentMenu(ele?.links)}
-                                        className={`hover:text-secondary cursor-pointer w-max text-2xl font-novaReg text-left ${currentPath === ele?.links ? "text-secondary" : ""
+                                        className={`hover:text-primary cursor-pointer w-max text-2xl font-novaReg text-left ${currentPath === ele?.links ? "text-primary" : ""
                                             }`}
                                     >
                                         {ele?.name}
@@ -111,7 +111,7 @@ function SlideNavbar() {
                                                 router.push(ele?.url);
                                                 handleToggleMenu();
                                             }}
-                                            className="hover:text-yellow-400 cursor-pointer w-max text-lg font-novaReg text-left"
+                                            className="hover:text-primary cursor-pointer w-max text-lg font-novaReg text-left"
                                         >
                                             {ele?.name}
                                         </button>
