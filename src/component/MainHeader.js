@@ -15,7 +15,7 @@ function MainHeader() {
       </div>
       <div className=" rounded-tl-3xl bg-white">
         {/* Main Header */}
-        <div className="flex flex-wrap justify-between items-center px-6 py-3 max-w-7xl mx-auto ">
+        <div className="flex flex-wrap justify-between items-center px-3 sm:px-6 py-3 max-w-[1600px] mx-auto ">
           {/* Left: Logos */}
           <div className="flex items-center gap-4">
             <img
@@ -26,7 +26,7 @@ function MainHeader() {
             <img
               src="https://www.mangalmay.org/assets/images/logo-naac.png"
               alt="NAAC Logo"
-              className="h-10 w-auto object-contain"
+              className="h-14 w-auto object-contain"
             />
           </div>
 

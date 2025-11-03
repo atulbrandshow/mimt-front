@@ -11,6 +11,7 @@ import '../../public/global.css'
 import LatestFooter from '@/component/LatestFooter';
 import SlideNavbar from '@/component/SlideNavbar';
 import MainHeader from '@/component/MainHeader';
+import SmoothScroll from '@/component/SmoothScroll';
 function MyApp({ Component, pageProps }) {
     const [isShowNavAndFooter, setIsShowNavAndFooter] = useState(false);
     const router = useRouter();
@@ -34,6 +35,7 @@ function MyApp({ Component, pageProps }) {
                 <div className='flex-grow'>
                 {isShowNavAndFooter && <MainHeader />}
                     <Component {...pageProps} />
+                    <SmoothScroll />
                     <ToastContainer
                         position="top-right"
                         autoClose={1000}

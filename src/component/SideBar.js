@@ -25,10 +25,10 @@ const SideBar = ({ title, LinkList }) => {
                                     onClick={() => router.push(item.link)}
                                     className="relative border-b p-4 max-lg:p-4 block bg-primary text-white text-left text-sm w-full group overflow-hidden"
                                 >
-                                    <span className="relative pl-2 z-10 transition-colors duration-500 ease-in-out truncate group-hover:text-white">
+                                    <span className="relative pl-2 z-10 transition-colors duration-500 ease-in-out truncate group-hover:text-black">
                                         ‒&nbsp; {item.name}
                                     </span>
-                                    <span className="absolute inset-0 bg-primary transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                                    <span className="absolute inset-0 bg-secondary transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
                                 </button>
                             ))}
                         </div>
