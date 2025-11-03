@@ -3,6 +3,7 @@ import Header from "@/component/Header";
 import SideBar from "@/component/SideBar";
 import { IMAGE_PATH } from "@/configs/config";
 import { descriptionCss } from "@/configs/css.config";
+import MIMTGallery from "@/component/MIMTGallery";
 
 export default function Page({ data }) {
   console.log(data);
@@ -26,26 +27,7 @@ export default function Page({ data }) {
             <div className="max-w-7xl mx-auto ">
               {/* Gallery Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {data?.pageData?.TransportGallery.map((item, index) => (
-                  <div
-                    key={index}
-                    className="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 cursor-grab"
-                  >
-                    {/* Image */}
-                    <img
-                      src={IMAGE_PATH + item}
-                      alt={item}
-                      className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-700"
-                    />
-
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                      <h3 className="text-white text-lg md:text-xl font-semibold tracking-wide text-center px-4">
-                        Mangalmay Group Of Institutions
-                      </h3>
-                    </div>
-                  </div>
-                ))}
+                <MIMTGallery data={data?.pageData?.TransportGallery} />
               </div>
             </div>
           </section>
