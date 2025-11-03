@@ -40,7 +40,7 @@ export default function HomePage({ data }) {
       {data && <NotificationSlider data={data} />}
       {data && <InnovationShowcase />}
       {/* {data && <PlacementHighlights data={data} />} */}
-      {data && <PlacementOverview />}
+      {/* {data && <PlacementOverview />} */}
       {data && <RecruiterTestimonial />}
       {data && <StudentTestimonial />}
       {/* {data && <HomeLogoSlider data={data} />} */}
