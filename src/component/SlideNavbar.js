@@ -27,17 +27,17 @@ function SlideNavbar() {
         }
     }, [currentMenu, NAV_ITEMS]);
     return (
-        <div className="fixed top-0 h-full z-[9999999] bg-primary px-4">
+        <div className="top-0 h-full z-[9999999] bg-primary px-4">
             {/* Menu Icon */}
             {!isMenuOpen ? (
                 <Menu
-                    className="mt-6 cursor-pointer text-white"
+                    className="mt-12 cursor-pointer text-white"
                     size={30}
                     onClick={handleToggleMenu}
                 />
             ) : (
                 <ChevronLeft
-                    className="mt-6 cursor-pointer text-white"
+                    className="mt-12 cursor-pointer text-white"
                     size={30}
                     onClick={handleToggleMenu}
                 />

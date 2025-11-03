@@ -28,10 +28,11 @@ function MyApp({ Component, pageProps }) {
     return (
         <AppDataProvider>
             {/* {isShowNavAndFooter && <LatestNavbar />} */}
-            {/* <MainHeader /> */}
-            <div className='flex'>
+            
+            <div className='flex bg-primary'>
                 {isShowNavAndFooter && <SlideNavbar />}
                 <div className='flex-grow'>
+                {isShowNavAndFooter && <MainHeader />}
                     <Component {...pageProps} />
                     <ToastContainer
                         position="top-right"
