@@ -23,9 +23,9 @@ const MainSection = () => {
   return (
     <div className="overflow-hidden relative">
       <div className="flex justify-center relative z-20 h-screen">
-        <div className="relative z-10 w-full h-full flex items-center py-10">
+        <div className="relative z-10 w-full h-full flex  items-center py-10">
           <div className="px-40 w-full flex flex-col justify-center h-full">
-            <span className="text-sm font-novaReg text-white tracking-widest uppercase">best <span className="text-secondary">university</span> in this Delhi NCR</span>
+            <span className="text-sm font-novaReg text-white tracking-widest uppercase">best <span className="text-primary">university</span> in this Delhi NCR</span>
             <h1 className="text-7xl uppercase font-cursiveFont font-thin max-w-lg text-white">
               Mangalmay Group of Institution
             </h1>
@@ -52,12 +52,12 @@ const MainSection = () => {
             </div>
 
             {/* Swiper */}
-            <div className="w-[850px] h-[200px]">
+            <div className="w-[600px] h-[200px]">
               <Swiper
                 modules={[Autoplay, Pagination, Navigation]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 loop={true}
-                slidesPerView={2.4}
+                slidesPerView={2}
                 spaceBetween={20}
                 navigation={{
                   prevEl: "#prevButton",
