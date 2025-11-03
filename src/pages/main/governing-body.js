@@ -1,3 +1,5 @@
+import Header from "@/component/Header";
+import SideBar from "@/component/SideBar";
 import React from "react";
 
 const sections = [
@@ -49,91 +51,24 @@ const sections = [
   }
 ];
 
-export default function GoverningBodyPage() {
+export default function GoverningBodyPage({ data }) {
+  const d = data?.pageData;
+  console.log(data);
+
   return (
-    <div className="w-full">
-
-      {/* ✅ Banner */}
-      <div
-        className="relative w-full h-[70vh] bg-cover bg-center flex items-center"
-        style={{
-          backgroundImage: "url('/image/about/mangalmay-campus.webp')",
-        }}
-      >
-        {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
-
-        {/* Banner Content */}
-        <div className="relative z-10 pl-10 md:pl-20 max-w-3xl">
-          <div className="backdrop-blur-md bg-white/5 border border-white/10 p-10 rounded-2xl">
-            <h1 className="text-white text-2xl md:text-3xl font-bold mb-4 tracking-wide leading-tight">
-              Governing Body
-            </h1>
-
-            <p className="text-white/80 text-lg md:text-xl leading-relaxed">
-              Visionary leaders, distinguished academicians & industry experts guiding Mangalmay’s growth.
-            </p>
-          </div>
+    <div className="bg-white">
+      <Header BreadCrumb={data?.breadCrumb} data={data} />
+      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-20 max-sm:py-2 gap-10 px-3 sm:px-6 max-sm:gap-0">
+        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <div dangerouslySetInnerHTML={{ __html: d?.TrusteeMembersDescription }} />
+          <div dangerouslySetInnerHTML={{ __html: d?.PatronMembersDescription }} />
+          <div dangerouslySetInnerHTML={{ __html: d?.GoverningBoardDescription }} />
+          <div dangerouslySetInnerHTML={{ __html: d?.AcademicBoardDescription }} />
         </div>
-      </div>
-
-
-      {/* ✅ Sections */}
-     <div className="max-w-7xl mx-auto px-6 py-20">
-  {sections.map((sec, i) => (
-    <div key={i} className="mb-20">
-
-      {/* Section Title */}
-      <h2 className="text-3xl font-bold text-gray-900 mb-8 border-l-8 border-[#fdd023] pl-4">
-        {sec.title}
-      </h2>
-
-      {/* Cards Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {sec.items.map((m, idx) => (
-          <div
-            key={idx}
-            className="
-              group
-              rounded-2xl 
-              p-6 
-              bg-gradient-to-br from-[#ffffff]/80 to-[#f7f7f7]/40
-              border border-gray-200 
-              backdrop-blur-sm
-              transition-all duration-300
-              hover:-translate-y-2 
-              hover:shadow-lg 
-              hover:bg-white
-            "
-          >
-
-            {/* Line Accent */}
-            <div className="w-12 h-1 bg-[#fdd023] rounded mb-4 transition-all group-hover:w-20"></div>
-
-            {/* Name */}
-            <h3 className="text-xl font-semibold text-gray-900 group-hover:text-black transition">
-              {m.name}
-            </h3>
-
-            {/* Role */}
-            <p className="text-gray-700 mt-2 font-medium">
-              {m.role}
-            </p>
-
-            {/* Organization */}
-            <p className="text-gray-600 text-sm mt-1">
-              {m.org}
-            </p>
-
-          </div>
-        ))}
-      </div>
-
-    </div>
-  ))}
-</div>
-
-
+        <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
+          <SideBar />
+        </div>
+      </section>
     </div>
   );
 }
