@@ -22,7 +22,7 @@ export default function Page({ data }) {
         <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
           <div dangerouslySetInnerHTML={{ __html: data?.pageData?.WifiCampusDesc }} />
           <section className="py-12 bg-white">
-            <div className="max-w-7xl mx-auto px-4">
+            <div className="max-w-7xl mx-auto ">
               {/* Section Title */}
               <h2 className="text-3xl md:text-4xl font-bold text-left text-gray-800 mb-10">
                 Our Wi-Fi Enabled Campus
