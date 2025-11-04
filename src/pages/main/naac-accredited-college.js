@@ -27,7 +27,7 @@ export default function NAACPage({ data }) {
 
             {/* ✅ What is NAAC */}
             <section>
-              <h2 className="text-3xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
+              <h2 className="text-2xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
                 {pageData?.NAACHeading}
               </h2>
 
@@ -39,7 +39,7 @@ export default function NAACPage({ data }) {
 
             {/* ✅ Objective */}
             <section>
-              <h2 className="text-3xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
+              <h2 className="text-2xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
                 NAAC Objective
               </h2>
 
@@ -51,7 +51,7 @@ export default function NAACPage({ data }) {
 
             {/* ✅ Criteria */}
             <section>
-              <h2 className="text-3xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
+              <h2 className="text-2xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
                 NAAC Criteria
               </h2>
 
@@ -63,7 +63,7 @@ export default function NAACPage({ data }) {
 
             {/* ✅ Accreditation */}
             <section>
-              <h2 className="text-3xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
+              <h2 className="text-2xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
                 NAAC Accreditation
               </h2>
 
@@ -77,7 +77,7 @@ export default function NAACPage({ data }) {
 
             {/* ✅ Accreditation Importance */}
             <section>
-              <h2 className="text-3xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
+              <h2 className="text-2xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
                 NAAC Accreditation Importance
               </h2>
 
@@ -91,7 +91,7 @@ export default function NAACPage({ data }) {
 
             {/* ✅ Cycles & Reassessment */}
             <section>
-              <h2 className="text-3xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
+              <h2 className="text-2xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
                 Cycles & Reassessment
               </h2>
 
