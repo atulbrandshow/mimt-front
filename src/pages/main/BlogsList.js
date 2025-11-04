@@ -215,9 +215,6 @@ const BlogsList = () => {
         </div>
       </nav>
 
-      <div className="flex flex-row items-center justify-center mb-10 w-full">
-        <AnimatedTooltip items={people} />
-      </div>
 
       <div className="max-w-7xl mx-auto space-y-14">
         {/* Featured Article */}
