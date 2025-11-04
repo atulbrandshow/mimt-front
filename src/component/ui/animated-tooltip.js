@@ -79,6 +79,7 @@ export const AnimatedTooltip = ({
                         width={100}
                         src={item.image}
                         alt={item.name}
+                        onClick={() => router.push(item?.link)}
                         className="relative  !m-0 h-9 w-9 rounded-full border-2 border-white object-contain object-top p-1 transition duration-500 group-hover:z-30 group-hover:scale-105" />
                 </div>
             ))}
