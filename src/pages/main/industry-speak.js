@@ -1,91 +1,105 @@
-import React from "react";
+"use client";
 
-const Page = ({ data }) => {
-  if (!data) return <p>No data available</p>;
+import React, { useEffect, useState } from "react";
+import Header from "@/component/Header";
+import SideBar from "@/component/SideBar";
+import { IMAGE_PATH } from "@/configs/config";
 
-  // ✅ Helper to check if a value has meaningful content
-  const hasContent = (value) => {
-    if (
-      value === null ||
-      value === undefined ||
-      value === false ||
-      value === ""
-    )
-      return false;
+export default function Page({ data }) {
+  const p = data?.pageData;
 
-    if (Array.isArray(value)) return value.some((item) => hasContent(item));
+  // ✅ 15 Recruiters list generate
+  const recruiters = Array.from({ length: 15 }).map((_, i) => ({
+    img: p[`SliderImage_${i + 1}`],
+    desc: p[`SliderDescription_${i + 1}`],
+  }));
 
-    if (typeof value === "object")
-      return Object.keys(value).some((k) => hasContent(value[k]));
+  const SideBarLink = [
+    { name: "Our Recruiters", link: "" },
+    { name: "Placement Reports", link: "" },
+    { name: "Corporate Partners", link: "" },
+    { name: "Training Activities", link: "" },
+  ];
 
-    return true;
-  };
+  // ✅ Auto slider – index control
+  const [current, setCurrent] = useState(0);
 
-  // ✅ Recursive renderer
-  const renderValue = (value) => {
-    if (!hasContent(value)) return null;
+  useEffect(() => {
+    const total = recruiters.filter(r => r.img || r.desc).length;
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % total);
+    }, 3000); // ✅ Auto slide every 3 secs
 
-    // Render HTML strings safely
-    if (typeof value === "string" && /<[^>]+>/.test(value)) {
-      return (
-        <div
-          className="prose max-w-none custom-prose"
-          dangerouslySetInnerHTML={{ __html: value }}
-        />
-      );
-    }
+    return () => clearInterval(interval);
+  }, [recruiters]);
 
-    // Render arrays
-    if (Array.isArray(value)) {
-      const filteredArray = value.filter((item) => hasContent(item));
-      if (filteredArray.length === 0) return null;
-      return (
-        <ul className="list-disc ml-6">
-          {filteredArray.map((item, index) => (
-            <li key={index}>{renderValue(item)}</li>
-          ))}
-        </ul>
-      );
-    }
-
-    // Render objects
-    if (typeof value === "object") {
-      const entries = Object.entries(value).filter(([_, v]) => hasContent(v));
-      if (entries.length === 0) return null;
-      return (
-        <div className="ml-4 border-l border-gray-400 pl-4">
-          {entries.map(([k, v]) => (
-            <div key={k} className="mb-2">
-              <strong className="text-black">{k}:</strong>
-              <div className="ml-2 mt-1">{renderValue(v)}</div>
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    // Primitive values
-    return <span className="text-black">{value.toString()}</span>;
-  };
-
-  // ✅ Filter top-level keys
-  const filteredData = Object.entries(data).filter(([_, value]) =>
-    hasContent(value)
-  );
-
-  if (filteredData.length === 0)
-    return <p className="text-black">No meaningful data available</p>;
+  const activeRecruiters = recruiters.filter(r => r.img || r.desc);
 
   return (
-    <div className="p-6 bg-gray-200 min-h-screen  text-black mt-32">
-      {filteredData.map(([key, value]) => (
-        <div key={key} className="mb-6">
-          <strong className="text-lg font-semibold text-black">{key}:</strong>
-          <div className="ml-3 mt-2">{renderValue(value)}</div>
+    <div className="bg-white">
+      <Header BreadCrumb={data?.breadCrumb} data={data} />
+
+      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-16 px-4 gap-10">
+
+        {/* ✅ LEFT SECTION */}
+        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-10">
+            {p?.RecruitersSaysTitle}
+          </h1>
+
+          {/* ✅ AUTO SLIDER */}
+          <div className="relative w-full h-auto">
+            {activeRecruiters.map((item, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-opacity duration-700 ease-in-out
+                  ${current === index ? "opacity-100" : "opacity-0"}
+                `}
+              >
+                <div className="p-8 rounded-2xl border border-gray-200 shadow-md bg-white">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    
+                    {/* ✅ IMAGE */}
+                    <div className="flex justify-center">
+                      {item.img ? (
+                        <img
+                          src={IMAGE_PATH + item.img}
+                          alt=""
+                          className="w-40 h-40 rounded-full object-cover border-4 border-purple-600 p-1 bg-white shadow"
+                        />
+                      ) : (
+                        <div className="w-40 h-40 bg-gray-200 rounded-full" />
+                      )}
+                    </div>
+
+                    {/* ✅ DESCRIPTION (HTML Support) */}
+                    <div className="md:col-span-2 text-gray-700 text-lg leading-relaxed">
+                      <div dangerouslySetInnerHTML={{ __html: item.desc }} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* ✅ DOT INDICATORS */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {activeRecruiters.map((_, i) => (
+              <div
+                key={i}
+                className={`w-3 h-3 rounded-full transition-all
+                  ${current === i ? "bg-purple-600" : "bg-gray-300"}
+                `}
+              />
+            ))}
+          </div>
         </div>
-      ))}
+
+        {/* ✅ RIGHT SIDEBAR */}
+        <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
+          <SideBar title={"Placements"} LinkList={SideBarLink} />
+        </div>
+      </section>
     </div>
   );
-};
-
-export default Page;
+}

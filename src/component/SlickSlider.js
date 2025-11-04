@@ -55,29 +55,24 @@ export default function SlickSlider({ data }) {
   }, [cardDetails.length])
 
   // Set up staggered intervals for each card
+  // Smooth auto image change every 4 seconds
   useEffect(() => {
     if (cardDetails.length === 0) return
 
-    const intervals = cardDetails.map((item, idx) => {
-      return setInterval(
-        () => {
-          setImageIndex((prevIndex) => {
-            const newIndex = { ...prevIndex }
-            if (item.images && item.images.length > 0) {
-              newIndex[item.id] = (prevIndex[item.id] + 1) % item.images.length
-            }
-            return newIndex
-          })
-        },
-        (idx + 1) * 1000,
-      ) // Different timing for each card: 1s, 2s, 3s, etc.
-    })
+    const interval = setInterval(() => {
+      setImageIndex((prevIndex) => {
+        const newIndex = { ...prevIndex }
+        cardDetails.forEach((item) => {
+          if (item.images && item.images.length > 0) {
+            newIndex[item.id] = (prevIndex[item.id] + 1) % item.images.length
+          }
+        })
+        return newIndex
+      })
+    }, 4000) // every 4 seconds
 
-    // Clear all intervals on cleanup
-    return () => {
-      intervals.forEach(clearInterval)
-    }
-  }, [cardDetails.length]) // Only depend on length to avoid recreating intervals unnecessarily
+    return () => clearInterval(interval)
+  }, [cardDetails.length])
 
   return (
     <section className="bg-gradient-to-r from-primary to-white">
@@ -92,17 +87,23 @@ export default function SlickSlider({ data }) {
                     key={item.id}
                     className="group relative h-[20rem] w-full max-sm:h-80 max-2xl:h-80 max-xl:h-72 max-lg:h-96 max-md:h-80 bg-white shadow-md overflow-hidden"
                   >
-                    <img
-                      key={`${item.id}-${imageIndex[item.id] || 0}`}
-                      src={IMAGE_PATH + item.images[imageIndex[item.id] || 0]}
-                      alt={item.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-                    />
+                    <div className="absolute inset-0">
+                      {item.images?.map((img, idx) => (
+                        <img
+                          key={`${item.id}-${idx}`}
+                          src={IMAGE_PATH + img}
+                          alt={item.title}
+                          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ${imageIndex[item.id] === idx ? "opacity-100" : "opacity-0"
+                            }`}
+                        />
+                      ))}
+                    </div>
+
                     <div
                       aria-hidden="true"
                       className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-t from-black from-[calc(7/16*100%)] ring-1 ring-inset ring-gray-950/10 sm:from-5%"
                     />
-                    <div className="absolute bottom-0 left-0 p-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="absolute bottom-0 left-0 p-10 opacity-0 transition-opacity duration-1000 group-hover:opacity-100">
                       {/* <blockquote>
                         <p className="text-xs uppercase text-white">{item.subheading}</p>
                       </blockquote> */}

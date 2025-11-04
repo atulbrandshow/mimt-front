@@ -120,7 +120,7 @@ const Slide = ({
                             {desc}
                         </p>
                         <div className="mt-4">
-                            <Link href={link} className="px-2 md:px-4 py-1 md:py-2 rounded-md bg-yellow-400 text-black text-[10px] sm:text-xs font-novaBold uppercase tracking-wide">View Details</Link>
+                            <Link href={link} className="px-2 md:px-4 py-1 md:py-2 rounded-md bg-primary text-white text-[10px] sm:text-xs font-novaBold uppercase tracking-wide">View Details</Link>
                         </div>
                     </div>
                 </article>
