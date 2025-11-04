@@ -1,91 +1,104 @@
 import React from "react";
+import Header from "@/component/Header";
+import SideBar from "@/component/SideBar";
+import { descriptionCss } from "@/configs/css.config";
+import { FaFilePdf } from "react-icons/fa";
 
-const Page = ({ data }) => {
-  if (!data) return <p>No data available</p>;
+export default function PatentsPage({ data }) {
+  const pageData = data?.pageData || {};
 
-  // ✅ Helper to check if a value has meaningful content
-  const hasContent = (value) => {
-    if (
-      value === null ||
-      value === undefined ||
-      value === false ||
-      value === ""
-    )
-      return false;
+  const SideBarLink = [
+    { name: "Our Identity", link: "/overview" },
+    { name: "Leadership", link: "" },
+    { name: "Governance", link: "" },
+    { name: "Recognition and Approvals", link: "" },
+    { name: "Awards and Rankings", link: "" },
+    { name: "Institution Social Responsibility", link: "" },
+  ];
 
-    if (Array.isArray(value)) return value.some((item) => hasContent(item));
-
-    if (typeof value === "object")
-      return Object.keys(value).some((k) => hasContent(value[k]));
-
-    return true;
-  };
-
-  // ✅ Recursive renderer
-  const renderValue = (value) => {
-    if (!hasContent(value)) return null;
-
-    // Render HTML strings safely
-    if (typeof value === "string" && /<[^>]+>/.test(value)) {
-      return (
-        <div
-          className="prose max-w-none custom-prose"
-          dangerouslySetInnerHTML={{ __html: value }}
-        />
-      );
-    }
-
-    // Render arrays
-    if (Array.isArray(value)) {
-      const filteredArray = value.filter((item) => hasContent(item));
-      if (filteredArray.length === 0) return null;
-      return (
-        <ul className="list-disc ml-6">
-          {filteredArray.map((item, index) => (
-            <li key={index}>{renderValue(item)}</li>
-          ))}
-        </ul>
-      );
-    }
-
-    // Render objects
-    if (typeof value === "object") {
-      const entries = Object.entries(value).filter(([_, v]) => hasContent(v));
-      if (entries.length === 0) return null;
-      return (
-        <div className="ml-4 border-l border-gray-400 pl-4">
-          {entries.map(([k, v]) => (
-            <div key={k} className="mb-2">
-              <strong className="text-black">{k}:</strong>
-              <div className="ml-2 mt-1">{renderValue(v)}</div>
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    // Primitive values
-    return <span className="text-black">{value.toString()}</span>;
-  };
-
-  // ✅ Filter top-level keys
-  const filteredData = Object.entries(data).filter(([_, value]) =>
-    hasContent(value)
-  );
-
-  if (filteredData.length === 0)
-    return <p className="text-black">No meaningful data available</p>;
+  // ✅ Dynamically create items array using pageData keys
+  const patentsList = [
+    {
+      title: "Civil – UC Tool",
+      pdf: pageData?.CivilUcToolPDF,
+    },
+    {
+      title: "Mechanical – IMI AC Performance",
+      pdf: pageData?.MechnicalPDF,
+    },
+    {
+      title: "Computer Science – FDML Fitness",
+      pdf: pageData?.ComputerSciencePDF,
+    },
+    {
+      title: "Bio-Technology – NSP Intelligent Technology",
+      pdf: pageData?.BioTechnologyPDF,
+    },
+  ];
 
   return (
-    <div className="p-6 bg-gray-200 min-h-screen  text-black mt-32">
-      {filteredData.map(([key, value]) => (
-        <div key={key} className="mb-6">
-          <strong className="text-lg font-semibold text-black">{key}:</strong>
-          <div className="ml-3 mt-2">{renderValue(value)}</div>
+    <div className="bg-gray-50">
+      <Header BreadCrumb={data?.breadCrumb} data={data} />
+
+      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-20 px-3 sm:px-6 gap-10">
+
+        {/* ✅ LEFT COLUMN */}
+        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+
+          {/* ✅ ONE BIG CARD (same design as NCC) */}
+          <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-10 space-y-14">
+
+            {/* ✅ Page Heading */}
+            <section>
+              <h2 className="text-2xl font-bold mb-6 border-l-8 border-yellow-400 pl-4">
+                {pageData?.PatentsPublished}
+              </h2>
+
+              <div
+                className={`${descriptionCss} text-gray-700 space-y-4`}
+                dangerouslySetInnerHTML={{ __html: pageData?.PatentsPublishedDesc }}
+              />
+            </section>
+
+            {/* ✅ Patent Items Mapped Dynamically */}
+            <section>
+              <h3 className="text-xl font-semibold mb-6">Published Patents</h3>
+
+              <div className="grid sm:grid-cols-2 gap-6">
+                {patentsList.map((item, i) => (
+                  <div
+                    key={i}
+                    className="p-5 border border-gray-200 rounded-xl shadow-sm bg-gray-50"
+                  >
+                    <h4 className="font-bold text-lg mb-3">{item.title}</h4>
+
+                    {item.pdf ? (
+                      <a
+                        href={item.pdf}
+                        target="_blank"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition"
+                      >
+                        <FaFilePdf size={16} />
+                        Download PDF
+                      </a>
+                    ) : (
+                      <p className="text-sm text-gray-500">PDF not available</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+
+          </div>
+
         </div>
-      ))}
+
+        {/* ✅ RIGHT SIDEBAR */}
+        <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
+          <SideBar title="About Us" LinkList={SideBarLink} />
+        </div>
+
+      </section>
     </div>
   );
-};
-
-export default Page;
+}
