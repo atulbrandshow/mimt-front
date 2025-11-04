@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function MainHeader() {
   return (
-    <header className="w-full bg-primary shadow-md font-sans">
+    <header className="w-full bg-primary font-sans">
 
       {/* Top Bar */}
       <div className=" bg-white">
