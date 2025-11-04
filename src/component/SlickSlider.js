@@ -85,7 +85,7 @@ export default function SlickSlider({ data }) {
                 {cardDetails.slice(0, 6).map((item) => (
                   <div
                     key={item.id}
-                    className="group relative h-[20rem] w-full max-sm:h-80 max-sm:w-72 max-2xl:w-64 max-2xl:h-80 max-xl:w-52 max-xl:h-72 max-lg:h-96 max-lg:w-80 max-md:w-60 max-md:h-80 bg-white shadow-md overflow-hidden"
+                    className="group relative h-[20rem] w-full max-sm:h-80 max-2xl:h-80 max-xl:h-72 max-lg:h-96 max-md:h-80 bg-white shadow-md overflow-hidden"
                   >
                     <div className="absolute inset-0">
                       {item.images?.map((img, idx) => (
