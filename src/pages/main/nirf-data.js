@@ -27,10 +27,6 @@ export default function NIRFPage({ data }) {
           {/* ✅ CARD CONTAINER */}
           <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-10 space-y-10">
 
-            {/* ✅ NIRF Heading */}
-            <h2 className="text-3xl font-bold mb-4 border-l-8 border-blue-600 pl-4">
-              NIRF DATA
-            </h2>
 
             {/* ✅ Description */}
             <div
@@ -45,7 +41,7 @@ export default function NIRFPage({ data }) {
                   href={pageData.NirfPdf}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl shadow hover:bg-blue-700 hover:shadow-md transition-all duration-200"
+                  className="inline-block bg-yellow-400 text-white font-semibold px-6 py-3 rounded-xl shadow hover:yellow-300 hover:shadow-md transition-all duration-200"
                 >
                   📄 View NIRF 2021 PDF
                 </a>
