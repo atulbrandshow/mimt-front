@@ -16,9 +16,7 @@ const EventDetails = ({ data }) => {
     });
 
     const eventData = data;
-    const galleryImages = Array.isArray(data?.galleryimg) ? data.galleryimg.filter((img) => img && img.trim() !== "") : [];
-
-    console.log(data);
+    const galleryImages = Array.isArray(data?.galleryimg) ? data?.galleryimg.filter((img) => img && img.trim() !== "") : [];
 
     const openLightbox = (index) => {
         setSelectedImageIndex(index)
@@ -62,7 +60,7 @@ const EventDetails = ({ data }) => {
                         <div className="inline-block mb-4 px-4 py-1 bg-primary backdrop-blur-md rounded-full border border-white/20">
                             <span className="text-sm font-novaSemi text-white">FEATURED EVENT</span>
                         </div>
-                        <h1 className="text-5xl md:text-6xl font-novaBold mb-4 text-balance leading-tight">{eventData.name}</h1>
+                        <h1 className="text-5xl md:text-6xl font-novaBold mb-4 text-balance leading-tight">{eventData?.name}</h1>
                         <p className="text-lg max-w-4xl font-novaThin mx-auto text-slate-300" dangerouslySetInnerHTML={{ __html: eventData?.shortdesc}} />
                     </div>
                 </div>
