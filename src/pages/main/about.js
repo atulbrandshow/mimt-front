@@ -5,7 +5,9 @@ import SideBar from "@/component/SideBar";
 export default function AboutUs({ data }) {
   return (
     <div className="bg-white">
-      <Header BreadCrumb={data?.breadCrumb} />
+      <div className="mt-14">
+        <Header BreadCrumb={data?.breadCrumb} />
+      </div>
       <div className="bg-primary">
         <div className="bg-white h-20 rounded-bl-3xl" />
       </div>

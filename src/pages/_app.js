@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
         <AppDataProvider>
             {/* {isShowNavAndFooter && <LatestNavbar />} */}
             
-            <div className='flex bg-primary'>
+            <div className='flex'>
                 {isShowNavAndFooter && <SlideNavbar />}
                 <div className='flex-grow'>
                 {isShowNavAndFooter && <MainHeader />}

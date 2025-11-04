@@ -16,7 +16,7 @@ function MainHeader() {
       </div>
       <div className=" rounded-tl-3xl bg-white">
         {/* Main Header */}
-        <div className="flex flex-wrap justify-between items-center px-3 sm:px-6 py-3 max-w-[1600px] mx-auto ">
+        <div className="flex flex-wrap justify-between items-center px-3 sm:px-6 py-3 max-w-[1700px] mx-auto ">
           {/* Left: Logos */}
           <div className="flex items-center gap-4">
             <Link href="/">

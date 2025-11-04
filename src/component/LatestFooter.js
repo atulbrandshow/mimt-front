@@ -126,38 +126,39 @@ const navigation2 = [
 
 export default function LatestFooter() {
     return (
-        <footer className="rounded-tl-[100px] bg-white text-black py-20">
-            <div className="mx-auto max-w-[1400px] max-[1400px]:max-w-7xl max-[1300px]:max-w-6xl max-[1160px]:max-w-5xl px-4">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                    {navigation?.map((section, index) => (
-                        <div key={index} className="w-full mb-6">
-                            <h3 className="font-novaSemi mb-4 text-primary">{section.name}</h3>
-                            <ul className='space-y-3'>
-                                {section.links?.map((link, index) => (
-                                    <li key={index} className="mb-2 text-sm font-novaSemi">
-                                        <a href={link.href} className="hover:underline">
-                                            {link.name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
+        <section className='bg-primary'>
+            <footer className="rounded-tl-[100px] bg-white text-black py-20">
+                <div className="mx-auto max-w-[1400px] max-[1400px]:max-w-7xl max-[1300px]:max-w-6xl max-[1160px]:max-w-5xl px-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                        {navigation?.map((section, index) => (
+                            <div key={index} className="w-full mb-6">
+                                <h3 className="font-novaSemi mb-4 text-primary">{section.name}</h3>
+                                <ul className='space-y-3'>
+                                    {section.links?.map((link, index) => (
+                                        <li key={index} className="mb-2 text-sm font-novaSemi">
+                                            <a href={link.href} className="hover:underline">
+                                                {link.name}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                        <div>
+                            <h3 className="text-base font-novaSemi text-primary mb-4">Get in Touch</h3>
+                            <p className="text-sm font-novaSemi">Mangalmay Group of Institution</p>
+                            <p className="mb-1 text-sm font-novaSemi">Plot No. 8 & 9 Knowledge Park II, Greater Noida, Delhi NCR</p>
+                            <p className="mb-2 text-sm font-novaSemi text-primary"><strong>Student Helpline No:</strong></p>
+                            <p className="mb-2 text-sm font-novaSemi">9910255400</p>
+                            <p className="mb-2 text-sm font-novaSemi text-primary"><strong>Toll Free:</strong></p>
+                            <p className="mb-2 text-sm font-novaSemi">18001033797</p>
+                            <p className="text-sm font-novaSemi text-primary"><strong>Email:</strong></p>
+                            <p><a href="mailto:info@mangalmay.org" className="text-sm hover:underline font-novaSemi">info@mangalmay.org</a></p>
                         </div>
-                    ))}
-                    <div>
-                        <h3 className="text-base font-novaSemi text-primary mb-4">Get in Touch</h3>
-                        <p className="text-sm font-novaSemi">Mangalmay Group of Institution</p>
-                        <p className="mb-1 text-sm font-novaSemi">Plot No. 8 & 9 Knowledge Park II, Greater Noida, Delhi NCR</p>
-                        <p className="mb-2 text-sm font-novaSemi text-primary"><strong>Student Helpline No:</strong></p>
-                        <p className="mb-2 text-sm font-novaSemi">9910255400</p>
-                        <p className="mb-2 text-sm font-novaSemi text-primary"><strong>Toll Free:</strong></p>
-                        <p className="mb-2 text-sm font-novaSemi">18001033797</p>
-                        <p className="text-sm font-novaSemi text-primary"><strong>Email:</strong></p>
-                        <p><a href="mailto:info@mangalmay.org" className="text-sm hover:underline font-novaSemi">info@mangalmay.org</a></p>
                     </div>
-                </div>
 
 
-                {/* <div className="mx-auto py-4 md:flex md:items-center md:justify-between border-t border-b border-slate-500">
+                    {/* <div className="mx-auto py-4 md:flex md:items-center md:justify-between border-t border-b border-slate-500">
                     <div className="flex justify-center space-x-10 md:order-2">
                         {navigation2?.map((item, index) => (
                             <a key={index} href={item.href} className="text-white hover:text-gray-500">
@@ -177,7 +178,7 @@ export default function LatestFooter() {
                     </div>
                 </div> */}
 
-                {/* <div className="items-center justify-center mt-4 mx-auto grid grid-cols-2 gap-8">
+                    {/* <div className="items-center justify-center mt-4 mx-auto grid grid-cols-2 gap-8">
                     <div className="flex items-center space-x-2">
                         <div className="flex justify-center py-4 w-32 rounded-md bg-white">
                             <img src="/image/hgcas.jpg" alt="Radio" className="h-16" />
@@ -200,44 +201,45 @@ export default function LatestFooter() {
                     </div>
                 </div> */}
 
-                <div className="items-center justify-center mt-4 mx-auto grid grid-cols-12 gap-8 place-items-center">
-                    <div className="col-span-5 max-[1160px]:col-span-6 max-[850px]:col-span-12 flex items-center space-x-4">
-                        <div className="flex justify-center p-1 bg-white">
-                            <img src="/image/nba.jpg" alt="NBA" className="h-16 max-[360px]:h-14" />
+                    <div className="items-center justify-center mt-4 mx-auto grid grid-cols-12 gap-8 place-items-center">
+                        <div className="col-span-5 max-[1160px]:col-span-6 max-[850px]:col-span-12 flex items-center space-x-4">
+                            <div className="flex justify-center p-1 bg-white">
+                                <img src="/image/nba.jpg" alt="NBA" className="h-16 max-[360px]:h-14" />
+                            </div>
+                            <div className="flex justify-center p-1 bg-white">
+                                <img src="/image/qs-i-gauge.jpg" alt="QS-IGAUGE" className="h-16 max-[360px]:h-14" />
+                            </div>
+                            <div className="flex justify-center p-1 bg-white">
+                                <img src="/image/NaaC.webp" alt="UN Academic Impact" className="h-16 max-[360px]:h-14" />
+                            </div>
                         </div>
-                        <div className="flex justify-center p-1 bg-white">
-                            <img src="/image/qs-i-gauge.jpg" alt="QS-IGAUGE" className="h-16 max-[360px]:h-14" />
+                        <div className="col-span-3 max-[1160px]:col-span-6 max-[850px]:col-span-6 max-sm:col-span-12 flex justify-center items-center max-sm:px-2">
+                            <div className="flex max-[400px]:flex-col text-xs md:text-sm font-novaSemi gap-10">
+                                <ul className="flex flex-col max-sm:flex-row max-sm:items-center max-sm:space-y-0 max-sm:gap-3 space-y-3 justify-center sm:justify-center max-[350px]:pl-5">
+                                    <li className='hover:underline cursor-pointer'>NAAC</li>
+                                    <li className='hover:underline cursor-pointer'>NIRF</li>
+                                    <li className='hover:underline cursor-pointer'>NATS</li>
+                                </ul>
+                                <ul className="flex flex-col max-sm:flex-row max-sm:items-center max-sm:space-y-0 max-sm:gap-3 space-y-3 justify-center sm:justify-center">
+                                    <li className='max-[350px]:text-left hover:underline cursor-pointer'>Anti-Ragging</li>
+                                    <li className='max-[350px]:text-left hover:underline cursor-pointer'>National Ragging Prevention Programme</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div className="flex justify-center p-1 bg-white">
-                            <img src="/image/NaaC.webp" alt="UN Academic Impact" className="h-16 max-[360px]:h-14" />
+                        <div className="col-span-4 max-[1160px]:col-span-12 max-[850px]:col-span-6 max-sm:col-span-12 flex justify-center space-x-10 md:order-2">
+                            {navigation2?.map((item, index) => (
+                                <a key={index} href={item.href} className="text-primary hover:text-gray-500">
+                                    <span className="sr-only">{item.name}</span>
+                                    <item.icon aria-hidden="true" className="h-6 w-6" />
+                                </a>
+                            ))}
                         </div>
                     </div>
-                    <div className="col-span-3 max-[1160px]:col-span-6 max-[850px]:col-span-6 max-sm:col-span-12 flex justify-center items-center max-sm:px-2">
-                        <div className="flex max-[400px]:flex-col text-xs md:text-sm font-novaSemi gap-10">
-                            <ul className="flex flex-col max-sm:flex-row max-sm:items-center max-sm:space-y-0 max-sm:gap-3 space-y-3 justify-center sm:justify-center max-[350px]:pl-5">
-                                <li className='hover:underline cursor-pointer'>NAAC</li>
-                                <li className='hover:underline cursor-pointer'>NIRF</li>
-                                <li className='hover:underline cursor-pointer'>NATS</li>
-                            </ul>
-                            <ul className="flex flex-col max-sm:flex-row max-sm:items-center max-sm:space-y-0 max-sm:gap-3 space-y-3 justify-center sm:justify-center">
-                                <li className='max-[350px]:text-left hover:underline cursor-pointer'>Anti-Ragging</li>
-                                <li className='max-[350px]:text-left hover:underline cursor-pointer'>National Ragging Prevention Programme</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="col-span-4 max-[1160px]:col-span-12 max-[850px]:col-span-6 max-sm:col-span-12 flex justify-center space-x-10 md:order-2">
-                        {navigation2?.map((item, index) => (
-                            <a key={index} href={item.href} className="text-primary hover:text-gray-500">
-                                <span className="sr-only">{item.name}</span>
-                                <item.icon aria-hidden="true" className="h-6 w-6" />
-                            </a>
-                        ))}
+                    <div className="mt-8 text-xs font-novaSemi text-center border-t border-slate-400 pt-4">
+                        <p>© All rights reserved 2025</p>
                     </div>
                 </div>
-                <div className="mt-8 text-xs font-novaSemi text-center border-t border-slate-400 pt-4">
-                    <p>© All rights reserved 2025</p>
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </section>
     );
 }
