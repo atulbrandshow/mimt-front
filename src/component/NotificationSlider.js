@@ -74,7 +74,7 @@ const NotificationSlider = ({ data }) => {
                                         </span>
                                     </h2>
                                     <span
-                                        className={`bg-yellow-400 text-black py-1 tracking-widest max-[400px]:py-1 max-[400px]:text-xs mb-2 px-2 text-sm uppercase font-novaBold rounded-md font-bold`}
+                                        className={`bg-primary text-white py-1 tracking-widest max-[400px]:py-1 max-[400px]:text-xs mb-2 px-2 text-sm uppercase font-novaBold rounded-md font-bold`}
                                     >
                                         {item.title}
                                     </span>

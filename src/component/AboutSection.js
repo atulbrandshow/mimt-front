@@ -87,10 +87,22 @@ const AboutSection = () => {
 
                                 {/* Overlay with Text */}
                                 <div className="-mt-8 relative flex items-end justify-center pb-6">
-                                    <div className="bg-blue-800 text-white px-8 py-3 text-center md:py-4 shadow-lg">
-                                        <h3 className="text-lg md:text-xl lg:text-2xl font-novaReg tracking-wider uppercase">Top Quality And Learning Experience</h3>
+                                    <div
+                                        className={`relative bg-white/10 border border-white/20 
+                backdrop-blur-md rounded-xl 
+                text-white px-8 py-3 md:py-4 text-center shadow-lg 
+                transition-all duration-300 
+                hover:bg-white/20 hover:border-white/40
+                before:absolute before:inset-0 before:rounded-xl 
+                before:bg-gradient-to-br before:from-white/30 before:to-transparent 
+                before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300`}
+                                    >
+                                        <h3 className="text-lg md:text-xl lg:text-2xl font-novaReg tracking-wider uppercase relative z-10">
+                                            Top Quality And Learning Experience
+                                        </h3>
                                     </div>
                                 </div>
+
                             </>
                         )}
                     </div>

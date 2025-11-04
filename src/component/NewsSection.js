@@ -123,10 +123,22 @@ export default function NewsSection() {
                                     </div>
                                     <a
                                         href={activeNews.link}
-                                        className="px-4 py-2 bg-secondary text-black rounded-md hover:bg-slate-700 transition-colors duration-300 font-novaBold text-sm whitespace-nowrap"
+                                        className={`relative inline-block px-5 py-2 rounded-lg 
+              bg-white/10 border border-white/30 
+              backdrop-blur-lg 
+              text-white font-novaBold text-sm 
+              shadow-md transition-all duration-300 
+              hover:bg-white/20 hover:border-white/50 hover:shadow-lg hover:shadow-white/20
+              before:absolute before:inset-0 before:rounded-lg 
+              before:bg-gradient-to-br before:from-white/40 before:to-transparent 
+              before:opacity-0 before:transition-opacity before:duration-300 
+              hover:before:opacity-100 overflow-hidden`}
                                     >
                                         Read More &rarr;
                                     </a>
+
+
+
                                 </div>
                             </div>
 
