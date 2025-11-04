@@ -118,7 +118,7 @@ export default function ExploreCourses({ data }) {
                                             as="a"
                                             href={item.link}
                                             target="__blank"
-                                            className="px-4 py-2 rounded-xl bg-black text-white text-xs font-novaBold uppercase tracking-wider">
+                                            className="px-4  rounded-xl bg-primary text-white text-xs font-novaBold uppercase tracking-wider w-full text-center py-3">
                                             View Details
                                         </CardItem>
                                     </div>
