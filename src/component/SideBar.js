@@ -14,7 +14,7 @@ const SideBarLink = [
 const SideBar = () => {
     const router = useRouter();
     return (
-        <section className='drop-shadow-xl rounded-3xl overflow-hidden bg-white'>
+        <section className='max-w-xs drop-shadow-xl rounded-3xl overflow-hidden bg-white'>
             <div className="overflow-hidden text-white w-full">
                 <ul>
                     <div className="flex justify-start">
