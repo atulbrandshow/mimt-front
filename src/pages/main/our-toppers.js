@@ -49,7 +49,7 @@ export default function Page({ data }) {
         {/* Header Section */}
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-white  mb-3">Toppers of the Year</h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">{pageData?.Topper_Desc}</p>
+          <p className="text-gray-300 max-w-4xl mx-auto">{pageData?.Topper_Desc}</p>
         </div>
 
         {/* Engineering Toppers Section */}
@@ -91,7 +91,7 @@ export default function Page({ data }) {
         {/* MBA Section */}
         {pageData?.MBA_Title && (
           <div className="mt-20">
-            <h3 className="text-2xl font-bold text-blue-800 mb-6 text-center">
+            <h3 className="text-2xl font-bold text-white  mb-6 text-center">
               {pageData.MBA_Title}
             </h3>
 
