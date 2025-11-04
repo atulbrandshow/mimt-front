@@ -2,6 +2,7 @@ import React from "react";
 import Header from "@/component/Header";
 import SideBar from "@/component/SideBar";
 import { descriptionCss } from "@/configs/css.config";
+import { IMAGE_PATH } from "@/configs/config";
 
 export default function Page({ data }) {
   console.log(data);
@@ -23,10 +24,29 @@ export default function Page({ data }) {
           <div dangerouslySetInnerHTML={{ __html: data?.pageData?.Placement_Description }} className={descriptionCss} />
           <div dangerouslySetInnerHTML={{ __html: data?.pageData?.Recruit_Description_1 }} className={descriptionCss} />
         </div>
-        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12 prose-p:bg-transparent bg-blue-800 prose-p:text-white">
-          <div dangerouslySetInnerHTML={{ __html: data?.pageData?.Recruit_Desc_2 }} className={descriptionCss} />
+        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <div className="flex flex-wrap items-center justify-between bg-blue-800/70 rounded-xl overflow-hidden p-6 md:p-10 gap-6">
+
+            {/* Left Content Section */}
+            <div className="flex-1 min-w-[280px] text-white prose prose-p:text-white prose-p:bg-transparent">
+              <div
+                dangerouslySetInnerHTML={{ __html: data?.pageData?.Recruit_Desc_2 }}
+                className={descriptionCss}
+              />
+            </div>
+
+            {/* Right Image Section */}
+            <div className="w-full md:w-1/2 lg:w-5/12 flex justify-center">
+              <img
+                src={IMAGE_PATH + data?.pageData?.Recruit_img}
+                alt="Recruit"
+                className="rounded-xl shadow-lg object-cover w-full h-auto max-h-max transition-transform duration-300 hover:scale-105"
+              />
+            </div>
+
+          </div>
         </div>
-        
+
         <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
           <SideBar title={"About Us"} LinkList={SideBarLink} />
         </div>
