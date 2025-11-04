@@ -28,6 +28,12 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+/* ✅ Force remove inline or class-based backgrounds from editor HTML */
+.prose-custom-clean * {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
 
 
 /* Adjust spacing for smaller devices */
