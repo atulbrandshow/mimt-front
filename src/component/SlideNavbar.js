@@ -5,11 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { NAV_ITEMS } from "@/Json/NavList";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import { AnimatedTooltip } from "./ui/animated-tooltip";
 function SlideNavbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const currentPath = window.location.pathname || "/";
-    console.log(currentPath);
 
     const [currentMenu, setCurrentMenu] = useState(currentPath || "")
     const router = useRouter()
@@ -26,6 +25,51 @@ function SlideNavbar() {
             setLeftHeight(leftRef.current.offsetHeight);
         }
     }, [currentMenu, NAV_ITEMS]);
+
+    const items = [
+        {
+            id: 1,
+            name: "Facebook",
+            link: "https://www.facebook.com/mangalmay.org",
+            image: "/image/Facebook.png"
+        },
+        {
+            id: 2,
+            name: "Twitter",
+            link: "https://twitter.com/mangalmaydotorg",
+            image: "/image/twitter.png"
+        },
+        {
+            id: 3,
+            name: "Pinterest",
+            link: "https://in.pinterest.com/mangalmaydotorg/",
+            image: "/image/pinterest.png"
+        },
+        {
+            id: 4,
+            name: "LinkedIn",
+            link: "https://in.linkedin.com/in/mangalmaydotorg",
+            image: "/image/linkedin.png"
+        },
+        {
+            id: 5,
+            name: "Youtube",
+            link: "https://www.youtube.com/mangalmayorg",
+            image: "/image/youtube.png"
+        },
+        {
+            id: 6,
+            name: "Instagran",
+            link: "https://www.instagram.com/mangalmayinstitutions/",
+            image: "/image/Instagram.png"
+        },
+        {
+            id: 7,
+            name: "Whatsapp",
+            link: "https://wa.me/919650308990",
+            image: "/image/whatsapp.png"
+        }
+    ]
     return (
         <div className="sticky top-0 h-screen z-[9999999] bg-primary px-4">
             {/* Menu Icon */}
@@ -122,6 +166,9 @@ function SlideNavbar() {
                     </motion.div>
                 )}
             </AnimatePresence>
+            <div className="absolute bottom-2 left-3 ">
+            <AnimatedTooltip items={items} />
+            </div>
         </div>
     );
 }
