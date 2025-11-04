@@ -77,7 +77,7 @@ const EventDetails = ({ data }) => {
                             <div className="lg:col-span-2">
                                 <div className="bg-white rounded-[60px] p-12 border border-slate-200/50 shadow-md drop-shadow-2xl transition-all duration-300">
                                     <h2 className="text-3xl font-novaSemi text-black mb-6">About This Event</h2>
-                                    <p className="text-slate-700 text-lg font-novaReg leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: eventData?.description }} />
+                                    <p className="text-slate-700 text-lg font-novaReg leading-relaxed mb-6 prose-p:mb-5" dangerouslySetInnerHTML={{ __html: eventData?.description }} />
                                 </div>
                             </div>
 
