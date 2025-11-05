@@ -1,91 +1,81 @@
+"use client";
+
 import React from "react";
+import Header from "@/component/Header";
+import SideBar from "@/component/SideBar";
+import { descriptionCss } from "@/configs/css.config";
 
-const Page = ({ data }) => {
-  if (!data) return <p>No data available</p>;
+export default function Page({ data }) {
+  const p = data?.pageData;
 
-  // ✅ Helper to check if a value has meaningful content
-  const hasContent = (value) => {
-    if (
-      value === null ||
-      value === undefined ||
-      value === false ||
-      value === ""
-    )
-      return false;
-
-    if (Array.isArray(value)) return value.some((item) => hasContent(item));
-
-    if (typeof value === "object")
-      return Object.keys(value).some((k) => hasContent(value[k]));
-
-    return true;
-  };
-
-  // ✅ Recursive renderer
-  const renderValue = (value) => {
-    if (!hasContent(value)) return null;
-
-    // Render HTML strings safely
-    if (typeof value === "string" && /<[^>]+>/.test(value)) {
-      return (
-        <div
-          className="prose max-w-none custom-prose"
-          dangerouslySetInnerHTML={{ __html: value }}
-        />
-      );
-    }
-
-    // Render arrays
-    if (Array.isArray(value)) {
-      const filteredArray = value.filter((item) => hasContent(item));
-      if (filteredArray.length === 0) return null;
-      return (
-        <ul className="list-disc ml-6">
-          {filteredArray.map((item, index) => (
-            <li key={index}>{renderValue(item)}</li>
-          ))}
-        </ul>
-      );
-    }
-
-    // Render objects
-    if (typeof value === "object") {
-      const entries = Object.entries(value).filter(([_, v]) => hasContent(v));
-      if (entries.length === 0) return null;
-      return (
-        <div className="ml-4 border-l border-gray-400 pl-4">
-          {entries.map(([k, v]) => (
-            <div key={k} className="mb-2">
-              <strong className="text-black">{k}:</strong>
-              <div className="ml-2 mt-1">{renderValue(v)}</div>
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    // Primitive values
-    return <span className="text-black">{value.toString()}</span>;
-  };
-
-  // ✅ Filter top-level keys
-  const filteredData = Object.entries(data).filter(([_, value]) =>
-    hasContent(value)
-  );
-
-  if (filteredData.length === 0)
-    return <p className="text-black">No meaningful data available</p>;
+  const SideBarLink = [
+    { name: "Scholarships", link: "" },
+    { name: "Education Loan", link: "" },
+    { name: "Fee Structure", link: "" },
+    { name: "Admission Process", link: "" }
+  ];
 
   return (
-    <div className="p-6 bg-gray-200 min-h-screen  text-black mt-32">
-      {filteredData.map(([key, value]) => (
-        <div key={key} className="mb-6">
-          <strong className="text-lg font-semibold text-black">{key}:</strong>
-          <div className="ml-3 mt-2">{renderValue(value)}</div>
+    <div className="bg-white">
+      <Header BreadCrumb={data?.breadCrumb} data={data} />
+
+      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-16 px-4 gap-10">
+
+        {/* LEFT CONTENT */}
+        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+
+          {/* Session Title */}
+          <h1 className="text-2xl font-bold text-gray-900 mb-6 border-l-8 border-[#fdd023] pl-4">
+            {p?.Session_Title_}
+          </h1>
+
+          {/* Short Description */}
+          <p className="text-lg text-gray-700 leading-relaxed mb-10">
+            {p?.Short_Desc}
+          </p>
+
+          {/* Scholarship Card 1 */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-10 hover:shadow-2xl transition">
+            <h2 className="text-2xl font-bold text-[#831d82] mb-4">
+              {p?.Scolarship_Title_1}
+            </h2>
+
+            <div
+              className="text-gray-700 leading-relaxed text-lg space-y-4"
+              dangerouslySetInnerHTML={{ __html: p?.Scolarship_Desc_1 || "" }}
+            />
+          </div>
+
+          {/* Scholarship Card 2 */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-10 hover:shadow-2xl transition">
+            <h2 className="text-2xl font-bold text-[#831d82] mb-4">
+              {p?.Scolarship_Title_2}
+            </h2>
+
+            <div
+              className="text-gray-700 leading-relaxed text-lg space-y-4"
+              dangerouslySetInnerHTML={{ __html: p?.Scolarship_Desc_2 || "" }}
+            />
+          </div>
+
+          {/* NOTE Section */}
+          <div className="bg-yellow-100 border-l-8 border-yellow-500 rounded-lg p-6 shadow-md">
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Important Note</h3>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {p?.Note_Desc}
+            </p>
+          </div>
+
         </div>
-      ))}
+
+        {/* RIGHT SIDEBAR */}
+        <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
+          <SideBar title={"Scholarships"} LinkList={SideBarLink} />
+        </div>
+
+      </section>
     </div>
   );
-};
+}
 
-export default Page;
+
