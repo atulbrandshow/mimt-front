@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import React from "react"
 import TitleInfo from "./TitleInfo"
+import Link from "next/link"
 
 export default function NewsSection() {
     const [activeCard, setActiveCard] = useState(0)
@@ -121,23 +122,19 @@ export default function NewsSection() {
                                         <h3 className="text-xl font-bold font-novaBold text-slate-100">{activeNews.title}</h3>
                                         <p className="text-sm text-slate-300 font-novaSemi">{activeNews.date}</p>
                                     </div>
-                                    <a
+                                    <Link
                                         href={activeNews.link}
                                         className={`relative inline-block px-5 py-2 rounded-lg 
-              bg-secondary border border-white/30 
-              backdrop-blur-lg 
-              text-black font-novaBold text-sm 
-              shadow-md transition-all duration-300 
-              before:absolute before:inset-0 before:rounded-lg 
-              before:bg-gradient-to-br before:from-white/40 before:to-transparent 
-              before:opacity-0 before:transition-opacity before:duration-300 
-              hover:before:opacity-100 overflow-hidden`}
+                                        bg-secondary border border-white/30 
+                                        backdrop-blur-lg text-black font-novaBold text-sm 
+                                        shadow-md transition-all duration-300 
+                                        before:absolute before:inset-0 before:rounded-lg 
+                                        before:bg-gradient-to-br before:from-white/40 before:to-transparent 
+                                        before:opacity-0 before:transition-opacity before:duration-300 
+                                        hover:before:opacity-100 overflow-hidden`}
                                     >
                                         Read More &rarr;
-                                    </a>
-
-
-
+                                    </Link>
                                 </div>
                             </div>
 
