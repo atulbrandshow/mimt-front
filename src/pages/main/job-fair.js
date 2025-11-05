@@ -38,9 +38,7 @@ const JobFair = ({ data }) => {
     }
     return (
         <div onKeyDown={handleKeyDown} className="relative bg-white h-full w-full">
-            <div className="mt-14">
-                <Header data={data} />
-            </div>
+            <Header data={data} />
             <div className="bg-primary">
                 <div className="bg-white h-20 rounded-bl-3xl" />
             </div>

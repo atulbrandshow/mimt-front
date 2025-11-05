@@ -45,9 +45,7 @@ const Page = () => {
     return (
         <>
             <div className="bg-white">
-                <div className="mt-14">
-                    <Header />
-                </div>
+                <Header />
                 <section className="w-full max-w-[1400px] mx-auto pt-10">
                     <div className="container mx-auto px-4 py-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -415,22 +413,20 @@ const Page = () => {
                         <div className="flex justify-center gap-6 mb-10">
                             <button
                                 onClick={() => setActiveTab("eligibility")}
-                                className={`px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 border ${
-                                    activeTab === "eligibility"
+                                className={`px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 border ${activeTab === "eligibility"
                                         ? "bg-blue-600 text-white shadow-lg border-blue-600"
                                         : "bg-white text-gray-700 border-gray-300 hover:bg-blue-50"
-                                }`}
+                                    }`}
                             >
                                 Eligibility Criteria
                             </button>
 
                             <button
                                 onClick={() => setActiveTab("admission")}
-                                className={`px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 border ${
-                                    activeTab === "admission"
+                                className={`px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 border ${activeTab === "admission"
                                         ? "bg-blue-600 text-white shadow-lg border-blue-600"
                                         : "bg-white text-gray-700 border-gray-300 hover:bg-blue-50"
-                                }`}
+                                    }`}
                             >
                                 Admission Process
                             </button>
@@ -438,11 +434,10 @@ const Page = () => {
 
                         {/* Content Area */}
                         <div
-                            className={`transition-all duration-500 ease-in-out ${
-                                activeTab === "eligibility"
+                            className={`transition-all duration-500 ease-in-out ${activeTab === "eligibility"
                                     ? "opacity-100 translate-y-0"
                                     : "opacity-0 -translate-y-4 hidden"
-                            }`}
+                                }`}
                         >
                             {/* Eligibility Criteria Content */}
                             <div className="relative bg-white border border-gray-100 rounded-3xl shadow-2xl p-10 md:p-14 max-w-5xl mx-auto hover:shadow-blue-200 transition duration-300">
@@ -490,11 +485,10 @@ const Page = () => {
 
                         {/* Admission Process */}
                         <div
-                            className={`transition-all duration-500 ease-in-out ${
-                                activeTab === "admission"
+                            className={`transition-all duration-500 ease-in-out ${activeTab === "admission"
                                     ? "opacity-100 translate-y-0"
                                     : "opacity-0 -translate-y-4 hidden"
-                            }`}
+                                }`}
                         >
                             <div className="bg-gradient-to-r from-blue-50 to-white p-10 md:p-14 rounded-3xl border border-gray-200 shadow-xl max-w-5xl mx-auto hover:shadow-blue-100 transition duration-300">
                                 <div className="flex items-center gap-3 mb-6">
