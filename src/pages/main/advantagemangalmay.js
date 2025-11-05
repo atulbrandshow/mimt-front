@@ -26,7 +26,7 @@ export default function Page({ data }) {
       </div>
       <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
         <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
-          <div className="max-w-6xl ml-auto py-16 px-5">
+          <div className="max-w-[1200px] ml-auto py-16 px-16">
             <div
               className={`mt-4 prose prose-gray max-w-none prose-li:text-white font-novaReg`}
               dangerouslySetInnerHTML={{ __html: htmlContent }}

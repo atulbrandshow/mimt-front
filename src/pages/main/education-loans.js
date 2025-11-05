@@ -46,61 +46,49 @@ export default function Page({ data }) {
   return (
     <div className="bg-white">
       <Header BreadCrumb={data?.breadCrumb} data={data} />
-
-      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-20 max-sm:py-6 gap-10 px-3 sm:px-6">
-
-        {/* ✅ LEFT CONTENT */}
-        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
-
-          {/* ✅ TITLE */}
-          <h2 className="text-3xl font-bold text-black mb-6 border-l-8 border-[#fdd023] pl-4">
-            Education Loan
-          </h2>
-
-          {/* ✅ DESCRIPTION */}
-          <div
-            dangerouslySetInnerHTML={{
-              __html: pageData?.EducationloanDescription,
-            }}
-            className={`${descriptionCss} bg-gray-50 p-6 rounded-xl shadow-sm mb-10`}
-          />
-
-          {/* ✅ BANK CARDS */}
-          <section className="py-12 bg-white">
-            <h3 className="text-2xl font-semibold mb-6">Our Banking Partners</h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-
-              {bankCards.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl shadow-md p-6 border hover:shadow-lg transition text-center"
-                >
-                  {/* ✅ Bank Logo */}
-                  <div className="w-full h-28 flex items-center justify-center mb-4">
-                    <img
-                      src={`${IMAGE_PATH}${item.img}`}
-                      alt="bank-logo"
-                      className="max-h-24 object-contain"
+      <div className="bg-primary">
+        <div className="bg-white h-20 rounded-bl-3xl" />
+      </div>
+      <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
+        <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <div className="max-w-[1200px] ml-auto py-16 px-16">
+            <h2 className="text-3xl font-novaBold text-white mb-6 border-l-8 border-[#fdd023] pl-4">
+              Education Loan
+            </h2>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: pageData?.EducationloanDescription,
+              }}
+              className={`${descriptionCss} bg-white p-6 rounded-3xl shadow-sm mb-10`}
+            />
+            <section className="p-10 bg-white rounded-3xl">
+              <h3 className="text-2xl font-novaSemi mb-6">Our Banking Partners</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+                {bankCards.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-[40px] shadow-md drop-shadow-2xl p-6 border hover:shadow-lg transition text-center"
+                  >
+                    <div className="w-full h-28 flex items-center justify-center mb-4">
+                      <img
+                        src={`${IMAGE_PATH}${item.img}`}
+                        alt="bank-logo"
+                        className="max-h-24 object-contain"
+                      />
+                    </div>
+                    <div
+                    className="font-novaReg"
+                      dangerouslySetInnerHTML={{ __html: item.htmlContent }}
                     />
                   </div>
-
-                  {/* ✅ HTML TEXT RENDER */}
-                  <div
-                    dangerouslySetInnerHTML={{ __html: item.htmlContent }}
-                  />
-                </div>
-              ))}
-
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          </div>
         </div>
-
-        {/* ✅ RIGHT SIDEBAR */}
         <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
           <SideBar title={"About Us"} LinkList={SideBarLink} />
         </div>
-
       </section>
     </div>
   );
