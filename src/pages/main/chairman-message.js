@@ -21,16 +21,12 @@ export default function Page({ data }) {
   return (
     <div className="bg-white">
       <Header BreadCrumb={data?.breadCrumb} data={data} />
-
-      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-20 px-3 sm:px-6 gap-10">
-
-        {/* ✅ LEFT CONTENT */}
-        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
-
-          {/* ✅ IMAGE + CONTENT IN A ROW (Modern Layout) */}
-          <div className="flex flex-col md:flex-row gap-8 items-start">
-
-            {/* ✅ Much Smaller Left Image with Elegant Design */}
+      <div className="bg-primary">
+        <div className="bg-white h-20 rounded-bl-3xl" />
+      </div>
+      <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
+        <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <div className="max-w-6xl ml-auto py-16 px-5 flex flex-col md:flex-row gap-8 items-start">
             {page?.ChairmanImage && (
               <div className="md:w-[220px] w-full flex justify-start">
                 <img
@@ -40,8 +36,6 @@ export default function Page({ data }) {
                 />
               </div>
             )}
-
-            {/* ✅ Text Content (Right Side) */}
             {page?.ChairmanDescription && (
               <div
                 className={`${descriptionCss} w-full leading-relaxed`}
@@ -50,8 +44,6 @@ export default function Page({ data }) {
             )}
           </div>
         </div>
-
-        {/* ✅ RIGHT SIDEBAR */}
         <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
           <SideBar title={"About Us"} LinkList={SideBarLink} />
         </div>
