@@ -1,91 +1,147 @@
-import React from "react";
+"use client";
 
-const Page = ({ data }) => {
-  if (!data) return <p>No data available</p>;
+import React, { useEffect, useState } from "react";
+import Header from "@/component/Header";
+import SideBar from "@/component/SideBar";
+import { IMAGE_PATH } from "@/configs/config";
 
-  // ✅ Helper to check if a value has meaningful content
-  const hasContent = (value) => {
-    if (
-      value === null ||
-      value === undefined ||
-      value === false ||
-      value === ""
-    )
-      return false;
+export default function AlumniPage({ data }) {
+  const p = data?.pageData || {};
 
-    if (Array.isArray(value)) return value.some((item) => hasContent(item));
+  // ✅ Prepare alumni list dynamically
+  const alumni = Array.from({ length: 6 }).map((_, i) => ({
+    name: p[`Stu_name_${i + 1}`] || "",
+    company: p[`Stu_company_${i + 1}`] || "",
+    msg: p[`Stu_msg_${i + 1}`] || "",
+    img: p[`Stu_img_${i + 1}`] || null,
+  }));
 
-    if (typeof value === "object")
-      return Object.keys(value).some((k) => hasContent(value[k]));
+  // ✅ Filter valid entries
+  const list = alumni.filter((a) => a.name || a.msg);
 
-    return true;
-  };
+  // ✅ Slider: 2 cards per slide
+  const slides = [];
+  for (let i = 0; i < list.length; i += 2) {
+    slides.push(list.slice(i, i + 2));
+  }
 
-  // ✅ Recursive renderer
-  const renderValue = (value) => {
-    if (!hasContent(value)) return null;
+  const total = slides.length;
+  const [current, setCurrent] = useState(0);
 
-    // Render HTML strings safely
-    if (typeof value === "string" && /<[^>]+>/.test(value)) {
-      return (
-        <div
-          className="prose max-w-none custom-prose"
-          dangerouslySetInnerHTML={{ __html: value }}
-        />
-      );
-    }
+  // ✅ Auto Slide
+  useEffect(() => {
+    if (total === 0) return;
 
-    // Render arrays
-    if (Array.isArray(value)) {
-      const filteredArray = value.filter((item) => hasContent(item));
-      if (filteredArray.length === 0) return null;
-      return (
-        <ul className="list-disc ml-6">
-          {filteredArray.map((item, index) => (
-            <li key={index}>{renderValue(item)}</li>
-          ))}
-        </ul>
-      );
-    }
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % total);
+    }, 4000);
 
-    // Render objects
-    if (typeof value === "object") {
-      const entries = Object.entries(value).filter(([_, v]) => hasContent(v));
-      if (entries.length === 0) return null;
-      return (
-        <div className="ml-4 border-l border-gray-400 pl-4">
-          {entries.map(([k, v]) => (
-            <div key={k} className="mb-2">
-              <strong className="text-black">{k}:</strong>
-              <div className="ml-2 mt-1">{renderValue(v)}</div>
-            </div>
-          ))}
-        </div>
-      );
-    }
+    return () => clearInterval(interval);
+  }, [total]);
 
-    // Primitive values
-    return <span className="text-black">{value.toString()}</span>;
-  };
-
-  // ✅ Filter top-level keys
-  const filteredData = Object.entries(data).filter(([_, value]) =>
-    hasContent(value)
-  );
-
-  if (filteredData.length === 0)
-    return <p className="text-black">No meaningful data available</p>;
+  const SideBarLink = [
+    { name: "Our Alumni", link: "" },
+    { name: "Student Success", link: "" },
+    { name: "Campus Life", link: "" },
+    { name: "Placement Stories", link: "" },
+  ];
 
   return (
-    <div className="p-6 bg-gray-200 min-h-screen  text-black mt-32">
-      {filteredData.map(([key, value]) => (
-        <div key={key} className="mb-6">
-          <strong className="text-lg font-semibold text-black">{key}:</strong>
-          <div className="ml-3 mt-2">{renderValue(value)}</div>
+    <div className="bg-white">
+      <Header BreadCrumb={data?.breadCrumb} data={data} />
+
+      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-16 px-4 gap-10">
+
+        {/* ✅ LEFT CONTENT */}
+        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <h1 className="text-3xl font-bold text-gray-900 mb-10">
+            {p?.AlumniTitle || "What Our Students Say"}
+          </h1>
+
+          {/* ✅ Fallback */}
+          {total === 0 && (
+            <p className="text-gray-500 text-lg">No alumni data found.</p>
+          )}
+
+          {/* ✅ SLIDER */}
+          {total > 0 && (
+            <div className="relative w-full overflow-hidden">
+              <div
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateX(-${current * 100}%)` }}
+              >
+                {slides.map((group, idx) => (
+                  <div
+                    key={idx}
+                    className="min-w-full grid grid-cols-1 md:grid-cols-2 gap-6 px-2"
+                  >
+                    {group.map((item, index) => (
+                      <div
+                        key={index}
+                        className="
+    bg-yellow-400 border border-gray-200 
+    rounded-2xl p-6 
+    shadow-sm hover:shadow-lg 
+    transition-all duration-300
+  "
+                      >
+                        <div className="flex items-center gap-4 mb-4">
+
+                          {/* ✅ Profile Image - modern minimal */}
+                          {item.img ? (
+                            <img
+                              src={IMAGE_PATH + item.img}
+                              alt={item.name}
+                              className="
+          w-16 h-16 rounded-xl object-cover 
+          shadow-md border border-gray-200
+        "
+                            />
+                          ) : (
+                            <div className="w-16 h-16 bg-gray-300 rounded-xl" />
+                          )}
+
+                          <div>
+                            <h3 className="text-lg font-semibold text-gray-900">
+                              {item.name}
+                            </h3>
+                            <p className="text-sm text-gray-500">
+                              {item.company}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* ✅ Message */}
+                        <p className="text-gray-700 leading-relaxed text-[15px]">
+                          {item.msg}
+                        </p>
+                      </div>
+
+                    ))}
+                  </div>
+                ))}
+              </div>
+
+              {/* ✅ DOTS */}
+              <div className="flex justify-center mt-6 space-x-2">
+                {slides.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-3 h-3 rounded-full transition-all ${current === i ? "bg-purple-600" : "bg-gray-300"
+                      }`}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      ))}
+
+        {/* ✅ SIDEBAR */}
+        <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
+          <SideBar title={"Alumni"} LinkList={SideBarLink} />
+        </div>
+
+      </section>
     </div>
   );
-};
-
-export default Page;
+}
