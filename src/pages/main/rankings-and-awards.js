@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "@/component/Header";
 import SideBar from "@/component/SideBar";
-import { descriptionCss } from "@/configs/css.config";
 
 export default function Page({ data }) {
   console.log(data);
