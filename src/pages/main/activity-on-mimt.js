@@ -18,37 +18,39 @@ export default function Page({ data }) {
 
   return (
     <div className="bg-white">
-      
+
       {/* ✅ Reuse global Header */}
       <Header BreadCrumb={data?.breadCrumb} data={data} />
+      <div className="bg-primary">
+        <div className="bg-white h-20 rounded-bl-3xl" />
+      </div>
+      <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
+        <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <div className="max-w-[1200px] ml-auto py-16 px-16">
 
-      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-20 max-sm:py-2 gap-10 px-3 sm:px-6 max-sm:gap-0">
+            {/* ✅ Activity Description for MMIT */}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: data?.pageData?.ActivityDescription,
+              }}
+              className={descriptionCss}
+            />
 
-        {/* ✅ LEFT CONTENT (same layout) */}
-        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+            {/* ✅ Activity Gallery for MMIT (exact same grid) */}
+            {data?.pageData?.ActivityGallery &&
+              data?.pageData?.ActivityGallery?.length > 0 && (
+                <section className="py-12">
+                  <div className="max-w-7xl mx-auto">
 
-          {/* ✅ Activity Description for MMIT */}
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data?.pageData?.ActivityDescription,
-            }}
-            className={descriptionCss}
-          />
+                    {/* ✅ Gallery Grid Same as Transport */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <MIMTGallery data={data?.pageData?.ActivityGallery} />
+                    </div>
 
-          {/* ✅ Activity Gallery for MMIT (exact same grid) */}
-          {data?.pageData?.ActivityGallery &&
-            data?.pageData?.ActivityGallery?.length > 0 && (
-              <section className="py-12 bg-white">
-                <div className="max-w-7xl mx-auto">
-
-                  {/* ✅ Gallery Grid Same as Transport */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <MIMTGallery data={data?.pageData?.ActivityGallery} />
                   </div>
-
-                </div>
-              </section>
-            )}
+                </section>
+              )}
+          </div>
         </div>
 
         {/* ✅ RIGHT SIDEBAR (exact same component) */}
