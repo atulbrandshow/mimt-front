@@ -77,8 +77,8 @@ export const NAV_ITEMS = [
   },
 
   {
-    name: 'Activity',
-    links: '',
+    name: 'Activities',
+    links: '/activity-on-mimt.html',
     sublinks: [
       {
         name: 'Activity on MIMT',
