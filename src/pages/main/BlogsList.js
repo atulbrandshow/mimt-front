@@ -3,53 +3,52 @@ import { API_NODE_URL, IMAGE_PATH } from "@/configs/config";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation"; // ✅ Import Next.js hook for URL handling
 import { AnimatedTooltip } from "@/component/ui/animated-tooltip";
+import Header from "@/component/Header";
 
-const people = [
-  {
-    id: 1,
-    name: "John Doe",
-    designation: "Software Engineer",
-    image:
-      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80",
-  },
-  {
-    id: 2,
-    name: "Robert Johnson",
-    designation: "Product Manager",
-    image:
-      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 3,
-    name: "Jane Smith",
-    designation: "Data Scientist",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 4,
-    name: "Emily Davis",
-    designation: "UX Designer",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 5,
-    name: "Tyler Durden",
-    designation: "Soap Developer",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3540&q=80",
-  },
-  {
-    id: 6,
-    name: "Dora",
-    designation: "The Explorer",
-    image:
-      "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3534&q=80",
-  },
-];
 
-const BlogsList = () => {
+const FeaturedBlogShimmer = () => (
+  <div className="grid md:grid-cols-2 bg-white shadow-md border border-gray-200 rounded-2xl overflow-hidden">
+    <div className="w-full h-72 bg-gray-300 animate-pulse"></div>
+    <div className="p-6 flex flex-col justify-center animate-pulse">
+      <div className="mb-6 flex flex-wrap items-center gap-3">
+        <div className="h-5 w-24 bg-gray-300 rounded-full"></div>
+        <div className="h-5 w-20 bg-gray-300 rounded-full"></div>
+      </div>
+      <div className="h-8 w-4/5 bg-gray-300 rounded-md mb-3"></div>
+      <div className="space-y-2 mb-4">
+        <div className="h-4 w-full bg-gray-300 rounded-md"></div>
+        <div className="h-4 w-full bg-gray-300 rounded-md"></div>
+        <div className="h-4 w-2/3 bg-gray-300 rounded-md"></div>
+      </div>
+      <div className="flex items-center justify-between">
+        <div className="h-4 w-1/3 bg-gray-300 rounded-md"></div>
+        <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
+      </div>
+    </div>
+  </div>
+);
+
+const BlogCardShimmer = () => (
+  <div className="bg-white shadow-md rounded-2xl border border-gray-200 overflow-hidden">
+    <div className="w-full h-48 bg-gray-300 animate-pulse"></div>
+    <div className="p-5 animate-pulse">
+      <div className="flex flex-wrap items-center gap-3 mb-2">
+        <div className="h-4 w-20 bg-gray-300 rounded-full"></div>
+      </div>
+      <div className="h-6 w-3/4 bg-gray-300 rounded-md mb-2"></div>
+      <div className="space-y-2 mb-3">
+        <div className="h-4 w-full bg-gray-300 rounded-md"></div>
+        <div className="h-4 w-5/6 bg-gray-300 rounded-md"></div>
+      </div>
+      <div className="flex items-center justify-between">
+        <div className="h-4 w-1/3 bg-gray-300 rounded-md"></div>
+        <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
+      </div>
+    </div>
+  </div>
+);
+
+const BlogsList = ({ data }) => {
   const [blogs, setBlogs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -170,12 +169,15 @@ const BlogsList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-6 mt-20">
+    <div className="bg-white">
       {/* Navbar */}
-      <nav className="bg-gradient-to-r from-indigo-600 to-blue-500 shadow-md py-4 px-6 mb-10 sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
-          <h1 className="text-white text-2xl font-bold">Our Blog</h1>
-
+      <Header data={data} BreadCrumb={data?.breadCrumb} />
+      <div className="bg-primary">
+        <div className="bg-white h-20 rounded-bl-3xl" />
+      </div>
+      <nav className="bg-primary rounded-r-[50px] py-6 px-6 sticky top-0 z-20">
+        <div className="max-w-[1400px] mx-auto flex flex-wrap justify-between items-center gap-4 px-5">
+          <h1 className="text-white text-2xl font-novaBold">Our Blog</h1>
           {/* Categories */}
           <div className="flex flex-wrap gap-3 justify-center flex-1">
             {categories.length > 0 ? (
@@ -183,7 +185,7 @@ const BlogsList = () => {
                 <button
                   key={cat.slug}
                   onClick={() => handleCategoryClick(cat.slug)}
-                  className={`text-sm font-medium px-3 py-1 rounded-md transition ${selectedCategory === cat.slug
+                  className={`text-base font-novaSemi px-3 py-1 rounded-md transition ${selectedCategory === cat.slug
                     ? "bg-yellow-400 text-gray-800"
                     : "text-white hover:text-yellow-300"
                     }`}
@@ -207,7 +209,7 @@ const BlogsList = () => {
             />
             <button
               onClick={() => fetchBlogs(1)}
-              className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-4 py-2 text-sm font-semibold transition"
+              className="bg-secondary text-black px-4 py-2 text-sm font-novaSemi transition"
             >
               Search
             </button>
@@ -215,164 +217,178 @@ const BlogsList = () => {
         </div>
       </nav>
 
-
-      <div className="max-w-7xl mx-auto space-y-14">
-        {/* Featured Article */}
-        {featuredBlog && (
-          <>
-            <section>
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">Latest Blogs</h2>
-              <div className="grid md:grid-cols-2 bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition">
-                <img
-                  src={featuredBlog?.banner_img || "/placeholder.jpg"}
-                  alt={featuredBlog.name}
-                  className="w-full h-72 object-cover"
-                />
-                <div className="p-6 flex flex-col justify-center">
-                  <div className="mb-6 flex flex-wrap items-center gap-3">
-                    {featuredBlog.categorys.length > 0 &&
-                      featuredBlog.categorys.map((category, idx) => {
-                        const categoryColors = [
-                          { bg: "bg-gradient-to-r from-blue-100 to-blue-50", text: "text-blue-700", border: "border-blue-200" },
-                          { bg: "bg-gradient-to-r from-purple-100 to-purple-50", text: "text-purple-700", border: "border-purple-200" },
-                          { bg: "bg-gradient-to-r from-emerald-100 to-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
-                          { bg: "bg-gradient-to-r from-amber-100 to-amber-50", text: "text-amber-700", border: "border-amber-200" },
-                          { bg: "bg-gradient-to-r from-rose-100 to-rose-50", text: "text-rose-700", border: "border-rose-200" },
-                        ];
-                        const colorClass = categoryColors[idx % categoryColors.length];
-                        return (
+      <div className="bg-primary">
+        <div className="bg-white rounded-l-3xl py-10">
+          <div className="max-w-[1400px] mx-auto space-y-14 px-5">
+            {/* Featured Article */}
+            <>
+              <section>
+                <h2 className="text-3xl font-novaBold text-gray-800 mb-6">Latest Blogs</h2>
+                {loading && blogs.length === 0 ? (
+                  <FeaturedBlogShimmer />
+                ) : (
+                  featuredBlog && (
+                    <div className="grid md:grid-cols-2 bg-white shadow-md drop-shadow-xl border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition">
+                      <img
+                        src={featuredBlog?.banner_img || "/placeholder.jpg"}
+                        alt={featuredBlog.name}
+                        className="w-full h-72 object-cover"
+                      />
+                      <div className="p-6 flex flex-col justify-center">
+                        <div className="mb-6 flex flex-wrap items-center gap-3">
+                          {featuredBlog.categorys.length > 0 &&
+                            featuredBlog.categorys.map((category, idx) => {
+                              const categoryColors = [
+                                { bg: "bg-gradient-to-r from-blue-100 to-blue-50", text: "text-blue-700", border: "border-blue-200" },
+                                { bg: "bg-gradient-to-r from-purple-100 to-purple-50", text: "text-purple-700", border: "border-purple-200" },
+                                { bg: "bg-gradient-to-r from-emerald-100 to-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
+                                { bg: "bg-gradient-to-r from-amber-100 to-amber-50", text: "text-amber-700", border: "border-amber-200" },
+                                { bg: "bg-gradient-to-r from-rose-100 to-rose-50", text: "text-rose-700", border: "border-rose-200" },
+                              ];
+                              const colorClass = categoryColors[idx % categoryColors.length];
+                              return (
+                                <a
+                                  key={category.term_id}
+                                  href={`blogs/category/${category.slug}`}
+                                  className={`inline-block px-4 py-1 ${colorClass.bg} ${colorClass.text} text-xs font-novaBold uppercase tracking-widest rounded-full border ${colorClass.border} hover:shadow-md transition-all duration-200`}
+                                >
+                                  {category.name}
+                                </a>
+                              );
+                            })}
+                        </div>
+                        <h3 className="text-2xl font-novaSemi text-gray-900 mb-3">{featuredBlog.name}</h3>
+                        <p
+                          className="text-gray-600 text-sm mb-4 font-novaReg line-clamp-3"
+                          dangerouslySetInnerHTML={{
+                            __html: featuredBlog.description || "No description available.",
+                          }}
+                        />
+                        <div className="flex items-center justify-between">
+                          <p className="text-gray-500 text-sm flex font-novaSemi items-center gap-1">
+                            📅 <span>{formatDate(featuredBlog?.post_date_gmt)}</span>
+                          </p>
                           <a
-                            key={category.term_id}
-                            href={`blogs/category/${category.slug}`}
-                            className={`inline-block px-4 py-2 ${colorClass.bg} ${colorClass.text} text-xs font-bold uppercase tracking-widest rounded-full border ${colorClass.border} hover:shadow-md transition-all duration-200`}
+                            href={featuredBlog.path}
+                            className="text-blue-600 text-sm font-novaSemi hover:underline"
                           >
-                            {category.name}
+                            Read more →
                           </a>
-                        );
-                      })}
-                  </div>
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-3">{featuredBlog.name}</h3>
-                  <p
-                    className="text-gray-600 text-sm mb-4 line-clamp-3"
-                    dangerouslySetInnerHTML={{
-                      __html: featuredBlog.description || "No description available.",
-                    }}
-                  />
-                  <div className="flex items-center justify-between">
-                    <p className="text-orange-500 text-sm flex items-center gap-1">
-                      📅 <span>{formatDate(featuredBlog?.post_date_gmt)}</span>
-                    </p>
-                    <a
-                      href={featuredBlog.path}
-                      className="text-blue-600 text-sm font-semibold hover:underline"
+                        </div>
+                      </div>
+                    </div>
+                  )
+                )}
+              </section>
+            </>
+
+            {/* More Blogs */}
+            <section>
+              <h2 className="text-2xl font-novaBold text-gray-800 mb-6">More Blogs</h2>
+
+              {loading ? (
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {/* Render 6 shimmer cards. Adjust count as needed. */}
+                  {[...Array(6)].map((_, i) => (
+                    <BlogCardShimmer key={i} />
+                  ))}
+                </div>
+              ) : otherBlogs.length > 0 ? (
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {otherBlogs.map((blog) => (
+                    <div
+                      key={blog._id}
+                      className="bg-white shadow-md rounded-2xl drop-shadow-xl border border-gray-200 overflow-hidden hover:shadow-lg transition"
                     >
-                      Read more →
-                    </a>
-                  </div>
+                      <div className="relative">
+                        <img
+                          src={blog?.banner_img || "/placeholder.jpg"}
+                          alt={blog?.name}
+                          className="w-full h-48 object-cover"
+                        />
+                        <div className="flex flex-wrap items-center gap-3 px-5 mt-2">
+                          {blog.categorys.length > 0 &&
+                            blog.categorys.map((category, idx) => {
+                              const categoryColors = [
+                                { bg: "bg-gradient-to-r from-blue-100 to-blue-50", text: "text-blue-700", border: "border-blue-200" },
+                                { bg: "bg-gradient-to-r from-purple-100 to-purple-50", text: "text-purple-700", border: "border-purple-200" },
+                                { bg: "bg-gradient-to-r from-emerald-100 to-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
+                                { bg: "bg-gradient-to-r from-amber-100 to-amber-50", text: "text-amber-700", border: "border-amber-200" },
+                                { bg: "bg-gradient-to-r from-rose-100 to-rose-50", text: "text-rose-700", border: "border-rose-200" },
+                              ];
+                              const colorClass = categoryColors[idx % categoryColors.length];
+                              return (
+                                <a
+                                  key={category.term_id}
+                                  href={`/blogs/category/${category.slug}`}
+                                  className={`inline-block px-2 py-1 ${colorClass.bg} ${colorClass.text} text-xs font-novaSemi uppercase tracking-widest rounded-full border ${colorClass.border} hover:shadow-md transition-all duration-200`}
+                                >
+                                  {category.name}
+                                </a>
+                              );
+                            })}
+                        </div>
+                      </div>
+                      <div className="p-5">
+                        <h3 className="text-lg font-novaSemi text-gray-900 mb-2 line-clamp-2">
+                          {blog.name}
+                        </h3>
+                        <p
+                          className="text-gray-600 text-sm mb-3 line-clamp-3"
+                          dangerouslySetInnerHTML={{
+                            __html: blog.description || "No description available.",
+                          }}
+                        />
+                        <div className="flex items-center justify-between">
+                          <p className="text-orange-500 text-sm">
+                            📅 {formatDate(blog?.post_date_gmt)}
+                          </p>
+                          <a
+                            href={blog.path}
+                            className="text-blue-600 text-sm font-novaSemi hover:underline"
+                          >
+                            Read more →
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              ) : (
+                <p className="text-center text-gray-500">No more blogs found.</p>
+              )}
             </section>
-          </>
-        )}
 
-        {/* More Blogs */}
-        <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">More Blogs</h2>
-
-          {loading ? (
-            <p className="text-center text-gray-500">Loading blogs...</p>
-          ) : otherBlogs.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherBlogs.map((blog) => (
-                <div
-                  key={blog._id}
-                  className="bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition"
-                >
-                  <div className="relative">
-                    <img
-                      src={blog?.banner_img || "/placeholder.jpg"}
-                      alt={blog?.name}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="flex flex-wrap items-center gap-3 px-5 mt-2">
-                      {blog.categorys.length > 0 &&
-                        blog.categorys.map((category, idx) => {
-                          const categoryColors = [
-                            { bg: "bg-gradient-to-r from-blue-100 to-blue-50", text: "text-blue-700", border: "border-blue-200" },
-                            { bg: "bg-gradient-to-r from-purple-100 to-purple-50", text: "text-purple-700", border: "border-purple-200" },
-                            { bg: "bg-gradient-to-r from-emerald-100 to-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
-                            { bg: "bg-gradient-to-r from-amber-100 to-amber-50", text: "text-amber-700", border: "border-amber-200" },
-                            { bg: "bg-gradient-to-r from-rose-100 to-rose-50", text: "text-rose-700", border: "border-rose-200" },
-                          ];
-                          const colorClass = categoryColors[idx % categoryColors.length];
-                          return (
-                            <a
-                              key={category.term_id}
-                              href={`/blogs/category/${category.slug}`}
-                              className={`inline-block px-2 py-1 ${colorClass.bg} ${colorClass.text} text-xs font-semibold uppercase tracking-widest rounded-full border ${colorClass.border} hover:shadow-md transition-all duration-200`}
-                            >
-                              {category.name}
-                            </a>
-                          );
-                        })}
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                      {blog.name}
-                    </h3>
-                    <p
-                      className="text-gray-600 text-sm mb-3 line-clamp-3"
-                      dangerouslySetInnerHTML={{
-                        __html: blog.description || "No description available.",
-                      }}
-                    />
-                    <div className="flex items-center justify-between">
-                      <p className="text-orange-500 text-sm">
-                        📅 {formatDate(blog?.post_date_gmt)}
-                      </p>
-                      <a
-                        href={blog.path}
-                        className="text-blue-600 text-sm font-semibold hover:underline"
-                      >
-                        Read more →
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-center text-gray-500">No more blogs found.</p>
-          )}
-        </section>
-
-        {/* Pagination */}
+            {/* Pagination */}
+          </div>
+        </div>
         {!loading && blogs.length > 0 && (
-          <div className="flex justify-center items-center mt-10 space-x-4">
-            <button
-              disabled={pagination.currentPage === 1}
-              onClick={() => handlePageChange(pagination.currentPage - 1)}
-              className={`px-4 py-2 rounded-lg border text-sm font-medium ${pagination.currentPage === 1
-                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                : "bg-white text-gray-700 hover:bg-gray-100"
-                }`}
-            >
-              ← Prev
-            </button>
-            <span className="text-gray-700 text-sm">
-              Page {pagination.currentPage} of {pagination.totalPages}
-            </span>
-            <button
-              disabled={pagination.currentPage === pagination.totalPages}
-              onClick={() => handlePageChange(pagination.currentPage + 1)}
-              className={`px-4 py-2 rounded-lg border text-sm font-medium ${pagination.currentPage === pagination.totalPages
-                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                : "bg-white text-gray-700 hover:bg-gray-100"
-                }`}
-            >
-              Next →
-            </button>
+          <div className="bg-white">
+            <div className="bg-primary flex justify-center items-center rounded-r-[50px] py-4 px-6 space-x-4">
+              <button
+                disabled={pagination.currentPage === 1}
+                onClick={() => handlePageChange(pagination.currentPage - 1)}
+                className={`px-4 py-2 rounded-lg border text-sm font-novaSemi uppercase ${pagination.currentPage === 1
+                  ? "bg-white text-black cursor-not-allowed"
+                  : "bg-white text-black"
+                  }`}
+              >
+                ← Prev
+              </button>
+              <span className="text-gray-100 font-novaReg text-sm">
+                Page {pagination.currentPage} of {pagination.totalPages}
+              </span>
+              <button
+                disabled={pagination.currentPage === pagination.totalPages}
+                onClick={() => handlePageChange(pagination.currentPage + 1)}
+                className={`px-4 py-2 rounded-lg text-sm font-novaSemi uppercase ${pagination.currentPage === pagination.totalPages
+                  ? "bg-secondary text-black cursor-not-allowed"
+                  : "bg-secondary text-black"
+                  }`}
+              >
+                Next →
+              </button>
+            </div>
           </div>
         )}
       </div>

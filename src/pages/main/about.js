@@ -11,7 +11,7 @@ export default function AboutUs({ data }) {
       </div>
       <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
         <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
-          <div className="max-w-[1200px] ml-auto py-16 px-16">
+          <div className="max-w-[1400px] ml-auto py-16 px-16">
             <div
               className={`text-white font-novaReg w-full leading-relaxed`}
               dangerouslySetInnerHTML={{ __html: data?.pageData?.AboutDescription }}

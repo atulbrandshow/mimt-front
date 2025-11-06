@@ -91,7 +91,7 @@ export default function AlumniPage({ data }) {
                                   className="
                                 w-16 h-16 rounded-3xl object-cover 
                                 shadow-md border border-gray-200
-                              "
+                                "
                                 />
                               ) : (
                                 <div className="w-16 h-16 bg-gray-300 rounded-xl" />
