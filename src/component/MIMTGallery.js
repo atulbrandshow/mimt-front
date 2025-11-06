@@ -18,7 +18,7 @@ function MIMTGallery({ data }) {
 
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                        <h3 className="text-white text-lg md:text-xl font-semibold tracking-wide text-center px-4">
+                        <h3 className="text-white text-lg md:text-xl font-novaSemi tracking-wide text-center px-4">
                             Mangalmay Group Of Institutions
                         </h3>
                     </div>
