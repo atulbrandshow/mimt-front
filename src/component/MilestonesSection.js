@@ -31,7 +31,7 @@ const MilestonesSection = ({ data }) => {
   }
 
   return (
-    <section className='rounded-l-[100px] bg-white'>
+    <section className='rounded-l-[100px] bg-Vector-img bg-cover bg-center'>
       <div className="max-w-[1400px] mx-auto py-24">
         <div className="text-center">
           <div className='flex gap-1 justify-center text-secondary mb-6'>
