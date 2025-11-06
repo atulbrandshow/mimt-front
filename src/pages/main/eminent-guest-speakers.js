@@ -23,28 +23,31 @@ export default function Page({ data }) {
     <div className="bg-white">
       <Header BreadCrumb={data?.breadCrumb} data={data} />
 
-      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-20 px-3 sm:px-6 gap-10">
+      <div className="bg-primary">
+        <div className="bg-white h-20 rounded-bl-3xl" />
+      </div>
+      <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
+        <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <div className="max-w-[1200px] ml-auto py-16 px-16">
 
-        {/* ✅ LEFT CONTENT */}
-        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+            <h2 className="text-3xl font-novaBold text-white mb-6 border-l-8 border-[#fdd023] pl-4">
+              Eminent Guests
+            </h2>
 
-          <h2 className="text-3xl font-bold text-black mb-6 border-l-8 border-[#fdd023] pl-4">
-            Eminent Guests
-          </h2>
-
-          {/* ✅ DESCRIPTION CARDS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-            {cards?.map((item, index) => (
-              <div
-                key={index}
-                className=""
-              >
+            {/* ✅ DESCRIPTION CARDS */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+              {cards?.map((item, index) => (
                 <div
-                  className="text-[16px] leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: item }}
-                />
-              </div>
-            ))}
+                  key={index}
+                  className=""
+                >
+                  <div
+                    className="text-[16px] leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: item }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

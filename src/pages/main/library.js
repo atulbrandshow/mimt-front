@@ -22,59 +22,61 @@ export default function Page({ data }) {
     <div className="bg-white">
       <Header BreadCrumb={data?.breadCrumb} data={data} />
 
-      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-20 max-sm:py-2 gap-10 px-3 sm:px-6 max-sm:gap-0">
+      <div className="bg-primary">
+        <div className="bg-white h-20 rounded-bl-3xl" />
+      </div>
+      <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
+        <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <div className="max-w-[1200px] ml-auto py-16 px-16">
+            {/* ✅ TOP TEXT */}
+            <div
+              dangerouslySetInnerHTML={{ __html: pageData?.LibraryTopText }}
+              className="text-white font-novaReg mb-5"
+            />
 
-        {/* ✅ LEFT CONTENT SECTION */}
-        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
-
-          {/* ✅ TOP TEXT */}
-          <div
-            dangerouslySetInnerHTML={{ __html: pageData?.LibraryTopText }}
-            className={descriptionCss}
-          />
-
-          {/* ✅ GALLERY */}
-          <section className="py-12 bg-white">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <MIMTGallery data={pageData?.LibraryGallery} />
+            {/* ✅ GALLERY */}
+            <section className="py-2">
+              <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <MIMTGallery data={pageData?.LibraryGallery} />
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* ✅ LIBRARY DESCRIPTION */}
-          <div
-            dangerouslySetInnerHTML={{ __html: pageData?.LibraryDescription }}
-            className={descriptionCss}
-          />
+            {/* ✅ LIBRARY DESCRIPTION */}
+            <div
+              dangerouslySetInnerHTML={{ __html: pageData?.LibraryDescription }}
+              className="text-white font-novaReg mb-5"
+            />
 
-          {/* ✅ FEATURES LIST */}
-          <h3 className="text-2xl font-semibold mt-10">{pageData?.LF_Heading}</h3>
-          <ul className="list-disc pl-6 mt-3 space-y-2 text-gray-700">
-            <li>{pageData?.LF_1}</li>
-            <li>{pageData?.LF_2}</li>
-            <li>{pageData?.LF_3}</li>
-            <li>{pageData?.LF_4}</li>
-          </ul>
+            {/* ✅ FEATURES LIST */}
+            <h3 className="text-2xl font-semibold text-white mt-10">{pageData?.LF_Heading}</h3>
+            <ul className="list-disc pl-6 mt-3 space-y-2 text-gray-100">
+              <li>{pageData?.LF_1}</li>
+              <li>{pageData?.LF_2}</li>
+              <li>{pageData?.LF_3}</li>
+              <li>{pageData?.LF_4}</li>
+            </ul>
 
-          {/* ✅ LIBRARY COLLECTION */}
-          <div
-            dangerouslySetInnerHTML={{ __html: pageData?.LibraryCollection }}
-            className={`${descriptionCss} mt-10`}
-          />
+            {/* ✅ LIBRARY COLLECTION */}
+            <div
+              dangerouslySetInnerHTML={{ __html: pageData?.LibraryCollection }}
+              className={`mt-10`}
+            />
 
-          {/* ✅ LIBRARY SERVICES */}
-          <div
-            dangerouslySetInnerHTML={{ __html: pageData?.LibraryServices }}
-            className={`${descriptionCss} mt-10`}
-          />
+            {/* ✅ LIBRARY SERVICES */}
+            <div
+              dangerouslySetInnerHTML={{ __html: pageData?.LibraryServices }}
+              className={`mt-10`}
+            />
 
-          {/* ✅ LIBRARY RULES */}
-          <div
-            dangerouslySetInnerHTML={{ __html: pageData?.LibraryRules }}
-            className={`${descriptionCss} mt-10`}
-          />
+            {/* ✅ LIBRARY RULES */}
+            <div
+              dangerouslySetInnerHTML={{ __html: pageData?.LibraryRules }}
+              className={`mt-10`}
+            />
 
+          </div>
         </div>
 
         {/* ✅ SIDEBAR */}

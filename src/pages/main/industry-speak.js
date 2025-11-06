@@ -44,71 +44,70 @@ export default function Page({ data }) {
   return (
     <div className="bg-white">
       <Header BreadCrumb={data?.breadCrumb} data={data} />
+      <div className="bg-primary">
+        <div className="bg-white h-20 rounded-bl-3xl" />
+      </div>
+      <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
+        <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <div className="max-w-[1200px] ml-auto py-16 px-16">
+            <h1 className="text-4xl font-novaBold text-white mb-10">
+              {p?.RecruitersSaysTitle || "Industry Speak"}
+            </h1>
 
-      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-16 px-4 gap-10">
-        
-        {/* ✅ LEFT SECTION */}
-        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+            {/* ✅ If no data available */}
+            {total === 0 && (
+              <p className="text-gray-500 text-lg">No recruiter data available.</p>
+            )}
 
-          <h1 className="text-4xl font-bold text-gray-900 mb-10">
-            {p?.RecruitersSaysTitle || "Industry Speak"}
-          </h1>
+            {/* ✅ Auto Slider */}
+            {total > 0 && (
+              <div className="relative w-full h-auto">
+                {activeRecruiters.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${current === index ? "opacity-100" : "opacity-0"
+                      }`}
+                  >
+                    <div className="p-8 rounded-2xl border border-gray-200 shadow-md bg-white">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
 
-          {/* ✅ If no data available */}
-          {total === 0 && (
-            <p className="text-gray-500 text-lg">No recruiter data available.</p>
-          )}
+                        {/* ✅ IMAGE */}
+                        <div className="flex justify-center">
+                          {item.img ? (
+                            <img
+                              src={IMAGE_PATH + item.img}
+                              alt=""
+                              className="w-40 h-40 rounded-full object-cover border-4 border-purple-600 p-1 bg-white shadow"
+                            />
+                          ) : (
+                            <div className="w-40 h-40 bg-gray-200 rounded-full" />
+                          )}
+                        </div>
 
-          {/* ✅ Auto Slider */}
-          {total > 0 && (
-            <div className="relative w-full h-auto">
-              {activeRecruiters.map((item, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    current === index ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  <div className="p-8 rounded-2xl border border-gray-200 shadow-md bg-white">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-
-                      {/* ✅ IMAGE */}
-                      <div className="flex justify-center">
-                        {item.img ? (
-                          <img
-                            src={IMAGE_PATH + item.img}
-                            alt=""
-                            className="w-40 h-40 rounded-full object-cover border-4 border-purple-600 p-1 bg-white shadow"
-                          />
-                        ) : (
-                          <div className="w-40 h-40 bg-gray-200 rounded-full" />
-                        )}
-                      </div>
-
-                      {/* ✅ DESCRIPTION (HTML) */}
-                      <div className="md:col-span-2 text-gray-700 text-lg leading-relaxed">
-                        <div dangerouslySetInnerHTML={{ __html: item.desc }} />
+                        {/* ✅ DESCRIPTION (HTML) */}
+                        <div className="md:col-span-2 text-gray-700 text-lg leading-relaxed">
+                          <div dangerouslySetInnerHTML={{ __html: item.desc }} />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
 
-          {/* ✅ Dot Indicators */}
-          {total > 0 && (
-            <div className="flex justify-center mt-6 space-x-2">
-              {activeRecruiters.map((_, i) => (
-                <div
-                  key={i}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    current === i ? "bg-purple-600" : "bg-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
-          )}
+            {/* ✅ Dot Indicators */}
+            {total > 0 && (
+              <div className="flex justify-center mt-6 space-x-2">
+                {activeRecruiters.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-3 h-3 rounded-full transition-all ${current === i ? "bg-purple-600" : "bg-gray-300"
+                      }`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* ✅ SIDEBAR */}
