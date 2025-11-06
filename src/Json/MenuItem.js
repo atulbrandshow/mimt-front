@@ -109,6 +109,20 @@ export const Admissions = {
         ]
     }
 }
+
+export const Faculty = {
+    name: 'Faculty',
+    links: '/',
+    sublinks: {
+        "Faculty": [
+            {
+                name: 'Academicians',
+                url: "/academecians.html"
+            },
+           
+        ]
+    }
+}
 export const Placements = {
     name: 'Placements',
     links: '/',
