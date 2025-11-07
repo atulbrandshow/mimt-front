@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }) {
                 <div className='flex-grow'>
                 {isShowNavAndFooter && <MainHeader />}
                     <Component {...pageProps} />
-                    <SmoothScroll />
+                    {/* <SmoothScroll /> */}
                     <ToastContainer
                         position="top-right"
                         autoClose={1000}
