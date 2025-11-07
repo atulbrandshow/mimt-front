@@ -107,46 +107,7 @@ export default function Page({ data }) {
                 className={`${descriptionCss}`}
               />
             </div>
-
           </div>
-
-          {/* ✅ FINAL GREY SECTION – MODERN + ANIMATED */}
-          <div className="">
-
-            {/* ✅ TOP DESCRIPTION */}
-            <div
-              dangerouslySetInnerHTML={{ __html: page?.McieiDesc3 }}
-              className={`${descriptionCss} text-gray-700 leading-relaxed text-lg`}
-            />
-
-            {/* ✅ TWO COLUMN BLOCKS */}
-            <div className="grid md:grid-cols-2 gap-10">
-
-              {/* ✅ KEY DIFFERENTIATORS */}
-              <div className="group p-6 bg-white rounded-xl shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <h2 className="text-2xl font-bold mb-4 text-gray-900 group-hover:text-green-700 transition-colors">
-                  MCIEI - KEY DIFFERENTIATORS
-                </h2>
-                <div
-                  dangerouslySetInnerHTML={{ __html: page?.McieiKeys }}
-                  className={`${descriptionCss} text-gray-700 space-y-3 leading-relaxed animate-fadeIn`}
-                />
-              </div>
-
-              {/* ✅ SUPPORT TO STARTUPS */}
-              <div className="group p-6 bg-white rounded-xl shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <h2 className="text-2xl font-bold mb-4 text-gray-900 group-hover:text-green-700 transition-colors">
-                  SUPPORT TO STARTUPS
-                </h2>
-                <div
-                  dangerouslySetInnerHTML={{ __html: page?.McieiStartups }}
-                  className={`${descriptionCss} text-gray-700 space-y-3 leading-relaxed animate-fadeIn`}
-                />
-              </div>
-
-            </div>
-          </div>
-
 
         </div>
 
@@ -157,6 +118,37 @@ export default function Page({ data }) {
         </div>
 
       </section>
+      <div className="bg-primary">
+        <div className="bg-white h-20 rounded-bl-3xl" />
+      </div>
+      <div className="bg-primary w-[94vw] rounded-r-[100px]">
+        <div className="max-w-[1500px] mx-auto py-10">
+          <div
+            dangerouslySetInnerHTML={{ __html: page?.McieiDesc3 }}
+            className={`${descriptionCss} text-gray-700 bg-white p-4 rounded-3xl leading-relaxed text-lg`}
+          />
+          <div className="mt-10 grid md:grid-cols-2 gap-10">
+            <div className="group p-6 bg-white rounded-3xl shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <h2 className="text-2xl font-bold mb-4 text-gray-900 group-hover:text-green-700 transition-colors">
+                MCIEI - KEY DIFFERENTIATORS
+              </h2>
+              <div
+                dangerouslySetInnerHTML={{ __html: page?.McieiKeys }}
+                className={`${descriptionCss} text-gray-700 space-y-3 leading-relaxed animate-fadeIn`}
+              />
+            </div>
+            <div className="group p-6 bg-white rounded-3xl shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <h2 className="text-2xl font-bold mb-4 text-gray-900 group-hover:text-green-700 transition-colors">
+                SUPPORT TO STARTUPS
+              </h2>
+              <div
+                dangerouslySetInnerHTML={{ __html: page?.McieiStartups }}
+                className={`${descriptionCss} text-gray-700 space-y-3 leading-relaxed animate-fadeIn`}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
