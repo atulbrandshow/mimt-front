@@ -5,8 +5,6 @@ import { descriptionCss } from "@/configs/css.config";
 import MIMTGallery from "@/component/MIMTGallery";
 
 export default function Page({ data }) {
-  console.log(data);
-
   const SideBarLink = [
     { name: "Our Identity", link: "/overview" },
     { name: "Leadership", link: "" },
