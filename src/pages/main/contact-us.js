@@ -10,7 +10,7 @@ export default function Page({ data }) {
   return (
     <div className="bg-white">
       <Header BreadCrumb={data?.breadCrumb} data={data} />
-      <section className="w-full max-w-[1600px] mx-auto pt-20 pb-10 px-4 grid grid-cols-12 gap-10">
+      <section className="w-full max-w-[1400px] mx-auto pt-20 pb-10 px-4 grid grid-cols-12 gap-10">
         <div className="col-span-12 lg:col-span-7">
           <div className="bg-[#f9c80e] p-10 rounded-2xl shadow-xl">
             <h2 className="text-3xl font-novaBold text-black mb-6">
@@ -92,7 +92,7 @@ export default function Page({ data }) {
         <div className="bg-white h-10 rounded-bl-3xl" />
       </div>
       <div className="bg-primary rounded-r-[60px]">
-        <div className="w-full px-36 py-8">
+        <div className="max-w-[1400px] mx-auto px-4 py-8">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.670382625863!2d77.49140427627815!3d28.459351075759862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cc1dc2d556ab3%3A0xb81e6f3c5f27c1ef!2sMangalmay%20Group%20of%20Institutions%20%7C%20Greater%20Noida!5e0!3m2!1sen!2sin!4v1762330770161!5m2!1sen!2sin"
             className="w-full h-96 rounded-2xl shadow-xl border-0"
