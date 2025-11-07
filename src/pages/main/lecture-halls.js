@@ -20,39 +20,38 @@ export default function Page({ data }) {
   return (
     <div className="bg-white">
       <Header BreadCrumb={data?.breadCrumb} data={data} />
+      <div className="bg-primary">
+        <div className="bg-white h-20 rounded-bl-3xl" />
+      </div>
+      <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
+        <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
+          <div className="max-w-[1200px] ml-auto py-16 px-16">
+            <div
+              dangerouslySetInnerHTML={{ __html: page?.LectureHallDesc }}
+              className={`${descriptionCss} bg-gray-50 p-6 rounded-xl shadow-sm leading-relaxed text-[17px] mb-10`}
+            />
 
-      <section className="w-full max-w-[1600px] mx-auto grid grid-cols-12 py-20 max-sm:py-4 gap-10 px-3 sm:px-6 max-sm:gap-0">
-
-        {/* ✅ LEFT CONTENT */}
-        <div className="col-span-9 max-xl:col-span-8 max-lg:col-span-12">
-
-          {/* ✅ DESCRIPTION */}
-          <div
-            dangerouslySetInnerHTML={{ __html: page?.LectureHallDesc }}
-            className={`${descriptionCss} bg-gray-50 p-6 rounded-xl shadow-sm leading-relaxed text-[17px] mb-10`}
-          />
-
-          {/* ✅ GALLERY */}
-          <section className="py-8 bg-white">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {page?.LectureHallGallery?.map((img, i) => (
-                  <div
-                    key={i}
-                    className="w-full h-[260px] bg-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition relative"
-                  >
-                    <Image
-                      src={IMAGE_PATH + img}
-                      alt={`Lecture Hall ${i + 1}`}
-                      fill
-                      className="object-cover object-center"
-                    />
-                  </div>
-                ))}
+            {/* ✅ GALLERY */}
+            <section className="py-4">
+              <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {page?.LectureHallGallery?.map((img, i) => (
+                    <div
+                      key={i}
+                      className="w-full h-[260px] bg-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition relative"
+                    >
+                      <Image
+                        src={IMAGE_PATH + img}
+                        alt={`Lecture Hall ${i + 1}`}
+                        fill
+                        className="object-cover object-center"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-
+            </section>
+          </div>
         </div>
 
         {/* ✅ RIGHT SIDEBAR */}
