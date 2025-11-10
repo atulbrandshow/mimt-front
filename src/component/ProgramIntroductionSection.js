@@ -9,11 +9,11 @@ const IntroductionSection = ({
   brochureLink,
 }) => {
   return (
-    <section className="relative bg-gradient-to-b from-white via-gray-50 to-gray-100 py-6 md:py-10 px-6 md:px-12 overflow-hidden">
+    <section className="relative py-6 md:py-10 px-6 md:px-12 overflow-hidden">
       {/* Soft background gradient blob */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-transparent blur-3xl -z-10"></div>
 
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-14 md:gap-20">
+      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center gap-14 md:gap-20">
         {/* Left Section - Image */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -26,7 +26,7 @@ const IntroductionSection = ({
             <img
               src={image}
               alt={title}
-              className="w-full h-80 md:h-[450px] object-cover transform transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-80 md:h-[400px] object-cover object-top transform transition-transform duration-700 group-hover:scale-105"
             />
           </div>
           <div className="absolute inset-0 rounded-3xl bg-black bg-opacity-10 group-hover:bg-opacity-20 transition duration-500"></div>
@@ -40,12 +40,12 @@ const IntroductionSection = ({
           viewport={{ once: true }}
           className="w-full md:w-1/2 space-y-6"
         >
-          <h2 className="text-xl md:text-3xl font-bold text-gray-900 leading-tight">
+          <h2 className="text-xl md:text-3xl font-novaBold text-gray-900 leading-tight">
             {title}
           </h2>
 
           <div
-            className="text-gray-700 text-sm md:text-base leading-relaxed prose prose-gray max-w-none"
+            className="text-gray-700 text-sm md:text-base font-novaReg leading-relaxed prose prose-gray max-w-none"
             dangerouslySetInnerHTML={{ __html: description }}
           ></div>
 
@@ -58,7 +58,7 @@ const IntroductionSection = ({
                 href={applyLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-primary hover:bg-primary/90 text-white font-semibold py-3.5 px-7 rounded-full shadow-lg transition-all duration-300"
+                className="bg-primary hover:bg-primary/90 text-white font-semibold py-2 px-7 font-novaBold rounded-full shadow-lg transition-all duration-300"
               >
                 Apply Now
               </motion.a>
@@ -71,7 +71,7 @@ const IntroductionSection = ({
                 href={brochureLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3.5 px-7 rounded-full shadow-lg transition-all duration-300"
+                className="border border-primary text-primary hover:bg-primary hover:text-white font-semibold font-novaBold py-2 px-7 rounded-full shadow-lg transition-all duration-300"
               >
                 Download Brochure
               </motion.a>
