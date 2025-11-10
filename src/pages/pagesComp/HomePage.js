@@ -26,7 +26,7 @@ import { StudentTestimonial } from "@/component/StudentTestimonial";
 
 export default function HomePage({ data }) {
   return (
-    <div className="bg-primary">
+    <div className="bg-white">
       <MainSection />
       {/* <HeroSection /> */}
       {data && <AboutSection />}

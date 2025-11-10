@@ -67,7 +67,7 @@ export default function ExploreCourses({ data }) {
     }
 
     return (
-        <section className="bg-gradient-to-t from-white to-secondary">
+        <section className="bg-white">
             <section className="bg-primary rounded-r-[100px] py-10 sm:py-16 md:py-24">
                 <div className="break2:max-w-[1320px] break3:max-w-[1140px] break4:max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8 text-white">
                     <TitleInfo first="Our Courses" second={d?.Courses_Title} color="white" />
