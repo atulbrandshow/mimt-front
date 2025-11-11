@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #911E75;
+  --seconday-color: #fecc00;
+}
+
 @font-face {
   font-family: "proximanova-regular";
   src: url("/fonts/proximanova-regular.ttf") format("truetype");

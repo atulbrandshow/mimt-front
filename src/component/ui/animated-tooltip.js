@@ -37,7 +37,7 @@ export const AnimatedTooltip = ({
         <>
             {items.map((item, idx) => (
                 <div
-                    className="group relative mb-2  bg-white rounded-full cursor-pointer"
+                    className="group relative mb-2  bg-white max-sm:border-primary/40 max-sm:border-2 rounded-full cursor-pointer"
                     key={item.name}
                     onMouseEnter={() => setHoveredIndex(item.id)}
                     onMouseLeave={() => setHoveredIndex(null)}>
