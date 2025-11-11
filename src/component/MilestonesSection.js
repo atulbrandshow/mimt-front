@@ -31,8 +31,8 @@ const MilestonesSection = ({ data }) => {
   }
 
   return (
-    <section className="bg-gradient-to-r from-primary to-white">
-      <main className="rounded-l-[100px] rounded-tr-[100px] bg-white py-8 sm:py-16 md:py-24">
+    <section className="bg-primary">
+      <main className="rounded-l-[100px] bg-white py-8 sm:py-16 md:py-24">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center">
             <div className='flex gap-1 justify-center text-secondary mb-6'>
@@ -64,7 +64,7 @@ const MilestonesSection = ({ data }) => {
               ))}
             </div>
           </div>
-          <div className="flex justify-between space-x-0 max-lg:space-x-0  mx-auto max-lg:grid max-lg:grid-cols-3 max-md:grid-cols-2 max-lg:justify-start max-lg:gap-y-5">
+          <div className="max-sm:px-3 max-sm:pb-10 max-lg:px-10 flex justify-between space-x-0 max-lg:space-x-0  mx-auto max-lg:grid max-lg:grid-cols-3 max-md:grid-cols-2 max-lg:justify-start max-lg:gap-y-5">
             {milestones?.map((milestone, index) => (
               <div key={index} className="text-left after:content-link relative after:absolute after:left-5 after:top-0 after:w-6 after:h-full px-10 mb-1">
                 <p className="text-xs uppercase bg-gradient-to-r from-blue-600 to-rose-600 bg-clip-text text-transparent font-novaBold">Ranked</p>

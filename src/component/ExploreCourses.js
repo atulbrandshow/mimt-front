@@ -88,7 +88,7 @@ export default function ExploreCourses({ data }) {
                             ))}
                         </dl>
                     </div>
-                    <div className="mt-10 max-w-6xl mx-auto max-[480px]:grid-cols-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    <div className="mt-10 max-w-6xl mx-auto max-[480px]:grid-cols-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-sm:px-4">
                         {programs.map((item, index) => (
                             <CardContainer className="inter-var">
                                 <CardBody

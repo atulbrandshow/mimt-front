@@ -32,13 +32,13 @@ const AboutSection = () => {
     };
 
     return (
-        <section className="bg-gradient-to-r from-primary to-white">
-            <main className="rounded-bl-[100px] rounded-tr-[100px] bg-white py-8 sm:py-16 md:py-24">
+        <section className="bg-gradient-to-t from-primary to-white">
+            <main className="rounded-bl-[100px] rounded-tr-[100px] bg-white px-2 sm:px-6 py-8 sm:py-16 md:py-24">
                 <div className='max-w-[1500px] mx-auto'>
                     <TitleInfo first="Top Ranked Institution" second="Mangalmay Group Of Institutions – One of India's Best Ranked Institutions" color='black' />
-                    <section className='mt-20 grid grid-cols-3 gap-5'>
+                    <section className='sm:mt-10 md:mt-20 grid grid-cols-3 gap-5'>
                         <div
-                            className='w-full col-span-2 mx-auto relative group'
+                            className='w-full col-span-3 xl:col-span-2 mx-auto relative group'
                             onMouseEnter={() => setShowPlayButton(true)}
                             onMouseLeave={() => setShowPlayButton(false)}
                         >
@@ -107,7 +107,7 @@ const AboutSection = () => {
                                 </>
                             )}
                         </div>
-                        <div className='col-span-1'>
+                        <div className='col-span-3 xl:col-span-1'>
                             <div className='max-w-7xl mx-auto sm:px-6'>
                                 <h2 className='mb-5 text-3xl font-novaLight text-center'>About Us</h2>
                                 <p className='sm:text-base text-center font-novaReg'>Established in 2002, Mangalmay Group of Institutions is a NAAC "A" Grade accredited institute committed to innovation, excellence, and nurturing global leaders. Offering AICTE-approved and AKTU-affiliated programs in Management, Engineering, Biotechnology, Commerce, and Education, Mangalmay blends knowledge, research, and industry exposure to deliver holistic education. Ranked among the best MBA and B.Tech colleges in Delhi NCR, our mission is to empower students with creativity, talent, and values to make a positive impact on society.</p>

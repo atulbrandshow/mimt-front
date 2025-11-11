@@ -21,44 +21,60 @@ const MainSection = () => {
   ]
 
   return (
-    <div className="overflow-hidden relative">
-      <div className="flex justify-center relative z-20 h-screen">
-        <div className="relative z-10 w-full h-full flex  items-center py-10">
-          <div className="px-40 w-full flex flex-col justify-center h-full">
-            <span className="text-sm font-novaReg text-white tracking-widest uppercase">best <span className="text-primary">university</span> in this Delhi NCR</span>
-            <h1 className="text-7xl uppercase font-cursiveFont font-thin max-w-lg text-white">
+    <div className="relative overflow-hidden">
+      <div className="flex justify-center relative z-20 min-h-[90vh] sm:h-screen px-5 sm:px-10 lg:px-20">
+        <div className="relative z-10 w-full h-full flex flex-col lg:flex-row items-center lg:items-center py-10 gap-10 lg:gap-0">
+
+          {/* Left Text Section */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left">
+            <span className="text-xs sm:text-sm font-novaReg text-white tracking-widest uppercase">
+              best <span className="text-primary">university</span> in Delhi NCR
+            </span>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase font-cursiveFont font-thin text-white mt-3">
               Mangalmay Group of Institution
             </h1>
-            <p className="mt-4 text-white text-xl font-novaReg max-lg:text-base max-lg:text-center">
-              Best B.Tech, MBA, BBA, BCA, BCOM and B.Ed college with a global reputation that strives for high-quality education. The mission of the group is to offer innovative opportunities to our students to showcase their creativity and talent thereby making a positive impact on society.
+
+            <p className="mt-4 text-slate-200 text-sm sm:text-base md:text-lg font-novaReg max-w-xl mx-auto lg:mx-0">
+              Best B.Tech, MBA, BBA, BCA, BCOM and B.Ed college with a global reputation that strives for high-quality education. 
+              The mission of the group is to offer innovative opportunities to our students to showcase their creativity and talent 
+              thereby making a positive impact on society.
             </p>
-            <div className="h-20">
+
+            <div className="mt-6">
               <Button
-                text={"Apply Today"}
-                // onClick={() => setIsModalOpen(!isModalOpen)}
-                className="py-3 max-sm:px-6 max-sm:text-xs px-10 mt-5 text-[15px] rounded-xl font-novaBold uppercase bg-primary animate-gradient text-white w-max hover:bg-[#791b61] hover:border-b-4 hover:border-black hover:transform scale-y-105 tracking-widest"
+                text="Apply Today"
+                className="py-3 px-8 sm:px-10 text-sm sm:text-[15px] rounded-xl font-novaBold uppercase bg-primary animate-gradient text-white hover:bg-[#791b61] hover:border-b-4 hover:border-black hover:scale-y-105 tracking-widest"
               />
             </div>
           </div>
-          <div className="h-full flex flex-col items-end justify-end relative">
-            {/* Navigation buttons */}
-            <div className="flex gap-2 mb-5 mr-5">
-              <button id="prevButton" className="p-2 bg-primary rounded-full shadow hover:bg-gray-200">
+
+          {/* Right Swiper Section */}
+          <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-end justify-end relative lg:h-full">
+            
+            {/* Navigation Buttons */}
+            <div className="flex gap-2 mb-4 lg:mb-5">
+              <button id="prevButton" className="p-2 bg-primary rounded-full shadow hover:bg-[#9b337e] transition">
                 <ArrowLeft className="w-5 h-5 text-white" />
               </button>
-              <button id="nextButton" className="p-2 bg-primary rounded-full shadow hover:bg-gray-200">
+              <button id="nextButton" className="p-2 bg-primary rounded-full shadow hover:bg-[#9b337e] transition">
                 <ArrowRight className="w-5 h-5 text-white" />
               </button>
             </div>
 
             {/* Swiper */}
-            <div className="w-[600px] h-[200px]">
+            <div className="w-[250px] sm:w-[500px] md:w-[600px] lg:w-[700px] h-[140px] sm:h-[160px] md:h-[200px]">
               <Swiper
                 modules={[Autoplay, Pagination, Navigation]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 loop={true}
-                slidesPerView={2}
-                spaceBetween={20}
+                slidesPerView={1}
+                breakpoints={{
+                  640: { slidesPerView: 1 },
+                  768: { slidesPerView: 2 },
+                  1068: { slidesPerView: 2 },
+                }}
+                spaceBetween={15}
                 navigation={{
                   prevEl: "#prevButton",
                   nextEl: "#nextButton",
@@ -67,7 +83,10 @@ const MainSection = () => {
               >
                 {slides.map((img, i) => (
                   <SwiperSlide key={i}>
-                    <div className="w-full h-full bg-cover bg-center rounded-2xl" style={{ backgroundImage: `url(${img})` }}></div>
+                    <div
+                      className="w-full h-full bg-cover bg-center rounded-2xl"
+                      style={{ backgroundImage: `url(${img})` }}
+                    ></div>
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -76,17 +95,18 @@ const MainSection = () => {
         </div>
       </div>
 
-      {/* Gradient overlay */}
-      <div className="w-full h-full object-cover absolute left-0 top-0 z-10 bg-black/80"></div>
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 z-10 bg-black/80"></div>
 
-      <div className="w-full h-full absolute left-0 top-0 z-0">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
         <Image
           src="https://csip-image.blr1.digitaloceanspaces.com/csip-image/mmit/mangalmay_institute_of_management_technology_cover.webp"
           width={1920}
           height={1080}
           alt="Building"
           priority
-          className={`w-full h-full object-cover absolute left-0 top-0 transition-opacity duration-1000 ease-in-out`}
+          className="w-full h-full object-cover"
         />
       </div>
     </div>

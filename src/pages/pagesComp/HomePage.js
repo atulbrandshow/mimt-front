@@ -28,27 +28,16 @@ export default function HomePage({ data }) {
   return (
     <div className="bg-white">
       <MainSection />
-      {/* <HeroSection /> */}
-      {data && <AboutSection />}
-      {/* {data && <ProgramSection />} */}
-      {data && <ExploreCourses data={data} />}
+      <AboutSection />
+      <ExploreCourses data={data} />
       {data && <MilestonesSection data={data} />}
-      {/* {data && <HomeTopCard data={data} />} */}
       {data && <EventSection />}
       {data && <SlickSlider data={data} />}
       {data && <NewsSection />}
       {data && <NotificationSlider data={data} />}
       {data && <InnovationShowcase />}
-      {/* {data && <PlacementHighlights data={data} />} */}
-      {/* {data && <PlacementOverview />} */}
-      {data && <RecruiterTestimonial />}
-      {data && <StudentTestimonial />}
-      {/* {data && <HomeLogoSlider data={data} />} */}
-      {/* {data && <CampusSlider data={data} />} */}
-      {/* {data && <StudentReviews data={data} />} */}
-      {/* {data && <NewsEvents data={data} />} */}
-      {/* {data && <FooterCard data={data} />} */}
-      {/* {data && <ResearchEnvironment data={data} />} */}
+      {/* {data && <RecruiterTestimonial />} */}
+      {/* {data && <StudentTestimonial />} */}
     </div>
   );
 }

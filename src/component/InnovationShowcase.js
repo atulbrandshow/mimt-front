@@ -95,8 +95,8 @@ export default function InnovationShowcase() {
     }
 
     return (
-        <section className="bg-gradient-to-r from-primary to-white">
-            <section className="rounded-[100px] bg-primary py-24">
+        <section className="bg-primary rounded-r-[100px]">
+            <section className="rounded-[100px] bg-primary py-16 sm:py-24">
                 <TitleInfo first="Labs & Research" second="Innovate and Inspire Be a Future Innovator" color='white' />
                 <div className="max-w-[1600px] mx-auto text-white p-8 md:p-16">
                     {/* Header with Tab Buttons */}

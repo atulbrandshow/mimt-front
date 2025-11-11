@@ -50,12 +50,12 @@ const NotificationSlider = ({ data }) => {
     !eventsData && fetchEvents();
 
     return (
-        <section className="bg-gradient-to-r from-primary to-white">
-            <main className="rounded-l-[100px] rounded-tr-[100px] bg-white py-8 sm:py-16 md:py-24">
+        <section className="bg-primary">
+            <main className="rounded-l-[100px] bg-white py-8 sm:py-16 md:py-24">
                 <TitleInfo first="Highlights" second="Placement Highlights" color="cyan" />
                 <div className="max-w-[1500px] mx-auto">
                     <div className="col-span-12 max-lg:mb-4 flex items-center relative">
-                        <div className="grid grid-cols-4 max-w-7xl mx-auto w-full place-items-center">
+                        <div className="grid grid-cols-2 md:grid-cols-4 max-w-7xl mx-auto w-full place-items-center">
                             {stats.map((item, i) => {
                                 const hasUnit = item.count.includes("LPA") || item.count.includes("CR")
                                 const [value, unit] = hasUnit ? item.count.split(" ") : [item.count, ""]
@@ -87,7 +87,7 @@ const NotificationSlider = ({ data }) => {
                             })}
                         </div>
                     </div>
-                    <section className="col-span-8 max-lg:col-span-12 h-full max-lg:mb-4 max-lg:px-10 max-md:px-8 max-sm:px-1 max-lg:ml-0 drop-shadow-lg">
+                    <section className="col-span-8 max-lg:col-span-12 h-full max-lg:mb-4 max-lg:px-10 max-md:px-8 max-sm:px-5 max-lg:ml-0 drop-shadow-lg px-10">
                         <section className="bg-gradient-to-r from-cyan-500 to-green-600 animate-gradient rounded-lg h-full">
                             <div className="grid grid-cols-12 h-full">
                                 <div className="col-span-2 max-sm:hidden p-2 flex justify-center items-center">

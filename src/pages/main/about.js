@@ -7,7 +7,7 @@ export default function AboutUs({ data }) {
     <div className="bg-white">
       <Header data={data} BreadCrumb={data?.breadCrumb} />
       <div className="bg-primary">
-        <div className="bg-white h-20 rounded-bl-3xl" />
+        <div className="bg-white h-10 rounded-bl-3xl" />
       </div>
       <section className="w-full grid grid-cols-12 gap-10 max-sm:gap-0">
         <div className="bg-primary rounded-r-[50px] col-span-9 max-xl:col-span-8 max-lg:col-span-12">
@@ -18,7 +18,7 @@ export default function AboutUs({ data }) {
             />
           </div>
         </div>
-        <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12">
+        <div className="col-span-3 max-xl:col-span-4 max-lg:col-span-12 max-lg:px-6">
           <SideBar />
         </div>
       </section>

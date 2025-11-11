@@ -4,7 +4,7 @@ import Breadcrumb from './Breadcrumb'
 const Header = ({ BreadCrumb, data }) => {
     return (
         <div
-            className="mt-16 relative w-[92vw] h-[50vh] ml-auto rounded-l-[30px] overflow-hidden bg-cover bg-center"
+            className="mt-10 relative ml-10 h-[50vh] rounded-l-[30px] overflow-hidden bg-cover bg-center"
             style={{
                 backgroundImage: "url('/image/about/mangalmay_institute.webp')",
             }}

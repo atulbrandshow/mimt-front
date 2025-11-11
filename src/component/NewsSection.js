@@ -54,12 +54,12 @@ export default function NewsSection() {
     const activeNews = cards[activeCard];
 
     return (
-        <section className="bg-gradient-to-r from-primary to-white">
-            <section className="rounded-[100px] bg-primary flex flex-col justify-start items-center px-2 py-24">
+        <section className="bg-primary rounded-r-[100px]">
+            <section className="rounded-[100px] bg-primary flex flex-col justify-start items-center px-2 py-10 md:py-24">
                 <div className="max-w-7xl mx-auto flex flex-col justify-center items-center">
                     {/* Header Section */}
                     <TitleInfo first="News" second="Discover Latest News" color="white" />
-                    <p className="text-lg font-novaReg text-slate-200 text-center max-w-4xl mx-auto mt-4">
+                    <p className="text-base sm:text-lg font-novaReg text-slate-200 text-center max-w-4xl mx-auto mt-4">
                         Explore a diverse range of programs designed to empower students with knowledge, skills, and industry exposure. From management and technology to commerce and education, our courses are crafted to build future leaders and innovators ready to excel in their chosen fields.
                     </p>
 
