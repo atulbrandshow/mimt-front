@@ -8,7 +8,7 @@ import ShimmerContent from "@/component/ShimmerContent";
 export default function Home() {
   const { homeData, loading } = useContext(AppDataContext);
 
-  if (loading) return <ShimmerContent />;
+  // if (loading) return <ShimmerContent />;
 
   return (
     <>

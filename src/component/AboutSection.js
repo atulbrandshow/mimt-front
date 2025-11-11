@@ -33,9 +33,17 @@ const AboutSection = () => {
 
     return (
         <section className="bg-gradient-to-t from-primary to-white">
-            <main className="rounded-bl-[100px] rounded-tr-[100px] bg-white px-2 sm:px-6 py-8 sm:py-16 md:py-24">
-                <div className='max-w-[1500px] mx-auto'>
-                    <TitleInfo first="Top Ranked Institution" second="Mangalmay Group Of Institutions – One of India's Best Ranked Institutions" color='black' />
+            <main className="relative overflow-hidden rounded-bl-[100px] rounded-tr-[100px] bg-white px-2 sm:px-6 py-8 sm:py-16 md:py-24">
+                {/* Background texture */}
+                <div className="absolute inset-0  bg-Vector-img2 bg-contain bg-center opacity-50 pointer-events-none w-full"></div>
+
+                {/* Foreground content */}
+                <div className="relative max-w-[1500px] mx-auto">
+                    <TitleInfo
+                        first="Top Ranked Institution"
+                        second="Mangalmay Group Of Institutions – One of India's Best Ranked Institutions"
+                        color="black"
+                    />
                     <section className='sm:mt-10 md:mt-20 grid grid-cols-3 gap-5'>
                         <div
                             className='w-full col-span-3 xl:col-span-2 mx-auto relative group'

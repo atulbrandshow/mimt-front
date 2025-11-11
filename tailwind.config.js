@@ -100,6 +100,8 @@ module.exports = {
         'BG-Building-13': "url('/image/building/building-23.webp')",
         'BG-Building-14': "url('/image/building/building-24.webp')",
         'Vector-img': "url('/image/vector/Vector-img.jpg')",
+        'Vector-img2': "url('/image/vector/Vector-img2.jpg')",
+        'Vector-img3': "url('/image/vector/Vector-img3.png')",
 
       },
       boxShadow: {
