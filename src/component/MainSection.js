@@ -66,7 +66,13 @@ const MainSection = () => {
       />
 
       {/* Geometric Shapes */}
-      <div className="absolute top-20 left-10 w-20 h-20 border-2 border-[#fecc00]/30 rotate-45 z-10"></div>
+
+      {/* <div className="absolute top-20 left-10 w-20 h-20 border-2 border-[#fecc00]/30 rotate-45 z-10"></div> */}
+      <motion.div
+        className="absolute top-20 left-10 w-20 h-20 border-2 border-[#fecc00]/30 rotate-45 z-10"
+        animate={{ rotate: [45, 405] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      />
       <div className="absolute bottom-40 right-20 w-16 h-16 border-2 border-[#911E75]/40 rounded-full z-10"></div>
       <div className="absolute top-1/3 right-1/4 w-12 h-12 bg-[#fecc00]/10 rotate-12 z-10"></div>
 
@@ -237,8 +243,8 @@ const MainSection = () => {
                     key={index}
                     onClick={() => setCurrentSlide(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === index
-                        ? 'bg-[#fecc00] w-8'
-                        : 'bg-white/50 hover:bg-white/80'
+                      ? 'bg-[#fecc00] w-8'
+                      : 'bg-white/50 hover:bg-white/80'
                       }`}
                   />
                 ))}

@@ -52,7 +52,7 @@ const AboutSection = () => {
 
   return (
     <section className="bg-gradient-to-b from-white via-[#fecc00]/5 to-white relative overflow-hidden">
-      
+
       {/* ===== BACKGROUND ANIMATIONS ===== */}
       <motion.div
         className="absolute top-20 right-0 w-[500px] h-[500px] bg-[#911E75]/15 rounded-full blur-[120px]"
@@ -204,7 +204,7 @@ const AboutSection = () => {
                     {/* Thumbnail with Hover Button */}
                     <div className='relative h-[300px] md:h-[400px] lg:h-[547px] rounded-2xl overflow-hidden shadow-2xl'>
                       <img
-                        src="https://images.unsplash.com/photo-1637433496890-ee4eb1aecf4e"
+                        src="/image/mimt/hero-section/building2.jpeg"
                         alt="Building"
                         className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out'
                       />
@@ -233,7 +233,37 @@ const AboutSection = () => {
                         )}
                       </AnimatePresence>
                     </div>
+                    {/* Overlay with Text */}
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      className="-mt-8 relative flex items-end justify-center pb-6 z-10"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        className="relative bg-white/90 border-2 border-[#911E75]/20 backdrop-blur-xl rounded-2xl text-black px-6 sm:px-8 py-3 md:py-4 text-center shadow-2xl overflow-hidden"
+                      >
+                        {/* Animated Background */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-[#911E75]/10 via-[#fecc00]/10 to-[#911E75]/10"
+                          animate={{
+                            x: ["-100%", "100%"],
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
+                        />
+                        <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider uppercase relative z-10">
+                          Top Quality And Learning Experience
+                        </h3>
+                      </motion.div>
+                    </motion.div>
                   </motion.div>
+
                 )}
               </AnimatePresence>
             </motion.div>
@@ -279,7 +309,7 @@ const AboutSection = () => {
                     key={index}
                     initial={{ opacity: 0, y: 30, scale: 0.9 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.2, delay: 0}}
+                    transition={{ duration: 0.2, delay: 0 }}
                     whileHover={{ scale: 1.05, y: -5 }}
                     className='relative group'
                   >
