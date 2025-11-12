@@ -121,7 +121,7 @@ const AboutSection = () => {
 
       {/* Grid Overlay */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage: `
             linear-gradient(#911E75 1px, transparent 1px),
@@ -344,6 +344,7 @@ const AboutSection = () => {
           </section>
         </div>
       </main>
+       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#911E75] via-[#fecc00] to-[#911E75] z-30"></div>
     </section>
   );
 };
