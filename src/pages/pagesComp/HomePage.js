@@ -36,8 +36,8 @@ export default function HomePage({ data }) {
       {data && <NewsSection />}
       {data && <NotificationSlider data={data} />}
       {data && <InnovationShowcase />}
-      {/* {data && <RecruiterTestimonial />}
-      {data && <StudentTestimonial />} */}
+      {data && <RecruiterTestimonial />}
+      {data && <StudentTestimonial />}
     </div>
   );
 }
